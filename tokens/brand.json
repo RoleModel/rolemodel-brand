@@ -1,0 +1,50 @@
+{
+  "$description": "RoleModel Software brand tokens. Source of truth for brand values. Seeded 2026-07-09 from rolemodelsoftware.com/brand/rolemodel.",
+  "$version": "0.1.0",
+  "color": {
+    "core": {
+      "rm-blue": { "value": "#3A70B3", "name": "RM Blue" },
+      "rm-dark-blue": { "value": "#193C64", "name": "RM Dark Blue" }
+    },
+    "accent": {
+      "light-purple": { "value": "#A998C9", "name": "Light Purple" },
+      "medium-green": { "value": "#86C774", "name": "Medium Green" },
+      "orange": { "value": "#FFCD74", "name": "Orange" },
+      "bright-yellow": { "value": "#FCF496", "name": "Bright Yellow" }
+    },
+    "dark": {
+      "dark-blue-green": { "value": "#04242B", "name": "Dark Blue Green" },
+      "blue-green": { "value": "#27434D", "name": "Blue Green" },
+      "dark-purple": { "value": "#3C194A", "name": "Dark Purple" },
+      "dark-green": { "value": "#538C5E", "name": "Dark Green" }
+    },
+    "$todo": "Add CMYK values from the .ASE once imported from Drive"
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": { "value": "DM Sans" },
+      "mono": { "value": "Geist Mono" }
+    },
+    "scale": {
+      "hero": { "size": "10rem", "lineHeight": "1em", "letterSpacing": "-0.05em", "usage": "Single biggest statement on a page" },
+      "display": { "size": "4.5rem", "lineHeight": "1.1em", "letterSpacing": "-0.05em", "usage": "Section-leading headlines" },
+      "h1": { "size": "3.7rem", "lineHeight": "1.1em", "letterSpacing": "-0.04em", "usage": "Major sections, top-level hierarchy" },
+      "h2": { "size": "3.7rem", "lineHeight": "1.1em", "letterSpacing": "-0.04em", "usage": "Secondary section titles under an H1" },
+      "subheading": { "size": "2.875rem", "lineHeight": "1.3em", "letterSpacing": "-0.03em", "usage": "Context directly under a headline" },
+      "body": { "size": "1.6rem", "lineHeight": "1.6em", "letterSpacing": "-0.02em", "usage": "Main readable text" },
+      "mono-caps": { "size": "1.05rem", "lineHeight": "1.2em", "letterSpacing": "0", "usage": "Section headings and call-outs in asides" }
+    }
+  },
+  "logo": {
+    "brandIcon": {
+      "minSize": "50px",
+      "clearSpace": "40%"
+    },
+    "$todo": "File paths once logos land in logos/svg and logos/png"
+  },
+  "iconSets": {
+    "spot": { "source": "Icons8 Pastel Glyph", "url": "https://icons8.com/icons/pastel-glyph" },
+    "pictogram": { "source": "Icons8 Pastel Glyph", "url": "https://icons8.com/icons/pastel-glyph" },
+    "ui": { "source": "HugeIcons", "url": "https://hugeicons.com/icons" }
+  }
+}
