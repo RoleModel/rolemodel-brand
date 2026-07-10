@@ -1,0 +1,63 @@
+/* RoleModel Software brand tokens. */
+/* Generated from tokens/brand.json (v0.1.0). Source of truth for brand values. */
+
+:root {
+  /* Color — Core */
+  --rm-color-rm-blue: #3A70B3; /* RM Blue */
+  --rm-color-rm-dark-blue: #193C64; /* RM Dark Blue */
+
+  /* Color — Accent */
+  --rm-color-light-purple: #A998C9; /* Light Purple */
+  --rm-color-medium-green: #86C774; /* Medium Green */
+  --rm-color-orange: #FFCD74; /* Orange */
+  --rm-color-bright-yellow: #FCF496; /* Bright Yellow */
+
+  /* Color — Dark */
+  --rm-color-dark-blue-green: #04242B; /* Dark Blue Green */
+  --rm-color-blue-green: #27434D; /* Blue Green */
+  --rm-color-dark-purple: #3C194A; /* Dark Purple */
+  --rm-color-dark-green: #538C5E; /* Dark Green */
+
+  /* Typography — Font family */
+  --rm-font-family-primary: 'DM Sans';
+  --rm-font-family-mono: 'Geist Mono';
+
+  /* Typography — Scale: hero (Single biggest statement on a page) */
+  --rm-font-size-hero: 10rem;
+  --rm-line-height-hero: 1em;
+  --rm-letter-spacing-hero: -0.05em;
+
+  /* Typography — Scale: display (Section-leading headlines) */
+  --rm-font-size-display: 4.5rem;
+  --rm-line-height-display: 1.1em;
+  --rm-letter-spacing-display: -0.05em;
+
+  /* Typography — Scale: h1 (Major sections, top-level hierarchy) */
+  --rm-font-size-h1: 3.7rem;
+  --rm-line-height-h1: 1.1em;
+  --rm-letter-spacing-h1: -0.04em;
+
+  /* Typography — Scale: h2 (Secondary section titles under an H1) */
+  --rm-font-size-h2: 3.7rem;
+  --rm-line-height-h2: 1.1em;
+  --rm-letter-spacing-h2: -0.04em;
+
+  /* Typography — Scale: subheading (Context directly under a headline) */
+  --rm-font-size-subheading: 2.875rem;
+  --rm-line-height-subheading: 1.3em;
+  --rm-letter-spacing-subheading: -0.03em;
+
+  /* Typography — Scale: body (Main readable text) */
+  --rm-font-size-body: 1.6rem;
+  --rm-line-height-body: 1.6em;
+  --rm-letter-spacing-body: -0.02em;
+
+  /* Typography — Scale: mono-caps (Section headings and call-outs in asides) */
+  --rm-font-size-mono-caps: 1.05rem;
+  --rm-line-height-mono-caps: 1.2em;
+  --rm-letter-spacing-mono-caps: 0;
+
+  /* Logo — Brand icon */
+  --rm-logo-brand-icon-min-size: 50px;
+  --rm-logo-brand-icon-clear-space: 40%;
+}
