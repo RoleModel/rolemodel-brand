@@ -1,0 +1,10 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Bicycle--Streamline-Ultimate">
+  <desc>
+    Bicycle Streamline Icon: https://streamlinehq.com
+  </desc>
+  <path d="M0.5 15a4 4 0 1 0 8 0 4 4 0 1 0 -8 0Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+  <path d="M15.5 15a4 4 0 1 0 8 0 4 4 0 1 0 -8 0Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+  <path d="m11 15.001 5.684 -7.646L9 10l-4.5 5 6.5 0 -3.25 -8" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+  <path d="m19.5 15 -3.307 -8.977a0.5 0.5 0 0 1 0.348 -0.658L18 5" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+  <path d="m6.5 7 3 0" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+</svg>

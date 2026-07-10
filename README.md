@@ -1,5 +1,7 @@
 # RoleModel Brand
 
+![RoleModel Brand](ReadMeImage.png)
+
 Canonical, versioned home for RoleModel Software's brand assets. This repo is the source of truth that feeds every distribution surface: the public brand page ([rolemodelsoftware.com/brand/rolemodel](https://rolemodelsoftware.com/brand/rolemodel)), design tools, documents, and AI agents.
 
 The written brand context (voice, RoleModel Way references) lives in `standard/context/brand/`. This repo holds the *files and values*: logos, color, typography, icons, and machine-readable tokens.
@@ -23,16 +25,23 @@ rolemodel-brand/
     designers/logos/    # DPQ + Designer product marks (Dock, Deck, Railing, Flow, Building)
   css/                  # theme CSS (academy-theme.css)
   color/
-    # .ASE / palette files (pending import)
+    Colors.ase, RoleModelBrandColors.ase, ColorGridSmall@4x.png
   typography/
-    # font licenses + links; do not commit licensed font binaries
+    DM_Sans/            # variable + static TTFs, OFL license
+    Geist_Mono/         # variable + static TTFs, OFL license
   icons/
-    # curated icon exports (sources: Pastel Glyph, HugeIcons)
+    black/              # curated icon set (290 SVGs)
+    process-svg-colors.js
+  graphics/
+    highlighters/       # brand highlighter/underline vectors
+    approach/           # approach graphic exports (SVG + @2x PNG)
   imagery/
     og/                 # OG / social images
-  src/                  # design source files (.afdesign, .afphoto, .psd)
+    site/               # site imagery (core values, approach, milestones)
   dist/                 # generated bundles, e.g. rolemodel-brand-assets.zip
 ```
+
+Design source files (.afdesign, .afphoto, .psd, .ai, print projects) stay in Drive; this repo versions exports only.
 
 Note: the Drive folder spells it "LightingCAD" — normalized to `lightningcad` here.
 
