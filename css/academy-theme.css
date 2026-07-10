@@ -1,0 +1,17 @@
+:root[data-theme="academy"] {
+  --font-family-primary: "Space Grotesk", sans-serif;
+  --font-family-alt: "Geist Mono", sans-serif;
+
+  --color-primary: #04B870;
+  --color-secondary: #3161B5;
+  --color-accent: #3EA9B5;
+  --color-dark: #293747;
+  --color-light: #F2F2F2;
+
+  --color-background: var(--color-light);
+  --color-surface: #FFFFFF;
+  --color-text: var(--color-dark);
+  --color-text-inverse: var(--color-light);
+  --color-accent: var(--color-secondary);
+  --color-border: color-mix(in srgb, var(--color-dark) 18%, transparent);
+}

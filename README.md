@@ -16,21 +16,25 @@ rolemodel-brand/
   CHANGELOG.md          # what changed, Mastercard-style "recent updates"
   tokens/
     brand.json          # machine-readable source of truth (colors, type, spacing)
-  logos/
-    svg/                # primary logo, lockups, brand icon — light + dark
-    png/                # raster exports @1x/@2x
+  brands/
+    rolemodel/logos/    # RMS logo suite: color/white SVG + @2x/@3x PNG, icon, R mark
+    academy/logos/      # Craftsmanship Academy logos + icon
+    lightningcad/logos/ # LightningCAD logos (black/white variants)
+    designers/logos/    # DPQ + Designer product marks (Dock, Deck, Railing, Flow, Building)
+  css/                  # theme CSS (academy-theme.css)
   color/
-    rolemodel.ase       # Adobe swatch exchange (print/CMYK)
-    rolemodel.gpl       # optional: GIMP/Inkscape palette
+    # .ASE / palette files (pending import)
   typography/
     # font licenses + links; do not commit licensed font binaries
   icons/
-    # curated RoleModel icon exports (sources: Pastel Glyph, HugeIcons)
+    # curated icon exports (sources: Pastel Glyph, HugeIcons)
   imagery/
-    # brand photography guidance + curated selects (or pointers if too large)
-  dist/
-    # generated bundles, e.g. rolemodel-brand-assets.zip
+    og/                 # OG / social images
+  src/                  # design source files (.afdesign, .afphoto, .psd)
+  dist/                 # generated bundles, e.g. rolemodel-brand-assets.zip
 ```
+
+Note: the Drive folder spells it "LightingCAD" — normalized to `lightningcad` here.
 
 ## Consumers
 
