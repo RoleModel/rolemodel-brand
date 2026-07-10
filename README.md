@@ -18,11 +18,11 @@ rolemodel-brand/
   CHANGELOG.md          # what changed, Mastercard-style "recent updates"
   tokens/
     brand.json          # machine-readable source of truth (colors, type, spacing)
-  brands/
-    rolemodel/logos/    # RMS logo suite: color/white SVG + @2x/@3x PNG, icon, R mark
-    academy/logos/      # Craftsmanship Academy logos + icon
-    lightningcad/logos/ # LightningCAD logos (black/white variants)
-    designers/logos/    # DPQ + Designer product marks (Dock, Deck, Railing, Flow, Building)
+  logos/
+    rolemodel/          # RMS logo suite: color/white SVG + @2x/@3x PNG, icon, R mark
+    academy/            # Craftsmanship Academy logos + icon
+    lightningcad/       # LightningCAD logos (black/white variants)
+    designers/          # DPQ + Designer product marks (Dock, Deck, Railing, Flow, Building)
   css/                  # theme CSS (academy-theme.css)
   color/
     Colors.ase, RoleModelBrandColors.ase, ColorGridSmall@4x.png
