@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Icons — Brand Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <script>
+      if (new URLSearchParams(location.search).get("embed") === "1")
+        document.documentElement.classList.add("is-embedded");
+    </script>
+  </head>
+  <body>
+    <div id="nav-root"></div>
+    <div id="page-header-root"></div>
+
+    <main class="page-content" aria-label="Icon guidelines">
+      <section aria-labelledby="icon-sets-heading">
+        <span class="section-label" id="icon-sets-heading">Icon Sets</span>
+        <div class="icon-panels" id="icon-panels"></div>
+      </section>
+
+      <section aria-labelledby="icon-principles-heading">
+        <span class="section-label" id="icon-principles-heading"
+          >Usage Principles</span
+        >
+        <div class="icon-principle-list" id="icon-principles"></div>
+      </section>
+    </main>
+
+    <script type="module">
+      import {
+        initPage,
+        categoryInfo,
+        staggerReveal,
+        initReveal,
+      } from "../assets/js/modules/page-utils.js";
+      import {
+        SPOT_ICONS,
+        PICTOGRAM_ICONS,
+        UI_ICONS,
+      } from "../assets/js/modules/icon-library.js";
+      import { BRAND_ICONS } from "../assets/js/modules/brand-icons.js";
+      import { createIconTicker } from "../assets/js/modules/icon-ticker.js";
+
+      const { slug, brand, accentHex } = initPage("icons");
+      const { category: cat, numLabel } = categoryInfo("icons", "06");
+
+      document.querySelector("#page-header-root").setHTMLUnsafe(/* html */ `
+  <div class="page-header">
+    <span class="page-header__num">${numLabel}</span>
+    <h1 class="page-header__title" style="color:${accentHex}">${cat.name || "Icons"}</h1>
+    <p class="page-header__tagline">${cat.tagline || "Icons help us recognize complex ideas instantly."}</p>
+  </div>
+`);
+      document.title = `Icons — ${brand.name || "Brand Guidelines"}`;
+
+      // Light accent tone that reads on the dark brand-icon panel — each brand
+      // picks a bright tone from its palette.
+      const DARK_PANEL_ACCENTS = {
+        rolemodel: "var(--rolemodel-yellow)",
+        academy: "var(--academy-primary)",
+        lightningcad: "var(--lightningcad-secondary)",
+      };
+      const darkAccent = DARK_PANEL_ACCENTS[slug] || "var(--page-accent)";
+
+      const chunk = (list, count) =>
+        Array.from({ length: Math.ceil(list.length / count) }, (_, i) =>
+          list.slice(i * count, (i + 1) * count)
+        );
+
+      const panelsRoot = document.querySelector("#icon-panels");
+
+      // ---- Top panel: RoleModel's own icon library (icons/black) ----
+      const brandPanel = document.createElement("article");
+      brandPanel.className = "icon-panel icon-panel--dark reveal";
+      brandPanel.setAttribute("aria-label", "Brand icon library");
+      brandPanel.style.setProperty("--icon-accent", darkAccent);
+      brandPanel.setHTMLUnsafe(/* html */ `
+  <header class="icon-panel__header">
+    <h2 class="icon-panel__name">Brand Icons</h2>
+    <span class="icon-panel__meta">Our Set — Streamline</span>
+    <span class="icon-panel__link" style="text-decoration:none">Line icons, one weight, drawn from our own library.</span>
+  </header>
+`);
+      brandPanel.append(
+        createIconTicker({
+          icons: BRAND_ICONS,
+          size: "lg",
+          direction: "left",
+          duration: 70,
+        })
+      );
+      panelsRoot.append(brandPanel);
+
+      // ---- Bottom card: HugeIcons, shown in all three styles ----
+      const hugePanel = document.createElement("article");
+      hugePanel.className = "icon-panel reveal";
+      hugePanel.dataset.delay = 80;
+      hugePanel.setAttribute("aria-label", "HugeIcons set");
+      hugePanel.setHTMLUnsafe(/* html */ `
+  <header class="icon-panel__header">
+    <h2 class="icon-panel__name">HugeIcons</h2>
+    <span class="icon-panel__meta">Extended Set — Three Styles</span>
+    <a class="icon-panel__link" href="https://hugeicons.com/icons" target="_blank" rel="noopener">hugeicons.com</a>
+  </header>
+`);
+
+      const hugeStyles = [
+        {
+          label: "Duotone",
+          icons: SPOT_ICONS,
+          size: "lg",
+          direction: "left",
+          duration: 55,
+        },
+        {
+          label: "Twotone",
+          icons: PICTOGRAM_ICONS,
+          size: "md",
+          direction: "right",
+          duration: 60,
+        },
+        {
+          label: "Stroke",
+          icons: UI_ICONS,
+          size: "sm",
+          direction: "left",
+          duration: 48,
+        },
+      ];
+
+      hugeStyles.forEach((style) => {
+        const row = document.createElement("div");
+        row.className = "icon-style-row";
+        row.setHTMLUnsafe(
+          /* html */ `<span class="icon-style-row__label">${style.label}</span>`
+        );
+        row.append(createIconTicker(style));
+        hugePanel.append(row);
+      });
+
+      panelsRoot.append(hugePanel);
+
+      const principles = [
+        {
+          mark: "✓",
+          text: "Match icon style to context: spot icons for features, UI icons for interactive controls.",
+        },
+        {
+          mark: "✓",
+          text: "Maintain consistent stroke weight within a single composition (don't mix 1px and 2px strokes).",
+        },
+        {
+          mark: "✓",
+          text: "Use brand colors for fills and strokes. Avoid generic grays in non-system contexts.",
+        },
+        {
+          mark: "✗",
+          text: "Never use a UI icon at spot scale. A 16px icon blown up to 80px loses all visual intent.",
+        },
+        {
+          mark: "✗",
+          text: "Never mix icon families in the same component or page section.",
+        },
+      ];
+
+      document.querySelector("#icon-principles").setHTMLUnsafe(
+        principles
+          .map(
+            (p, i) => /* html */ `
+  <div class="icon-principle reveal" data-delay="${i * 50}">
+    <span class="icon-principle__mark icon-principle__mark--${p.mark === "✓" ? "do" : "dont"}">${p.mark}</span>
+    <p class="icon-principle__text">${p.text}</p>
+  </div>
+`
+          )
+          .join("")
+      );
+
+      staggerReveal(document.querySelectorAll(".reveal"), 0, 60);
+      initReveal();
+    </script>
+  </body>
+</html>

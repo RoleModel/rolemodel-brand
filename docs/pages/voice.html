@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice — Brand Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <script>
+      if (new URLSearchParams(location.search).get("embed") === "1")
+        document.documentElement.classList.add("is-embedded");
+    </script>
+  </head>
+  <body>
+    <div id="nav-root"></div>
+    <div id="page-header-root"></div>
+
+    <main class="page-content" aria-label="Voice guidelines">
+      <section aria-labelledby="concepts-heading">
+        <span class="section-label" id="concepts-heading">Voice Concepts</span>
+        <div class="voice-concepts" id="voice-concepts"></div>
+      </section>
+    </main>
+
+    <div
+      class="copy-toast"
+      id="copy-toast"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <script type="module">
+      import { VOICE_CONCEPTS } from "../assets/js/modules/page-data.js";
+      import {
+        initPage,
+        categoryInfo,
+        copyText,
+        showToast,
+        staggerReveal,
+        initReveal,
+      } from "../assets/js/modules/page-utils.js";
+
+      const { brand, accentHex } = initPage("voice");
+      const { category: cat, numLabel } = categoryInfo("voice", "03");
+
+      document.querySelector("#page-header-root").setHTMLUnsafe(/* html */ `
+  <div class="page-header">
+    <span class="page-header__num">${numLabel}</span>
+    <h1 class="page-header__title" style="color:${accentHex}">${cat.name || "Voice"}</h1>
+    <p class="page-header__tagline">${cat.tagline || "Humble confidence, grounded in partnership."}</p>
+  </div>
+`);
+      document.title = `Voice — ${brand.name || "Brand Guidelines"}`;
+
+      const conceptsRoot = document.querySelector("#voice-concepts");
+      conceptsRoot.setHTMLUnsafe(
+        VOICE_CONCEPTS.map((concept, i) => {
+          const num = String(i + 1).padStart(2, "0");
+          const chips = (concept.practice || [])
+            .map(
+              (p) =>
+                /* html */ `<span class="voice-concept__practice-item">${p}</span>`
+            )
+            .join("");
+          return /* html */ `
+    <article class="voice-concept reveal" data-delay="${i * 70}" aria-label="${concept.name}">
+      <div class="voice-concept__meta">
+        <span class="voice-concept__num">Voice ${num}</span>
+        <h2 class="voice-concept__name">${concept.name}</h2>
+        <p class="voice-concept__desc">${concept.description}</p>
+        <button class="voice-concept__copy" data-copy="${concept.quote.replace(/"/g, "&quot;")}"
+                aria-label="Copy quote for ${concept.name}">Copy Quote</button>
+      </div>
+      <div class="voice-concept__body">
+        <blockquote class="voice-concept__quote">${concept.quote}</blockquote>
+        <span class="voice-concept__practice-label">In Practice</span>
+        <div class="voice-concept__practice-list">${chips}</div>
+      </div>
+    </article>
+  `;
+        }).join("")
+      );
+
+      conceptsRoot.addEventListener("click", async (e) => {
+        const btn = e.target.closest(".voice-concept__copy");
+        if (!btn) return;
+        await copyText(btn.dataset.copy);
+        showToast("Copied quote");
+      });
+
+      staggerReveal(document.querySelectorAll(".reveal"), 0, 60);
+      initReveal();
+    </script>
+  </body>
+</html>

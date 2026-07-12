@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motion — Brand Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <script>
+      if (new URLSearchParams(location.search).get("embed") === "1")
+        document.documentElement.classList.add("is-embedded");
+    </script>
+  </head>
+  <body>
+    <div id="nav-root"></div>
+
+    <header class="motion-hero" aria-label="Motion">
+      <span class="motion-hero__num" id="hero-num">07</span>
+      <h1 class="motion-hero__headline">
+        Motion with
+        <span class="motion-hero__cycle" id="hero-cycle" aria-live="polite"
+          >purpose</span
+        >
+      </h1>
+      <p class="motion-hero__lede" id="hero-lede"></p>
+    </header>
+
+    <main class="page-content" aria-label="Motion guidelines">
+      <section aria-labelledby="ease-heading">
+        <span class="section-label" id="ease-heading">Easing Curves</span>
+        <p class="section-note">
+          Every curve below is plotted from its real control points — watch the
+          dot trace the shape, then feel the same timing drive the marker
+          underneath.
+        </p>
+        <div class="ease-grid" id="ease-grid"></div>
+      </section>
+
+      <section aria-labelledby="duration-heading">
+        <span class="section-label" id="duration-heading">Duration Scale</span>
+        <p class="section-note">
+          Three speeds, one shared clock. The bars fill in real time so the
+          difference is something you feel, not just read.
+        </p>
+        <div class="duration-scale" id="duration-scale"></div>
+      </section>
+
+      <section aria-labelledby="principles-heading">
+        <span class="section-label" id="principles-heading"
+          >Motion Principles</span
+        >
+        <div class="principle-list" id="principles-list"></div>
+      </section>
+    </main>
+
+    <script type="module">
+      import {
+        EASING_TOKENS,
+        DURATION_TOKENS,
+      } from "../assets/js/modules/page-data.js";
+      import {
+        initPage,
+        categoryInfo,
+        staggerReveal,
+        initReveal,
+      } from "../assets/js/modules/page-utils.js";
+
+      const { brand, accentHex } = initPage("motion");
+      const { category: cat, numLabel } = categoryInfo("motion", "07");
+      const reduceMotion = matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      document.title = `Motion — ${brand.name || "Brand Guidelines"}`;
+      document.querySelector("#hero-num").textContent = numLabel;
+      document.querySelector("#hero-lede").textContent =
+        cat.tagline ||
+        "We animate to guide, confirm, and clarify — fast starts, soft landings, and nothing that moves without a reason.";
+
+      // ---- Kinetic hero: cycle the closing word on the motion heartbeat ----
+      const CYCLE_WORDS = ["purpose", "precision", "restraint", "intent"];
+      const cycleEl = document.querySelector("#hero-cycle");
+      if (!reduceMotion) {
+        let i = 0;
+        setInterval(() => {
+          i = (i + 1) % CYCLE_WORDS.length;
+          cycleEl.style.animation = "none";
+          void cycleEl.offsetWidth; // reflow to restart the swap animation
+          cycleEl.textContent = CYCLE_WORDS[i];
+          cycleEl.style.animation = "";
+        }, 2200);
+      }
+
+      // ---- Easing cards: plotted bézier curve + a tracing dot + a timed marker ----
+      const PLOT = 120; // curve is drawn in a 120×120 user-unit box
+
+      const parseBezier = (value) => value.match(/-?\d*\.?\d+/g).map(Number); // [x1,y1,x2,y2]
+
+      const curvePath = ([x1, y1, x2, y2]) =>
+        `M0,${PLOT} C${(x1 * PLOT).toFixed(2)},${(PLOT - y1 * PLOT).toFixed(2)} ` +
+        `${(x2 * PLOT).toFixed(2)},${(PLOT - y2 * PLOT).toFixed(2)} ${PLOT},0`;
+
+      const easeCard = (e, index) => {
+        const points = parseBezier(e.value);
+        const d = curvePath(points);
+        // A looping trace: start → end (dwell) → back (dwell), on the shared cycle.
+        const motion = reduceMotion
+          ? ""
+          : /* html */ `
+    <animateMotion dur="2.2s" repeatCount="indefinite" calcMode="linear"
+      keyPoints="0;1;1;0;0" keyTimes="0;0.42;0.5;0.92;1" path="${d}"/>`;
+        // With animateMotion the dot origin (0,0) follows the path; when static
+        // (reduced motion) place it at the curve's start instead.
+        const dotPos = reduceMotion ? `cx="0" cy="${PLOT}"` : 'cx="0" cy="0"';
+        return /* html */ `
+  <article class="ease-card reveal" data-delay="${index * 90}" style="--ease:${e.value}">
+    <div class="ease-card__plot">
+      <svg class="ease-card__svg" viewBox="-14 -78 148 216" role="img" aria-label="${e.name} easing curve">
+        <line class="ease-card__guide" x1="0" y1="${PLOT}" x2="${PLOT}" y2="${PLOT}"/>
+        <line class="ease-card__guide" x1="0" y1="0" x2="${PLOT}" y2="0"/>
+        <line class="ease-card__axis" x1="0" y1="-70" x2="0" y2="${PLOT + 14}"/>
+        <path class="ease-card__curve" d="${d}" fill="none"/>
+        <circle class="ease-card__dot" r="6" ${dotPos}>${motion}</circle>
+      </svg>
+    </div>
+    <div class="ease-card__demo" aria-hidden="true">
+      <div class="ease-card__track"></div>
+      <div class="ease-card__marker"></div>
+    </div>
+    <div class="ease-card__info">
+      <h3 class="ease-card__name">${e.name}</h3>
+      <code class="ease-card__value">${e.value}</code>
+      <p class="ease-card__desc">${e.desc}</p>
+    </div>
+  </article>`;
+      };
+
+      document
+        .querySelector("#ease-grid")
+        .setHTMLUnsafe(EASING_TOKENS.map(easeCard).join(""));
+
+      // ---- Duration scale: each bar fills + empties at its real duration, so the
+      // difference in speed is a rhythm you feel continuously, not a one-off. ----
+      document.querySelector("#duration-scale").setHTMLUnsafe(
+        DURATION_TOKENS.map((tkn, i) => {
+          const ms = parseInt(tkn.value, 10);
+          const anim = reduceMotion
+            ? ""
+            : `animation:dur-fill ${ms}ms linear infinite alternate`;
+          return /* html */ `
+  <div class="duration-row reveal" data-delay="${i * 80}">
+    <div class="duration-row__head">
+      <span class="duration-row__name">${tkn.name}</span>
+      <span class="duration-row__value">${tkn.value}</span>
+    </div>
+    <div class="duration-row__lane">
+      <div class="duration-row__fill" style="${anim}"></div>
+    </div>
+    <p class="duration-row__usage">${tkn.usage}</p>
+  </div>`;
+        }).join("")
+      );
+
+      // ---- Motion principles ----
+      const principles = [
+        {
+          title: "Intentional, not ambient",
+          desc: "Animation directs attention, confirms an action, or shows system state. If it does none of those, it does not ship.",
+        },
+        {
+          title: "Fast starts, soft landings",
+          desc: "Ease-out is the default: elements enter quickly and settle gently. Linear motion feels mechanical — save it for progress, not personality.",
+        },
+        {
+          title: "One thing at a time",
+          desc: "Move a single element, or a coherent group in sequence. Parallel motion competes for attention and reads as noise.",
+        },
+        {
+          title: "Reduced motion is first-class",
+          desc: "Every animation degrades to an instant, legible state. Motion is the polish, never the gate.",
+        },
+      ];
+
+      document.querySelector("#principles-list").setHTMLUnsafe(
+        principles
+          .map(
+            (p, i) => /* html */ `
+  <article class="principle-card reveal" data-delay="${i * 70}">
+    <span class="principle-card__num">0${i + 1}</span>
+    <div class="principle-card__body">
+      <h3 class="principle-card__title">${p.title}</h3>
+      <p class="principle-card__desc">${p.desc}</p>
+    </div>
+  </article>
+`
+          )
+          .join("")
+      );
+
+      staggerReveal(document.querySelectorAll(".reveal"), 0, 60);
+      initReveal();
+    </script>
+  </body>
+</html>

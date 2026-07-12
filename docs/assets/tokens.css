@@ -1,0 +1,164 @@
+/* -----------------------------------------------------------------------
+   Design tokens — the single source for every value used in the CSS.
+   Variables only; resets and element defaults live in css/base.css.
+   ----------------------------------------------------------------------- */
+
+:root {
+  /* ============ Color — neutrals ============ */
+  --ink: #04242b;
+  --paper: #fafaf7;
+  --white: #ffffff;
+
+  /* Ink at fixed alphas — hairlines, dim surfaces, borders */
+  --ink-a04: color-mix(in srgb, var(--ink) 4%, transparent);
+  --ink-a06: color-mix(in srgb, var(--ink) 6%, transparent);
+  --ink-a08: color-mix(in srgb, var(--ink) 8%, transparent);
+  --ink-a12: color-mix(in srgb, var(--ink) 12%, transparent);
+  --ink-a15: color-mix(in srgb, var(--ink) 15%, transparent);
+  --ink-a20: color-mix(in srgb, var(--ink) 20%, transparent);
+
+  /* White at fixed alphas — controls on dark surfaces */
+  --white-a12: color-mix(in srgb, var(--white) 12%, transparent);
+  --white-a25: color-mix(in srgb, var(--white) 25%, transparent);
+  --white-a75: color-mix(in srgb, var(--white) 75%, transparent);
+  --white-a90: color-mix(in srgb, var(--white) 90%, transparent);
+
+  /* Semantic surfaces */
+  --surface: var(--white);
+  --surface-dim: var(--ink-a04);
+  --scrim: color-mix(in srgb, var(--ink) 94%, transparent);
+
+  /* ============ Color — brands ============ */
+  /* RoleModel Software */
+  --rolemodel-primary: #2a84f8;
+  --rolemodel-blue: #3a70b3;
+  --rolemodel-purple: #a998c9;
+  --rolemodel-cyan: #87d4e9;
+  --rolemodel-yellow: #fcf496;
+  --rolemodel-orange: #ffcd74;
+  --rolemodel-green: #538c5e;
+  --rolemodel-dark: #04242b;
+  --rolemodel-navy: #193c64;
+
+  /* Craftsmanship Academy */
+  --academy-primary: #00b871;
+  --academy-secondary: #3e61b5;
+  --academy-accent: #43bba4;
+  --academy-dark: #293747;
+  --academy-light: #f2f2f2;
+
+  /* LightningCAD */
+  --lightningcad-primary: #2a83f7;
+  --lightningcad-secondary: #66a5f9;
+  --lightningcad-accent: #032a5e;
+
+  /* Per-page accent — overridden at runtime from brand data */
+  --page-accent: var(--rolemodel-blue);
+
+  /* Status */
+  --color-do: var(--rolemodel-green);
+  --color-dont: #c0392b;
+  --color-dont-soft: color-mix(in srgb, var(--color-dont) 55%, var(--white));
+
+  /* ============ Typography ============ */
+  /* --font-active is set at runtime per active brand (see js/main.js) */
+  --font-display: "DM Sans", "Inter", system-ui, sans-serif;
+  --font-active: var(--font-display);
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Size scale */
+  --text-2xs: 10px;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-md: 13px;
+  --text-base: 14px;
+  --text-lg: 15px;
+  --text-xl: 18px;
+  --text-2xl: 22px;
+  --text-3xl: 26px;
+  --text-4xl: 32px;
+  --text-display: clamp(3rem, 7vw, 5.5rem);
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Tracking */
+  --tracking-tight: -0.01em;
+  --tracking-snug: -0.02em;
+  --tracking-tighter: -0.03em;
+  --tracking-tightest: -0.05em;
+  --tracking-caps: 0.08em;
+  --tracking-caps-wide: 0.12em;
+
+  /* Leading */
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.65;
+
+  /* Text emphasis (opacity steps for secondary text) */
+  --emphasis-faint: 0.4;
+  --emphasis-muted: 0.55;
+  --emphasis-strong: 0.7;
+
+  /* ============ Space ============ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 40px;
+  --space-10: 48px;
+  --space-11: 56px;
+  --space-12: 64px;
+  --space-13: 72px;
+
+  /* ============ Radius ============ */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-pill: 999px;
+  --radius-round: 50%;
+
+  /* ============ Elevation ============ */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-raised: 0 8px 24px color-mix(in srgb, var(--ink) 28%, transparent);
+  --shadow-modal: 0 24px 64px color-mix(in srgb, var(--ink) 35%, transparent);
+  --border-hairline: 1px solid var(--ink-a08);
+  --border-control: 1.5px solid var(--ink-a15);
+
+  /* ============ Layout ============ */
+  --content-max: 1200px;
+  --content-pad: 40px;
+  --section-gap: 80px;
+  --nav-h: 50px;
+  --row-mini: 56px;
+  --grid-gap: 8px;
+
+  /* ============ Motion ============ */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 0.6s;
+  --spring: 400; /* stiffness */
+  --spring-damping: 30;
+
+  /* ============ Z layers ============ */
+  --z-raised: 2;
+  --z-close: 50;
+  --z-nav: 100;
+  --z-modal: 500;
+  --z-toast: 999;
+}

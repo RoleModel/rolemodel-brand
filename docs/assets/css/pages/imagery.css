@@ -1,0 +1,318 @@
+/* -----------------------------------------------------------------------
+   Imagery page — full-bleed mosaic hero + a single image library grid
+   with a lightbox. One grid, one interaction — no redundant galleries.
+   ----------------------------------------------------------------------- */
+
+/* ============================================================
+   Hero — edge-to-edge photo mosaic with a centered title card
+   ============================================================ */
+.imagery-hero {
+  position: relative;
+  height: calc(100dvh - var(--nav-h)); /* below the sticky page nav */
+  min-height: 480px;
+  overflow: hidden;
+  background: var(--ink);
+
+  .imagery-hero__mosaic {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-flow: dense;
+    gap: var(--space-1);
+  }
+
+  .imagery-hero__tile {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Span pattern fills the 6×2 grid exactly: 2+2+2+1+2+1+2 = 12 cells */
+  .imagery-hero__tile--a {
+    grid-column: span 2;
+  }
+  .imagery-hero__tile--b {
+    grid-column: span 2;
+  }
+  .imagery-hero__tile--c {
+    grid-column: span 2;
+  }
+  .imagery-hero__tile--d {
+    grid-column: span 1;
+  }
+  .imagery-hero__tile--e {
+    grid-column: span 2;
+  }
+  .imagery-hero__tile--f {
+    grid-column: span 1;
+  }
+  .imagery-hero__tile--g {
+    grid-column: span 2;
+  }
+
+  .imagery-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    animation: imagery-hero-drift 24s ease-in-out infinite alternate;
+  }
+
+  .imagery-hero__tile:nth-child(even) .imagery-hero__img {
+    animation-direction: alternate-reverse;
+  }
+
+  .imagery-hero__card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(640px, calc(100% - var(--space-10)));
+    background: var(--paper);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-9) var(--space-10);
+    box-shadow: var(--shadow-modal);
+    animation: imagery-card-enter 0.8s 0.15s var(--ease-out) both;
+  }
+
+  .imagery-hero__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tighter);
+    margin-bottom: var(--space-3);
+  }
+
+  .imagery-hero__num {
+    font-weight: var(--weight-medium);
+    opacity: 0.35;
+    margin-right: 2px;
+  }
+
+  .imagery-hero__intro {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    letter-spacing: var(--tracking-tight);
+    opacity: 0.65;
+  }
+}
+
+html.is-embedded .imagery-hero {
+  height: 100dvh;
+}
+
+@keyframes imagery-hero-drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+
+@keyframes imagery-card-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + var(--space-5)));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ============================================================
+   Image library — grid viewer, click any tile for the lightbox
+   ============================================================ */
+.image-viewer__hint {
+  font-size: var(--text-sm);
+  opacity: var(--emphasis-faint);
+  margin-top: calc(-1 * var(--space-4));
+  margin-bottom: var(--space-5);
+}
+
+.image-viewer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-2);
+
+  .image-viewer__tile {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    padding: 0;
+    background: var(--surface);
+    cursor: zoom-in;
+  }
+
+  .image-viewer__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .image-viewer__tile:hover .image-viewer__img,
+  .image-viewer__tile:focus-visible .image-viewer__img {
+    transform: scale(1.05);
+  }
+
+  .image-viewer__tile:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================
+   Lightbox — full-screen single image viewer
+   ============================================================ */
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--scrim);
+  opacity: 0;
+  transition: opacity var(--duration-fast);
+  height: 100vh;
+
+  /* Author display:flex overrides the UA [hidden] rule, so hide explicitly —
+     otherwise the invisible overlay covers the page and eats every click. */
+  &[hidden] {
+    display: none;
+  }
+
+  &.lightbox--visible {
+    opacity: 1;
+  }
+
+  .lightbox__stage {
+    max-width: calc(100vw - 160px);
+    max-height: calc(100vh - 96px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox__image {
+    max-width: 100%;
+    max-height: calc(100vh - 96px);
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-modal);
+  }
+
+  .lightbox__close,
+  .lightbox__arrow {
+    border: 0;
+    border-radius: var(--radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-a12);
+    color: var(--white);
+    transition: background var(--duration-fast);
+  }
+  .lightbox__close:hover,
+  .lightbox__arrow:hover {
+    background: var(--white-a25);
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: var(--space-5);
+    right: var(--space-5);
+    width: 44px;
+    height: 44px;
+  }
+
+  .lightbox__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+
+    &.lightbox__arrow--prev {
+      left: var(--space-5);
+    }
+    &.lightbox__arrow--next {
+      right: var(--space-5);
+    }
+  }
+
+  .lightbox__counter {
+    position: absolute;
+    bottom: var(--space-5);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--white-a75);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .imagery-hero {
+    .imagery-hero__mosaic {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    /* Reflow the span pattern for 3 columns */
+    .imagery-hero__tile--a,
+    .imagery-hero__tile--c,
+    .imagery-hero__tile--e,
+    .imagery-hero__tile--g {
+      grid-column: span 2;
+    }
+
+    .imagery-hero__card {
+      padding: var(--space-7);
+    }
+    .imagery-hero__title {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  .image-viewer {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .lightbox {
+    .lightbox__stage {
+      max-width: calc(100vw - var(--space-6));
+    }
+
+    .lightbox__arrow {
+      width: 42px;
+      height: 42px;
+
+      &.lightbox__arrow--prev {
+        left: var(--space-2);
+      }
+      &.lightbox__arrow--next {
+        right: var(--space-2);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imagery-hero .imagery-hero__img {
+    animation: none;
+  }
+  .imagery-hero .imagery-hero__card {
+    animation: none;
+  }
+}

@@ -1,0 +1,92 @@
+/* -----------------------------------------------------------------------
+   Page nav — sticky bar shown only when a page is opened standalone
+   (hidden in embed mode; see base.css).
+   ----------------------------------------------------------------------- */
+
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--nav-h);
+  padding: 0 var(--content-pad);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--border-hairline);
+
+  .page-nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-md);
+    font-weight: var(--weight-semibold);
+    color: var(--ink);
+    opacity: var(--emphasis-muted);
+    transition: opacity var(--duration-fast);
+    letter-spacing: var(--tracking-tight);
+    white-space: nowrap;
+  }
+  .page-nav__back:hover {
+    opacity: 1;
+  }
+
+  .page-nav__divider {
+    width: 1px;
+    height: var(--space-4);
+    background: currentColor;
+    opacity: 0.15;
+    flex-shrink: 0;
+  }
+
+  .page-nav__brand {
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-snug);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .page-nav__switcher {
+    display: flex;
+    gap: var(--space-1);
+    margin-left: auto;
+  }
+
+  .page-nav__pill {
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    border: 1.5px solid transparent;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    background: transparent;
+    color: var(--ink);
+    opacity: var(--emphasis-faint);
+    transition:
+      opacity var(--duration-fast),
+      border-color var(--duration-fast);
+
+    &.page-nav__pill--active {
+      opacity: 1;
+      border-color: currentColor;
+    }
+  }
+  .page-nav__pill:hover {
+    opacity: var(--emphasis-strong);
+  }
+}
+
+@media (max-width: 900px) {
+  .page-nav {
+    padding: 0 var(--space-5);
+
+    .page-nav__switcher {
+      display: none;
+    }
+  }
+}

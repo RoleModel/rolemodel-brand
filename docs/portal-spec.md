@@ -7,26 +7,26 @@ Feeds RMS-72. Source of truth for assets: this repo (github.com/RoleModel/rolemo
 **Collection: `Brands`**
 
 | Field | Type | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Name | text | RoleModel Software, LightningCAD, Craftsmanship Academy, Designer Products |
 | Slug | slug | rolemodel, lightningcad, academy, designers |
 | Tagline | text | one-line brand descriptor |
 | Logo (light bg) | image | primary SVG render |
 | Logo (dark bg) | image | white variant |
-| Brand icon | image | |
+| Brand icon | image |  |
 | Palette | reference → Colors | multi |
 | Zip URL | link | release zip for this brand |
-| Sort order | number | |
+| Sort order | number |  |
 
 **Collection: `Colors`**
 
-| Field | Type | Notes |
-|---|---|---|
-| Name | text | RM Blue, etc. |
-| Hex | text | |
-| CMYK | text | from .ASE |
-| Group | option | core / accent / dark |
-| Brand | reference → Brands | |
+| Field | Type               | Notes                |
+| ----- | ------------------ | -------------------- |
+| Name  | text               | RM Blue, etc.        |
+| Hex   | text               |                      |
+| CMYK  | text               | from .ASE            |
+| Group | option             | core / accent / dark |
+| Brand | reference → Brands |                      |
 
 One template page `brand/[slug]` renders every brand consistently (Google sub-portal pattern). `/brand` becomes the index: brand cards linking to each sub-page.
 
@@ -45,32 +45,35 @@ One template page `brand/[slug]` renders every brand consistently (Google sub-po
 Replace the current five ad-hoc concepts (Intentional / Professional / Approachable / Instructive / Engaging) with the four canonical voice concepts. Keep the existing three-trait-rows + example layout.
 
 ### Humble Confidence
+
 Strong opinions, held loosely. Grounded in values and earned experience, not authority.
 
-| | |
-|---|---|
-| Directness | Say the point early, without hedging |
-| Honesty | Name uncertainty plainly, then assert the method |
-| Contrast | Define what we're not before what we are |
+|            |                                                  |
+| ---------- | ------------------------------------------------ |
+| Directness | Say the point early, without hedging             |
+| Honesty    | Name uncertainty plainly, then assert the method |
+| Contrast   | Define what we're not before what we are         |
 
 > "It's impossible to know exactly how a custom software project will go — but by choosing a shared point on the horizon, we can navigate together."
 
 ### Trusted Partnership
+
 Partners, not customers. Shared ownership of outcomes.
 
-| | |
-|---|---|
+|          |                                            |
+| -------- | ------------------------------------------ |
 | Language | "Together," "navigate," "thought partners" |
-| Posture | Clients are integral members of the team |
-| Standard | We treat your money as if it were our own |
+| Posture  | Clients are integral members of the team   |
+| Standard | We treat your money as if it were our own  |
 
 > "Together we build the tailored solution your company needs."
 
 ### Instructive Clarity
+
 Teach before prescribing. Why always comes before how.
 
-| | |
-|---|---|
+|  |  |
+| --- | --- |
 | Openers | Start with the reframing question |
 | Metaphor | Concrete images that resolve to practice — skateboard to bicycle to car |
 | Constructs | Named ideas that carry weight: Expertise Amplification, Iterative Value, Process Scaling |
@@ -78,19 +81,20 @@ Teach before prescribing. Why always comes before how.
 > "The best software projects don't start with code — they start with understanding your business."
 
 ### Practical Value
+
 No concept left floating. Everything lands on a business outcome.
 
-| | |
-|---|---|
-| Anchor | Every claim ties to ROI or competitive advantage |
-| Values | Shown through daily behavior, not mission statements |
-| Delivery | Start small, deliver early, build on wins |
+|          |                                                      |
+| -------- | ---------------------------------------------------- |
+| Anchor   | Every claim ties to ROI or competitive advantage     |
+| Values   | Shown through daily behavior, not mission statements |
+| Delivery | Start small, deliver early, build on wins            |
 
 > "Real value, not assumptions."
 
 ## 4. OG templates relocation
 
-Move OG image templates out of the `/brand` directory in Framer — they're production tooling, not portal content. Suggested home: a `Templates` or `Internal` folder at project root (or the existing site-assets area). Portal keeps only the *downloadable* OG examples if any.
+Move OG image templates out of the `/brand` directory in Framer — they're production tooling, not portal content. Suggested home: a `Templates` or `Internal` folder at project root (or the existing site-assets area). Portal keeps only the _downloadable_ OG examples if any.
 
 ## 5. Distribution decision (open)
 

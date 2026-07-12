@@ -1,0 +1,108 @@
+/* -----------------------------------------------------------------------
+   Visual style page — style principle cards, radius + shadow demos.
+   Card chrome and mono-caps labels come from page-shell.css.
+   ----------------------------------------------------------------------- */
+
+.style-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.style-card {
+  overflow: hidden;
+
+  .style-card__preview {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    background: var(--surface-dim);
+  }
+
+  .style-card__body {
+    padding: var(--space-5) var(--space-6) var(--space-6);
+  }
+
+  .style-card__title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-snug);
+    margin-bottom: var(--space-2);
+  }
+
+  .style-card__desc {
+    font-size: var(--text-md);
+    opacity: var(--emphasis-muted);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-tight);
+  }
+}
+
+/* ---- Border radius demos ---- */
+.radius-list {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.radius-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+
+  .radius-demo__shape {
+    background: var(--page-accent);
+    opacity: 0.18;
+  }
+
+  .radius-demo__label {
+    opacity: var(--emphasis-muted);
+  }
+
+  .radius-demo__usage {
+    font-size: var(--text-xs);
+    opacity: var(--emphasis-faint);
+    letter-spacing: var(--tracking-tight);
+    text-align: center;
+    max-width: 80px;
+  }
+}
+
+/* ---- Shadow demos ---- */
+.shadow-list {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.shadow-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  flex: 1;
+  min-width: 160px;
+
+  .shadow-demo__name {
+    opacity: var(--emphasis-muted);
+  }
+
+  .shadow-demo__usage {
+    font-size: var(--text-xs);
+    opacity: var(--emphasis-faint);
+    text-align: center;
+    letter-spacing: var(--tracking-tight);
+  }
+}
+
+@media (max-width: 700px) {
+  .style-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,141 @@
+/* -----------------------------------------------------------------------
+   Portal grid — homepage bento of brand cards, with two layout modes:
+
+     default              classic bento
+     .portal-grid--open   nav rail on top (row 1) + one content panel below
+
+   In open mode the cards reflow into .portal-rail: [active brand] +
+   [category pills]. The other brand pills stay collapsed until
+   .portal-grid--brands-open is set (clicking the active brand pill). The
+   open category's pill is highlighted via .brand-card--current; clicking
+   it again closes the section. Page content lives in one shared
+   .portal-panel. The View Transitions API animates every card between the
+   two layouts (main.js); no GSAP Flip.
+   ----------------------------------------------------------------------- */
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: minmax(200px, 1fr);
+  min-height: 100dvh;
+  gap: var(--grid-gap);
+  padding: var(--grid-gap);
+
+  /* The bento inherits the active brand's typeface (set at runtime) */
+  font-family: var(--font-active);
+}
+
+/* ---- Open mode ----
+   The SAME container becomes a flex wrap: the mini pills flow across the
+   top, then the panel wraps to a full-width second row that fills the rest
+   of the viewport. No separate rail element — the cards stay put and the
+   View Transition morphs each one from its bento tile to its pill. */
+.portal-grid--open {
+  display: grid;
+  align-content: flex-start;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  gap: 0;
+  padding: 0;
+}
+
+.portal-grid.portal-grid--open.portal-grid--brands-open {
+  grid-template-columns: repeat(11, 1fr);
+}
+
+/* Pill ordering: active brand → other brands → category pills → panel. */
+.portal-grid--open .brand-card--mini {
+  flex: 0 0 auto;
+  height: var(--row-mini);
+  order: 3;
+}
+.portal-grid--open .brand-card--brand-alt {
+  order: 2;
+}
+.portal-grid--open .brand-card--nav-active {
+  order: 1;
+}
+
+/* ---- Content panel (wraps to its own row below the pills) ---- */
+.portal-panel {
+  position: relative;
+  background: var(--paper);
+}
+.portal-panel[hidden] {
+  display: none;
+}
+
+/* In open mode the panel wraps to a full-width row and fills the space
+   left under the single pill row. */
+.portal-grid--open .portal-panel {
+  order: 4;
+  flex: 1 1 100%;
+  height: calc(100dvh - var(--row-mini));
+  min-height: 0;
+  grid-column: 1 /-1;
+}
+
+.portal-panel__frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.portal-panel__close {
+  position: absolute;
+  left: var(--space-5);
+  bottom: 50%;
+  z-index: var(--z-close);
+  width: var(--space-10);
+  height: var(--space-10);
+  border-radius: var(--radius-round);
+  border: none;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-raised);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.portal-panel__close:hover {
+  transform: scale(1.08);
+}
+
+@media (max-width: 900px) {
+  .portal-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(160px, auto);
+  }
+
+  /* Open mode on small screens: let the pills wrap and the whole thing
+     scroll vertically, so nothing is clipped or truncated. */
+  .portal-grid--open {
+    overflow-y: auto;
+  }
+  .portal-grid--open .portal-panel {
+    height: auto;
+    min-height: 80dvh;
+  }
+}
+
+/* ---- View Transition timing ----
+   The browser morphs each named card (and the panel) between the grid and
+   rail layouts. Keep it visible but snappy. main.js skips the transition
+   entirely under prefers-reduced-motion. */
+::view-transition-group(*) {
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -3,24 +3,24 @@
 
 :root {
   /* Color — Core */
-  --rm-color-rm-blue: #3A70B3; /* RM Blue */
-  --rm-color-rm-dark-blue: #193C64; /* RM Dark Blue */
+  --rm-color-rm-blue: #3a70b3; /* RM Blue */
+  --rm-color-rm-dark-blue: #193c64; /* RM Dark Blue */
 
   /* Color — Accent */
-  --rm-color-light-purple: #A998C9; /* Light Purple */
-  --rm-color-medium-green: #86C774; /* Medium Green */
-  --rm-color-orange: #FFCD74; /* Orange */
-  --rm-color-bright-yellow: #FCF496; /* Bright Yellow */
+  --rm-color-light-purple: #a998c9; /* Light Purple */
+  --rm-color-medium-green: #86c774; /* Medium Green */
+  --rm-color-orange: #ffcd74; /* Orange */
+  --rm-color-bright-yellow: #fcf496; /* Bright Yellow */
 
   /* Color — Dark */
-  --rm-color-dark-blue-green: #04242B; /* Dark Blue Green */
-  --rm-color-blue-green: #27434D; /* Blue Green */
-  --rm-color-dark-purple: #3C194A; /* Dark Purple */
-  --rm-color-dark-green: #538C5E; /* Dark Green */
+  --rm-color-dark-blue-green: #04242b; /* Dark Blue Green */
+  --rm-color-blue-green: #27434d; /* Blue Green */
+  --rm-color-dark-purple: #3c194a; /* Dark Purple */
+  --rm-color-dark-green: #538c5e; /* Dark Green */
 
   /* Typography — Font family */
-  --rm-font-family-primary: 'DM Sans';
-  --rm-font-family-mono: 'Geist Mono';
+  --rm-font-family-primary: "DM Sans";
+  --rm-font-family-mono: "Geist Mono";
 
   /* Typography — Scale: hero (Single biggest statement on a page) */
   --rm-font-size-hero: 10rem;

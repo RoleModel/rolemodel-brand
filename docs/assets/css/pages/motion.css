@@ -1,0 +1,339 @@
+/* -----------------------------------------------------------------------
+   Motion page — a kinetic hero, plotted easing curves with a tracing dot
+   and timed marker, a real-time duration scale, and the motion principles.
+   Card chrome and mono-caps labels come from page-shell.css.
+   ----------------------------------------------------------------------- */
+
+/* ============================================================
+   Kinetic hero
+   ============================================================ */
+.motion-hero {
+  padding: clamp(var(--space-9), 12vh, var(--space-13)) var(--content-pad)
+    var(--space-10);
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.motion-hero__num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--page-accent);
+  margin-bottom: var(--space-5);
+}
+
+.motion-hero__headline {
+  font-size: clamp(2.75rem, 8vw, 6rem);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tightest);
+  margin-bottom: var(--space-6);
+}
+
+/* The closing word swaps on the motion heartbeat, easing in each time. */
+.motion-hero__cycle {
+  display: inline-block;
+  color: var(--page-accent);
+  animation: motion-word-swap var(--duration-slow) var(--ease-out) both;
+}
+
+@keyframes motion-word-swap {
+  from {
+    opacity: 0;
+    transform: translateY(0.34em) skewY(4deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.motion-hero__lede {
+  font-size: clamp(var(--text-lg), 2.4vw, var(--text-2xl));
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-tight);
+  opacity: var(--emphasis-muted);
+  max-width: 40ch;
+}
+
+/* Section intro note under the label */
+.section-note {
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-tight);
+  opacity: var(--emphasis-muted);
+  max-width: 60ch;
+  margin-top: calc(-1 * var(--space-3));
+  margin-bottom: var(--space-6);
+}
+
+/* ============================================================
+   Easing curves
+   ============================================================ */
+.ease-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.ease-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ease-card__plot {
+  padding: var(--space-7) var(--space-7) var(--space-5);
+  background: var(--surface-dim);
+}
+
+.ease-card__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.ease-card__curve {
+  stroke: var(--page-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.ease-card__guide {
+  stroke: var(--ink-a12);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.ease-card__axis {
+  stroke: var(--ink-a06);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.ease-card__dot {
+  fill: var(--page-accent);
+}
+
+/* Straight track + marker driven by the card's real timing function */
+.ease-card__demo {
+  position: relative;
+  height: var(--space-11);
+  container-type: inline-size;
+  border-top: 1px solid var(--ink-a06);
+  border-bottom: 1px solid var(--ink-a06);
+}
+
+.ease-card__track {
+  position: absolute;
+  left: var(--space-6);
+  right: var(--space-6);
+  top: 50%;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--ink-a12);
+  transform: translateY(-50%);
+}
+
+.ease-card__marker {
+  --run: calc(100cqw - var(--space-12) - var(--space-4));
+  position: absolute;
+  left: var(--space-6);
+  top: 50%;
+  width: var(--space-4);
+  height: var(--space-4);
+  margin-top: calc(-1 * var(--space-2));
+  border-radius: var(--radius-round);
+  background: var(--page-accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--page-accent) 16%, transparent);
+  animation: ease-run 2.2s infinite;
+  animation-timing-function: var(--ease);
+}
+
+@keyframes ease-run {
+  0% {
+    transform: translateX(0);
+  }
+  42%,
+  50% {
+    transform: translateX(var(--run));
+  }
+  92%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.ease-card__info {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ease-card__name {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-snug);
+}
+
+.ease-card__value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  opacity: var(--emphasis-faint);
+  word-break: break-all;
+}
+
+.ease-card__desc {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-tight);
+  opacity: var(--emphasis-muted);
+  margin-top: var(--space-1);
+}
+
+/* ============================================================
+   Duration scale
+   ============================================================ */
+.duration-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.duration-row {
+  padding: var(--space-5) var(--space-6);
+
+  .duration-row__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+  }
+
+  .duration-row__name {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-snug);
+  }
+
+  .duration-row__value {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--page-accent);
+  }
+
+  .duration-row__lane {
+    height: var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--ink-a06);
+    overflow: hidden;
+  }
+
+  .duration-row__fill {
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: var(--page-accent);
+    /* Safety guard: the inline `animation` shorthand in motion.html loops with
+       `alternate`, which at 200ms reads as a rapid, seizure-risk strobe. Force
+       a single forward pass and hold. (Section is being reworked next.) */
+    animation-iteration-count: 1 !important;
+    animation-direction: normal !important;
+    animation-fill-mode: forwards !important;
+  }
+
+  .duration-row__usage {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-tight);
+    opacity: var(--emphasis-muted);
+    margin-top: var(--space-3);
+  }
+}
+
+@keyframes dur-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================================
+   Motion principles
+   ============================================================ */
+.principle-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.principle-card {
+  padding: var(--space-6) var(--space-7);
+  display: grid;
+  grid-template-columns: var(--space-12) 1fr;
+  gap: var(--space-6);
+  align-items: start;
+
+  .principle-card__num {
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tightest);
+    line-height: var(--leading-none);
+    color: var(--page-accent);
+    opacity: 0.18;
+  }
+
+  .principle-card__title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-snug);
+    margin-bottom: var(--space-2);
+  }
+
+  .principle-card__desc {
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-tight);
+    opacity: var(--emphasis-muted);
+    max-width: 62ch;
+  }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 860px) {
+  .ease-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .principle-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-hero__cycle {
+    animation: none;
+  }
+  .ease-card__marker {
+    animation: none;
+  }
+  .duration-row__fill {
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,71 @@
+/* -----------------------------------------------------------------------
+   Page header — section number, title, and tagline at the top of every
+   guideline page. The --bar modifier turns it into a compact horizontal
+   bar with room for actions (used by the Color page).
+   ----------------------------------------------------------------------- */
+
+.page-header {
+  padding: var(--space-13) var(--content-pad) var(--space-11);
+  border-bottom: var(--border-hairline);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  width: 100%;
+
+  .page-header__num {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: var(--weight-semibold);
+    opacity: var(--emphasis-faint);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-header__title {
+    font-size: var(--text-display);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tightest);
+    line-height: var(--leading-none);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-header__tagline {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.5;
+    opacity: var(--emphasis-muted);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .page-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-bottom: var(--space-2);
+  }
+
+  &.page-header--bar {
+    padding: var(--space-9) var(--space-2) var(--space-5);
+    max-width: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    border-bottom: none;
+
+    .page-header__title {
+      margin-bottom: var(--space-2);
+    }
+    .page-header__tagline {
+      max-width: 380px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .page-header {
+    padding: var(--space-10) var(--space-5) var(--space-9);
+
+    &.page-header--bar {
+      padding: var(--space-7) var(--space-5) var(--space-4);
+    }
+  }
+}

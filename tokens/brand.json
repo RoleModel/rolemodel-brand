@@ -26,13 +26,48 @@
       "mono": { "value": "Geist Mono" }
     },
     "scale": {
-      "hero": { "size": "10rem", "lineHeight": "1em", "letterSpacing": "-0.05em", "usage": "Single biggest statement on a page" },
-      "display": { "size": "4.5rem", "lineHeight": "1.1em", "letterSpacing": "-0.05em", "usage": "Section-leading headlines" },
-      "h1": { "size": "3.7rem", "lineHeight": "1.1em", "letterSpacing": "-0.04em", "usage": "Major sections, top-level hierarchy" },
-      "h2": { "size": "3.7rem", "lineHeight": "1.1em", "letterSpacing": "-0.04em", "usage": "Secondary section titles under an H1" },
-      "subheading": { "size": "2.875rem", "lineHeight": "1.3em", "letterSpacing": "-0.03em", "usage": "Context directly under a headline" },
-      "body": { "size": "1.6rem", "lineHeight": "1.6em", "letterSpacing": "-0.02em", "usage": "Main readable text" },
-      "mono-caps": { "size": "1.05rem", "lineHeight": "1.2em", "letterSpacing": "0", "usage": "Section headings and call-outs in asides" }
+      "hero": {
+        "size": "10rem",
+        "lineHeight": "1em",
+        "letterSpacing": "-0.05em",
+        "usage": "Single biggest statement on a page"
+      },
+      "display": {
+        "size": "4.5rem",
+        "lineHeight": "1.1em",
+        "letterSpacing": "-0.05em",
+        "usage": "Section-leading headlines"
+      },
+      "h1": {
+        "size": "3.7rem",
+        "lineHeight": "1.1em",
+        "letterSpacing": "-0.04em",
+        "usage": "Major sections, top-level hierarchy"
+      },
+      "h2": {
+        "size": "3.7rem",
+        "lineHeight": "1.1em",
+        "letterSpacing": "-0.04em",
+        "usage": "Secondary section titles under an H1"
+      },
+      "subheading": {
+        "size": "2.875rem",
+        "lineHeight": "1.3em",
+        "letterSpacing": "-0.03em",
+        "usage": "Context directly under a headline"
+      },
+      "body": {
+        "size": "1.6rem",
+        "lineHeight": "1.6em",
+        "letterSpacing": "-0.02em",
+        "usage": "Main readable text"
+      },
+      "mono-caps": {
+        "size": "1.05rem",
+        "lineHeight": "1.2em",
+        "letterSpacing": "0",
+        "usage": "Section headings and call-outs in asides"
+      }
     }
   },
   "logo": {
@@ -43,8 +78,14 @@
     "$todo": "File paths once logos land in logos/svg and logos/png"
   },
   "iconSets": {
-    "spot": { "source": "Icons8 Pastel Glyph", "url": "https://icons8.com/icons/pastel-glyph" },
-    "pictogram": { "source": "Icons8 Pastel Glyph", "url": "https://icons8.com/icons/pastel-glyph" },
+    "spot": {
+      "source": "Icons8 Pastel Glyph",
+      "url": "https://icons8.com/icons/pastel-glyph"
+    },
+    "pictogram": {
+      "source": "Icons8 Pastel Glyph",
+      "url": "https://icons8.com/icons/pastel-glyph"
+    },
     "ui": { "source": "HugeIcons", "url": "https://hugeicons.com/icons" }
   }
 }

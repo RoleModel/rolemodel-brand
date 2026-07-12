@@ -4,7 +4,7 @@
 
 Canonical, versioned home for RoleModel Software's brand assets. This repo is the source of truth that feeds every distribution surface: the public brand page ([rolemodelsoftware.com/brand/rolemodel](https://rolemodelsoftware.com/brand/rolemodel)), design tools, documents, and AI agents.
 
-The written brand context (voice, RoleModel Way references) lives in `standard/context/brand/`. This repo holds the *files and values*: logos, color, typography, icons, and machine-readable tokens.
+The written brand context (voice, RoleModel Way references) lives in `standard/context/brand/`. This repo holds the _files and values_: logos, color, typography, icons, and machine-readable tokens.
 
 ## Why a repo
 
@@ -54,7 +54,7 @@ Note: the Drive folder spells it "LightingCAD" — normalized to `lightningcad` 
 ## Contribution
 
 - Asset additions and corrections: commit to `main`
-- Changes to brand *values* (colors, type scale, logo revisions): pull request + entry in `CHANGELOG.md`
+- Changes to brand _values_ (colors, type scale, logo revisions): pull request + entry in `CHANGELOG.md`
 
 ## Status
 

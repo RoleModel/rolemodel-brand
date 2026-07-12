@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typography — Brand Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <script>
+      if (new URLSearchParams(location.search).get("embed") === "1")
+        document.documentElement.classList.add("is-embedded");
+    </script>
+  </head>
+
+  <body>
+    <div id="nav-root"></div>
+    <div id="page-header-root"></div>
+
+    <main class="page-content" aria-label="Typography guidelines">
+      <!-- Font families section -->
+      <section id="fonts-section" aria-labelledby="fonts-heading">
+        <span class="section-label" id="fonts-heading">Typefaces</span>
+        <div class="font-grid" id="font-grid"></div>
+      </section>
+
+      <!-- Scale section -->
+      <section aria-labelledby="scale-heading">
+        <span class="section-label" id="scale-heading">Type Scale</span>
+        <div id="scale-list"></div>
+        <p class="type-hint">Click any specimen to copy the CSS rule.</p>
+      </section>
+    </main>
+
+    <div class="type-watermark" aria-hidden="true">Aa</div>
+
+    <div
+      class="copy-toast"
+      id="copy-toast"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <script type="module">
+      import { TYPE_SCALE } from "../assets/js/modules/page-data.js";
+      import {
+        initPage,
+        categoryInfo,
+        copyText,
+        showToast,
+        staggerReveal,
+        initReveal,
+      } from "../assets/js/modules/page-utils.js";
+
+      const { brand, pageData, accentHex } = initPage("typography");
+      const { category: cat, numLabel } = categoryInfo("typography", "04");
+      const brandFont = brand.font || "'DM Sans', sans-serif";
+
+      document.querySelector("#page-header-root").setHTMLUnsafe(/* html */ `
+  <div class="page-header">
+    <span class="page-header__num">${numLabel}</span>
+    <h1 class="page-header__title" style="color:${accentHex}">${cat.name || "Typography"}</h1>
+    <p class="page-header__tagline">${cat.tagline || "Confident and approachable, with clear hierarchy."}</p>
+  </div>
+`);
+      document.title = `Typography — ${brand.name || "Brand Guidelines"}`;
+
+      // ---- Font family cards ----
+      const fonts = pageData.fonts || [
+        {
+          name: "DM Sans",
+          role: "Display & UI",
+          weights: [400, 500, 700],
+          note: "Variable weight font.",
+          googleUrl: "https://fonts.google.com/specimen/DM+Sans",
+        },
+        {
+          name: "Geist Mono",
+          role: "Mono Caps / Code",
+          weights: [400, 700],
+          note: "Always uppercase in UI labels.",
+          googleUrl: "https://fonts.google.com/specimen/Geist+Mono",
+        },
+      ];
+
+      document.querySelector("#font-grid").setHTMLUnsafe(
+        fonts
+          .map((f, i) => {
+            const isMono =
+              f.name.toLowerCase().includes("mono") ||
+              f.name.toLowerCase().includes("geist");
+            const previewStyle = isMono
+              ? `font-family:'${f.name}',monospace`
+              : `font-family:'${f.name}',${brandFont}`;
+            const weights = f.weights
+              .map(
+                (w) => /* html */ `<span class="font-card__weight">${w}</span>`
+              )
+              .join("");
+
+            return /* html */ `
+    <div class="font-card reveal" data-delay="${i * 80}">
+      <div class="font-card__preview${isMono ? " font-card__preview--mono" : ""}" style="${previewStyle}">
+        ${isMono ? "Aa Bb Cc 01" : "Aa Bb Cc"}
+      </div>
+      <div class="font-card__meta">
+        <span class="font-card__role">${f.role}</span>
+        <span class="font-card__name">${f.name}</span>
+        <span class="font-card__note">${f.note || ""}</span>
+        <div class="font-card__weights">${weights}</div>
+      </div>
+      ${f.googleUrl ? /* html */ `<a href="${f.googleUrl}" target="_blank" rel="noopener" class="download-button font-card__link">View on Google Fonts</a>` : ""}
+    </div>
+  `;
+          })
+          .join("")
+      );
+
+      // ---- Type scale ----
+      const scaleList = document.querySelector("#scale-list");
+      const PREVIEW_CLAMP = {
+        Hero: 10,
+        Display: 4.5,
+        H1: 3.7,
+        H2: 2.7,
+        Subheading: 2.87,
+        Body: 2,
+        "Mono Caps": 1.05,
+      };
+
+      scaleList.setHTMLUnsafe(
+        TYPE_SCALE.map((step, i) => {
+          const isMono = step.mono || step.name === "Mono Caps";
+          const fontStyle = isMono
+            ? `font-family:'Geist Mono',monospace`
+            : `font-family:${brandFont}`;
+          const previewRem = PREVIEW_CLAMP[step.name] || 1.2;
+          const cssRule = `font-size:${step.size};font-weight:${step.weight};line-height:${step.lh};letter-spacing:${step.ls};`;
+
+          return /* html */ `
+    <div class="type-specimen reveal" data-delay="${i * 50}"
+         role="button" tabindex="0"
+         data-copy="${cssRule}"
+         title="Click to copy CSS">
+      <div class="type-specimen__preview${isMono ? " type-specimen__preview--mono" : ""}"
+           style="${fontStyle};font-size:${previewRem}rem;font-weight:${step.weight};letter-spacing:${step.ls};line-height:${step.lh}">
+        ${step.sample}
+      </div>
+      <div class="type-specimen__meta">
+        <span class="type-specimen__name" style="color:${accentHex}">${step.name}</span>
+        <span class="type-specimen__detail">${step.size} / ${step.weight}</span>
+        <span class="type-specimen__detail">${step.lh} leading</span>
+        <span class="type-specimen__detail type-specimen__detail--usage">${step.usage}</span>
+      </div>
+    </div>
+  `;
+        }).join("")
+      );
+
+      // Copy the CSS rule on click or keyboard activation (event delegation)
+      const handleCopy = async (target) => {
+        const el = target.closest("[data-copy]");
+        if (!el) return;
+        await copyText(el.dataset.copy);
+        showToast("Copied CSS rule");
+      };
+      scaleList.addEventListener("click", (e) => handleCopy(e.target));
+      scaleList.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") handleCopy(e.target);
+      });
+
+      staggerReveal(document.querySelectorAll(".reveal"), 0, 60);
+      initReveal();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+/* -----------------------------------------------------------------------
+   Brand card — the <brand-card> web component. One block, two state
+   modifiers toggled by the component's setState():
+
+     .brand-card--grid  full bento tile (default)
+     .brand-card--mini  compact pill in the .portal-rail while a section
+                         is open — every card gets this state, always;
+                         none are ever hidden.
+
+   .brand-card--current marks whichever category pill's page is showing
+   in the shared .portal-panel (see main.js). Clicking it again closes
+   the section — the card never has to leave the rail to do that.
+   ----------------------------------------------------------------------- */
+
+.brand-card {
+  /* --card-bg is set inline per card (main.js/brand-card.js). Text color is
+     derived from it so it always meets contrast — no JS luminance math. */
+  --card-bg: var(--surface);
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  background: var(--card-bg);
+  color: contrast-color(var(--card-bg));
+  transition:
+    background-color var(--duration-slow) var(--ease-in-out),
+    color var(--duration-slow) var(--ease-in-out);
+
+  /* ---- Faces (both are buttons; reset chrome) ---- */
+  .brand-card__face,
+  .brand-card__mini {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+  }
+
+  /* Grid-state face: full bento tile */
+  .brand-card__face {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding: var(--space-8);
+  }
+
+  /* Mini-state face: compact rail button */
+  .brand-card__mini {
+    display: none;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: 0 var(--space-4);
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    white-space: nowrap;
+  }
+
+  .brand-card__mini-mark {
+    width: var(--space-6);
+    height: var(--space-6);
+    flex-shrink: 0;
+    display: none;
+  }
+
+  .brand-card__mini-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .brand-card__mini-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-card__mini-close {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: end;
+    opacity: 0.7;
+  }
+
+  /* ---- Tile face internals ---- */
+  .brand-card__mark {
+    width: 100px;
+    height: 100px;
+  }
+
+  .brand-card__mark-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .brand-card__icon {
+    width: 86px;
+    height: 86px;
+    margin-bottom: var(--space-4);
+  }
+
+  .brand-card__icon-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  /* GSAP morph targets need a stable transform origin */
+  .brand-card__icon .point {
+    transform-origin: center;
+  }
+
+  .brand-card__glyph {
+    display: inline-block;
+    font-size: 44px;
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-none);
+    /* font-weight is tweened directly by icon-animations.js against the
+       active brand's variable font (see index.html's Google Fonts request,
+       which asks for the full weight range, not fixed static cuts). */
+  }
+
+  .brand-card__title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-snug);
+    margin: 0;
+  }
+
+  .brand-card__tagline {
+    font-size: var(--text-base);
+    opacity: 0;
+    max-height: 0;
+    margin-top: var(--space-2);
+    transition:
+      opacity var(--duration-base) var(--ease-out),
+      max-height var(--duration-base) var(--ease-out);
+  }
+
+  /* ---- Kind: brand tile (logo mark layout + active ring) ---- */
+  &.brand-card--brand {
+    .brand-card__face {
+      justify-content: space-between;
+    }
+    .brand-card__mini-mark {
+      display: inline-flex;
+    }
+  }
+
+  &.brand-card--active {
+    opacity: 1;
+    transform: scale(1);
+    --card-bg: var(--rolemodel-dark);
+  }
+
+  /* ---- State: grid ---- */
+  &.brand-card--grid {
+    &.brand-card--span-1 {
+      grid-column: span 1;
+    }
+    &.brand-card--span-2 {
+      grid-column: span 2;
+    }
+    &.brand-card--span-3 {
+      grid-column: span 3;
+    }
+    &.brand-card--span-4 {
+      grid-column: span 4;
+    }
+  }
+  &.brand-card--grid:hover .brand-card__tagline {
+    opacity: 0.85;
+    max-height: 60px;
+  }
+
+  /* ---- State: mini (a flex item inside .portal-rail) ---- */
+  &.brand-card--mini {
+    flex: 0 0 auto;
+    min-width: max-content;
+    height: var(--row-mini);
+
+    .brand-card__face {
+      display: none;
+    }
+    .brand-card__mini {
+      display: grid;
+      align-items: center;
+      grid-template-columns: auto 1fr;
+    }
+    .brand-card__check {
+      display: none;
+    }
+  }
+
+  /* Non-active brand pills stay collapsed until the active brand pill is
+     clicked (.portal-grid--brands-open, set in main.js). */
+  &.brand-card--mini.brand-card--brand-alt {
+    display: none;
+  }
+
+  /* ---- Modifier: current (the pill whose page is open in the panel) ---- */
+  &.brand-card--current {
+    filter: brightness(1.15);
+
+    .brand-card__mini-mark {
+      display: none;
+    }
+    .brand-card__mini-close {
+      display: inline-flex;
+    }
+  }
+}
+
+.brand-card:hover {
+  z-index: var(--z-raised);
+  --card-bg: var(--rolemodel-dark);
+}
+
+/* Reveal the other brand pills when the active brand pill is clicked. */
+.portal-grid--brands-open .brand-card--mini.brand-card--brand-alt {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .brand-card {
+    .brand-card__face {
+      padding: var(--space-5);
+    }
+    .brand-card__title {
+      font-size: var(--text-xl);
+    }
+    .brand-card__icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: var(--space-3);
+    }
+    .brand-card__mark {
+      width: 64px;
+      height: 64px;
+    }
+    .brand-card__glyph {
+      font-size: var(--text-4xl);
+    }
+
+    /* Bento spans collapse to the 2-column mobile grid */
+    &.brand-card--grid {
+      &.brand-card--span-2,
+      &.brand-card--span-3,
+      &.brand-card--span-4 {
+        grid-column: span 3;
+      }
+    }
+  }
+}
