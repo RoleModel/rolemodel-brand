@@ -59,23 +59,12 @@
   max-width: 40ch;
 }
 
-/* Section intro note under the label */
-.section-note {
-  font-size: var(--text-md);
-  line-height: var(--leading-normal);
-  letter-spacing: var(--tracking-tight);
-  opacity: var(--emphasis-muted);
-  max-width: 60ch;
-  margin-top: calc(-1 * var(--space-3));
-  margin-bottom: var(--space-6);
-}
-
 /* ============================================================
    Easing curves
    ============================================================ */
 .ease-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
 }
 
@@ -92,7 +81,7 @@
 
 .ease-card__svg {
   width: 100%;
-  height: auto;
+  height: 400px;
   overflow: visible;
 }
 
@@ -290,8 +279,7 @@
     font-weight: var(--weight-bold);
     letter-spacing: var(--tracking-tightest);
     line-height: var(--leading-none);
-    color: var(--page-accent);
-    opacity: 0.18;
+    color: var(--color-dark);
   }
 
   .principle-card__title {

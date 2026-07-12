@@ -24,6 +24,17 @@
 
     <main class="palette" id="palette" aria-label="Brand color palette"></main>
 
+    <section
+      class="subpalette"
+      id="subpalette"
+      aria-labelledby="subpalette-heading"
+      hidden
+    >
+      <span class="section-label" id="subpalette-heading">Product Family</span>
+      <p class="section-note" id="subpalette-note"></p>
+      <div class="subpalette__grid" id="subpalette-grid"></div>
+    </section>
+
     <div
       class="copy-toast"
       id="copy-toast"
@@ -38,6 +49,7 @@
         copyText,
         showToast,
       } from "../assets/js/modules/page-utils.js";
+      import { UI_STRINGS } from "../assets/js/modules/site-content.js";
 
       const { brand, pageData, accentHex } = initPage("color");
       const { category: cat, numLabel } = categoryInfo("color", "02");
@@ -54,7 +66,7 @@
   <div>
     <span class="page-header__num">${numLabel}</span>
     <h1 class="page-header__title">${cat.name || "Color"}</h1>
-    <p class="page-header__tagline">${cat.tagline || "Our palette carries our energy and warmth."}</p>
+    <p class="page-header__tagline">${cat.tagline}</p>
   </div>
   <div class="page-header__actions">
     ${
@@ -103,9 +115,41 @@
           .join("")
       );
 
-      grid.addEventListener("click", async (e) => {
-        const tile = e.target.closest(".palette__tile");
-        if (!tile) return;
+      // ---- Product family (sub-brand) color swatches ----
+      const subBrands = brand.subBrands || [];
+      if (subBrands.length) {
+        const subSection = document.querySelector("#subpalette");
+        subSection.hidden = false;
+        document.querySelector("#subpalette-note").textContent =
+          UI_STRINGS.subpaletteNote;
+        const subGrid = document.querySelector("#subpalette-grid");
+        subGrid.setHTMLUnsafe(
+          subBrands
+            .map(
+              (sub) => /* html */ `
+    <button class="subpalette__tile"
+            style="background:${sub.color};color:contrast-color(${sub.color});"
+            data-hex="${sub.color}"
+            aria-label="${sub.name} — click to copy ${sub.color}">
+      <span class="subpalette__chip">
+        <img src="${sub.logo}" alt="" loading="lazy"/>
+      </span>
+      <span class="subpalette__name">${sub.name}</span>
+      <span class="subpalette__value">${sub.color}</span>
+    </button>
+  `
+            )
+            .join("")
+        );
+      }
+
+      // ---- Click-to-copy for both the primary and sub-brand swatches ----
+      // Both tile types carry data-hex, so one delegated listener covers them.
+      document.body.addEventListener("click", async (e) => {
+        const tile = e.target.closest("[data-hex]");
+        if (!tile) {
+          return;
+        }
         await copyText(tile.dataset.hex);
         showToast(`Copied ${tile.dataset.hex}`);
       });

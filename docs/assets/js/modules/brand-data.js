@@ -1,3 +1,6 @@
+// GENERATED FILE — do not edit directly.
+// Source: docs/content/** — edit there, then push. CI regenerates this file.
+
 export const BRAND_ASSET_BASE =
   "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
 
@@ -8,7 +11,6 @@ export const BRAND_ORDER = ["rolemodel", "academy", "lightningcad"];
 export const BRANDS = {
   academy: {
     font: "'Space Grotesk', sans-serif",
-    // Academy Dark — the hero tile uses this, not Primary
     heroColor: "#293747",
     icon: `${BRAND_ASSET_BASE}/logos/academy/AcademyIcon.svg`,
     logo: `${BRAND_ASSET_BASE}/logos/academy/Academy.svg`,
@@ -48,28 +50,38 @@ export const BRANDS = {
     primary: "#2a83f7",
     subBrands: [
       {
-        logo: `${BRAND_ASSET_BASE}/logos/designers/AirfieldDesignerWhite.svg`,
+        color: "#07BBC2",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/AirfieldDesigner.svg`,
         name: "Airfield Designer",
       },
       {
-        logo: `${BRAND_ASSET_BASE}/logos/designers/BuildingDesignerWhite.svg`,
+        color: "#ADBF08",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/BuildingDesigner.svg`,
         name: "Building Designer",
       },
       {
-        logo: `${BRAND_ASSET_BASE}/logos/designers/DeckDesignerWhite.svg`,
+        color: "#FFAC08",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/DeckDesigner.svg`,
         name: "Deck Designer",
       },
       {
-        logo: `${BRAND_ASSET_BASE}/logos/designers/DockDesignerWhite.svg`,
+        color: "#0E8A6B",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/DockDesigner.svg`,
         name: "Dock Designer",
       },
-      { logo: `${BRAND_ASSET_BASE}/logos/designers/DPQWhite.svg`, name: "DPQ" },
       {
-        logo: `${BRAND_ASSET_BASE}/logos/designers/FlowDesignerWhite.svg`,
+        color: "#2A83F7",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/DPQ.svg`,
+        name: "DPQ",
+      },
+      {
+        color: "#0BCAF0",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/FlowDesigner.svg`,
         name: "Flow Designer",
       },
       {
-        logo: `${BRAND_ASSET_BASE}/logos/designers/RailingDesignerWhite.svg`,
+        color: "#8D3DE3",
+        logo: `${BRAND_ASSET_BASE}/logos/designers/RailingDesigner.svg`,
         name: "Railing Designer",
       },
     ],
@@ -83,7 +95,6 @@ export const BRANDS = {
     logo: `${BRAND_ASSET_BASE}/logos/rolemodel/logo.svg`,
     logoWhite: `${BRAND_ASSET_BASE}/logos/rolemodel/RMS-logo-White.svg`,
     name: "RoleModel Software",
-    // Real brand colors, in the order they should paint the grid tiles.
     palette: [
       "#2a84f8",
       "#a998c9",
@@ -107,13 +118,13 @@ export const CATEGORIES = [
   {
     name: "Logo",
     slug: "logo",
-    span: 3,
+    span: 2,
     tagline: "Our wordmark and icon are the clearest signal of who we are.",
   },
   {
     name: "Color",
     slug: "color",
-    span: 2,
+    span: 1,
     tagline: "Our palette carries our energy and warmth.",
   },
   {
@@ -131,19 +142,19 @@ export const CATEGORIES = [
   {
     name: "Typography",
     slug: "typography",
-    span: 2,
+    span: 1,
     tagline: "Confident and approachable, with clear hierarchy.",
   },
   {
     name: "Icons",
     slug: "icons",
-    span: 3,
+    span: 2,
     tagline: "Icons help us recognize complex ideas instantly.",
   },
   {
     name: "Motion",
     slug: "motion",
-    span: 4,
+    span: 2,
     tagline: "Fast, precise, never decorative for its own sake.",
   },
   {

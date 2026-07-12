@@ -3,7 +3,7 @@
 
    States (reflected as .brand-card--{state} modifiers, styled in
    css/brand-card.css):
-     grid — normal bento tile on the homepage (icon, title, tagline)
+     grid — normal bento tile on the homepage (icon, title)
      mini — compact pill in the nav rail while a section is open
 
    A card never owns page content or moves in/out of a "drawer" — the
@@ -16,7 +16,6 @@
      kind         brand | category
      slug         brand or category slug
      label        display title
-     tagline      hover tagline (category cards)
      bg           background color (drives --card-bg; text color is derived
                   in CSS via contrast-color(), so no text-color is passed in)
      span         grid column span in grid state
@@ -32,7 +31,7 @@ const CARD_STATES = ["grid", "mini"];
 
 export class BrandCard extends HTMLElement {
   static get observedAttributes() {
-    return ["bg", "label", "tagline", "icon-src", "state", "span", "kind"];
+    return ["bg", "label", "icon-src", "state", "span", "kind"];
   }
 
   connectedCallback() {
@@ -122,7 +121,6 @@ export class BrandCard extends HTMLElement {
     return `
       <div class="brand-card__icon"></div>
       <h3 class="brand-card__title"></h3>
-      <p class="brand-card__tagline"></p>
     `;
   }
 
@@ -137,7 +135,6 @@ export class BrandCard extends HTMLElement {
 
   _sync() {
     const label = this.getAttribute("label") || "";
-    const tagline = this.getAttribute("tagline") || "";
     const bg = this.getAttribute("bg");
     const iconSrc = this.getAttribute("icon-src");
     const span = this.getAttribute("span");
@@ -161,11 +158,6 @@ export class BrandCard extends HTMLElement {
     const title = this.querySelector(".brand-card__title");
     if (title) {
       title.textContent = label;
-    }
-
-    const tag = this.querySelector(".brand-card__tagline");
-    if (tag) {
-      tag.textContent = tagline;
     }
 
     const miniLabel = this.querySelector(".brand-card__mini-label");

@@ -25,10 +25,10 @@
   &.download-button--primary {
     padding: var(--space-2) var(--space-4);
     border: none;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-lg);
     background: var(--ink);
     color: var(--paper);
-    font-size: var(--text-md);
+    font-size: var(--text-lg);
     text-transform: none;
     letter-spacing: var(--tracking-tight);
     gap: var(--space-2);

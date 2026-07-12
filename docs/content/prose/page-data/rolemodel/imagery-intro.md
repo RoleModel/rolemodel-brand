@@ -1,0 +1,1 @@
+Imagery should feel real, grounded, and people-centered—showing the work, the process, and the partnership. Favor authentic moments over stocky "tech" clichés. Choose photos and illustrations that reinforce trust, competence, and momentum.

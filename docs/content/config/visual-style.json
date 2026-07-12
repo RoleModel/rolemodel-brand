@@ -1,0 +1,21 @@
+{
+  "radii": [
+    { "slug": "xs", "token": "--radius-xs", "size": 40 },
+    { "slug": "sm", "token": "--radius-sm", "size": 48 },
+    { "slug": "md", "token": "--radius-md", "size": 56 },
+    { "slug": "lg", "token": "--radius-lg", "size": 64 },
+    { "slug": "xl", "token": "--radius-xl", "size": 72 },
+    { "slug": "2xl", "token": "--radius-2xl", "size": 88 },
+    { "slug": "pill", "token": "--radius-pill", "size": 48 }
+  ],
+  "shadows": [
+    { "slug": "card", "name": "Card", "token": "--shadow-card" },
+    { "slug": "raised", "name": "Raised", "token": "--shadow-raised" },
+    { "slug": "modal", "name": "Modal", "token": "--shadow-modal" }
+  ],
+  "specs": [
+    { "slug": "max-width", "label": "Max Width", "token": "--content-max" },
+    { "slug": "gutter", "label": "Gutter", "token": "--content-pad" },
+    { "slug": "section-gap", "label": "Section Gap", "token": "--section-gap" }
+  ]
+}

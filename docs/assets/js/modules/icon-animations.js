@@ -300,6 +300,8 @@ export const initIconAnimations = (tileIcon, slug) => {
     }
 
     case "logo": {
+      // Transform only — animating `filter` on an <img src="*.svg"> causes a
+      // black flash in Chrome/Safari while the filtered raster re-decodes.
       const img = tileIcon.querySelector("img");
       if (!img) {
         return;
@@ -307,7 +309,6 @@ export const initIconAnimations = (tileIcon, slug) => {
       const hover = gsap.to(img, {
         duration: 0.4,
         ease: "back.out(2)",
-        filter: "brightness(1.1) drop-shadow(0 4px 10px rgba(0,0,0,0.2))",
         paused: true,
         scale: 1.05,
         y: -4,

@@ -8,6 +8,7 @@
   --ink: #04242b;
   --paper: #fafaf7;
   --white: #ffffff;
+  --border-color: #e2e2e2;
 
   /* Ink at fixed alphas — hairlines, dim surfaces, borders */
   --ink-a04: color-mix(in srgb, var(--ink) 4%, transparent);
@@ -68,16 +69,16 @@
 
   /* Size scale */
   --text-2xs: 10px;
-  --text-xs: 11px;
-  --text-sm: 12px;
-  --text-md: 13px;
-  --text-base: 14px;
-  --text-lg: 15px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 18px;
+  --text-base: 16px;
+  --text-lg: 16px;
   --text-xl: 18px;
-  --text-2xl: 22px;
-  --text-3xl: 26px;
+  --text-2xl: 20px;
+  --text-3xl: 24px;
   --text-4xl: 32px;
-  --text-display: clamp(3rem, 7vw, 5.5rem);
+  --text-display: clamp(3rem, 7vw, 4.5rem);
 
   /* Weights */
   --weight-regular: 400;
@@ -101,8 +102,8 @@
   --leading-relaxed: 1.65;
 
   /* Text emphasis (opacity steps for secondary text) */
-  --emphasis-faint: 0.4;
-  --emphasis-muted: 0.55;
+  --emphasis-faint: 0.7;
+  --emphasis-muted: 0.75;
   --emphasis-strong: 0.7;
 
   /* ============ Space ============ */
@@ -138,6 +139,7 @@
   --border-control: 1.5px solid var(--ink-a15);
 
   /* ============ Layout ============ */
+  --content-full: 1800px;
   --content-max: 1200px;
   --content-pad: 40px;
   --section-gap: 80px;

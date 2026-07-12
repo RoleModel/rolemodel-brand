@@ -16,6 +16,7 @@
         document.documentElement.classList.add("is-embedded");
     </script>
   </head>
+
   <body>
     <div id="nav-root"></div>
 
@@ -41,15 +42,6 @@
         <div class="ease-grid" id="ease-grid"></div>
       </section>
 
-      <section aria-labelledby="duration-heading">
-        <span class="section-label" id="duration-heading">Duration Scale</span>
-        <p class="section-note">
-          Three speeds, one shared clock. The bars fill in real time so the
-          difference is something you feel, not just read.
-        </p>
-        <div class="duration-scale" id="duration-scale"></div>
-      </section>
-
       <section aria-labelledby="principles-heading">
         <span class="section-label" id="principles-heading"
           >Motion Principles</span
@@ -69,6 +61,10 @@
         staggerReveal,
         initReveal,
       } from "../assets/js/modules/page-utils.js";
+      import {
+        CYCLE_WORDS,
+        MOTION_PRINCIPLES,
+      } from "../assets/js/modules/site-content.js";
 
       const { brand, accentHex } = initPage("motion");
       const { category: cat, numLabel } = categoryInfo("motion", "07");
@@ -78,12 +74,9 @@
 
       document.title = `Motion — ${brand.name || "Brand Guidelines"}`;
       document.querySelector("#hero-num").textContent = numLabel;
-      document.querySelector("#hero-lede").textContent =
-        cat.tagline ||
-        "We animate to guide, confirm, and clarify — fast starts, soft landings, and nothing that moves without a reason.";
+      document.querySelector("#hero-lede").textContent = cat.tagline;
 
       // ---- Kinetic hero: cycle the closing word on the motion heartbeat ----
-      const CYCLE_WORDS = ["purpose", "precision", "restraint", "intent"];
       const cycleEl = document.querySelector("#hero-cycle");
       if (!reduceMotion) {
         let i = 0;
@@ -128,10 +121,6 @@
         <circle class="ease-card__dot" r="6" ${dotPos}>${motion}</circle>
       </svg>
     </div>
-    <div class="ease-card__demo" aria-hidden="true">
-      <div class="ease-card__track"></div>
-      <div class="ease-card__marker"></div>
-    </div>
     <div class="ease-card__info">
       <h3 class="ease-card__name">${e.name}</h3>
       <code class="ease-card__value">${e.value}</code>
@@ -144,52 +133,9 @@
         .querySelector("#ease-grid")
         .setHTMLUnsafe(EASING_TOKENS.map(easeCard).join(""));
 
-      // ---- Duration scale: each bar fills + empties at its real duration, so the
-      // difference in speed is a rhythm you feel continuously, not a one-off. ----
-      document.querySelector("#duration-scale").setHTMLUnsafe(
-        DURATION_TOKENS.map((tkn, i) => {
-          const ms = parseInt(tkn.value, 10);
-          const anim = reduceMotion
-            ? ""
-            : `animation:dur-fill ${ms}ms linear infinite alternate`;
-          return /* html */ `
-  <div class="duration-row reveal" data-delay="${i * 80}">
-    <div class="duration-row__head">
-      <span class="duration-row__name">${tkn.name}</span>
-      <span class="duration-row__value">${tkn.value}</span>
-    </div>
-    <div class="duration-row__lane">
-      <div class="duration-row__fill" style="${anim}"></div>
-    </div>
-    <p class="duration-row__usage">${tkn.usage}</p>
-  </div>`;
-        }).join("")
-      );
-
-      // ---- Motion principles ----
-      const principles = [
-        {
-          title: "Intentional, not ambient",
-          desc: "Animation directs attention, confirms an action, or shows system state. If it does none of those, it does not ship.",
-        },
-        {
-          title: "Fast starts, soft landings",
-          desc: "Ease-out is the default: elements enter quickly and settle gently. Linear motion feels mechanical — save it for progress, not personality.",
-        },
-        {
-          title: "One thing at a time",
-          desc: "Move a single element, or a coherent group in sequence. Parallel motion competes for attention and reads as noise.",
-        },
-        {
-          title: "Reduced motion is first-class",
-          desc: "Every animation degrades to an instant, legible state. Motion is the polish, never the gate.",
-        },
-      ];
-
       document.querySelector("#principles-list").setHTMLUnsafe(
-        principles
-          .map(
-            (p, i) => /* html */ `
+        MOTION_PRINCIPLES.map(
+          (p, i) => /* html */ `
   <article class="principle-card reveal" data-delay="${i * 70}">
     <span class="principle-card__num">0${i + 1}</span>
     <div class="principle-card__body">
@@ -198,8 +144,7 @@
     </div>
   </article>
 `
-          )
-          .join("")
+        ).join("")
       );
 
       staggerReveal(document.querySelectorAll(".reveal"), 0, 60);

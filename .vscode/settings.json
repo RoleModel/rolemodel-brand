@@ -18,10 +18,10 @@
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[html]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"

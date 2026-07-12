@@ -1,108 +1,74 @@
 /* -----------------------------------------------------------------------
-   Visual style page — style principle cards, radius + shadow demos.
-   Card chrome and mono-caps labels come from page-shell.css.
+   Visual style page — dark hero with a dot-grid background (a shader
+   canvas layers on top for brands with a config; see shader-configs.js)
+   plus the same image library grid/lightbox pattern as the Imagery page
+   (.image-viewer/.lightbox rules live in pages/imagery.css).
    ----------------------------------------------------------------------- */
 
-.style-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
-
-.style-card {
+.visual-style-hero {
+  position: relative;
+  min-height: 60dvh;
   overflow: hidden;
-
-  .style-card__preview {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-6);
-    background: var(--surface-dim);
-  }
-
-  .style-card__body {
-    padding: var(--space-5) var(--space-6) var(--space-6);
-  }
-
-  .style-card__title {
-    font-size: var(--text-lg);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-snug);
-    margin-bottom: var(--space-2);
-  }
-
-  .style-card__desc {
-    font-size: var(--text-md);
-    opacity: var(--emphasis-muted);
-    line-height: var(--leading-normal);
-    letter-spacing: var(--tracking-tight);
-  }
-}
-
-/* ---- Border radius demos ---- */
-.radius-list {
-  display: flex;
-  gap: var(--space-3);
-  align-items: flex-end;
-  flex-wrap: wrap;
-}
-
-.radius-demo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-
-  .radius-demo__shape {
-    background: var(--page-accent);
-    opacity: 0.18;
-  }
-
-  .radius-demo__label {
-    opacity: var(--emphasis-muted);
-  }
-
-  .radius-demo__usage {
-    font-size: var(--text-xs);
-    opacity: var(--emphasis-faint);
-    letter-spacing: var(--tracking-tight);
-    text-align: center;
-    max-width: 80px;
-  }
-}
-
-/* ---- Shadow demos ---- */
-.shadow-list {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-
-.shadow-demo {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-6);
-  flex: 1;
-  min-width: 160px;
+  padding: var(--space-10);
+  background-color: var(--ink);
+  background-image: radial-gradient(
+    circle,
+    var(--white-a12) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
 
-  .shadow-demo__name {
-    opacity: var(--emphasis-muted);
+  .visual-style-hero__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
-  .shadow-demo__usage {
-    font-size: var(--text-xs);
-    opacity: var(--emphasis-faint);
+  .visual-style-hero__card {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
     text-align: center;
+    color: var(--white);
+  }
+
+  .visual-style-hero__num {
+    font-weight: var(--weight-medium);
+    opacity: 0.5;
+    margin-right: 2px;
+  }
+
+  .visual-style-hero__title {
+    font-size: var(--text-display);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tighter);
+    margin-bottom: var(--space-3);
+  }
+
+  .visual-style-hero__intro {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
     letter-spacing: var(--tracking-tight);
+    opacity: 0.75;
   }
 }
 
-@media (max-width: 700px) {
-  .style-grid {
-    grid-template-columns: 1fr;
+html.is-embedded .visual-style-hero {
+  min-height: 50dvh;
+}
+
+@media (max-width: 900px) {
+  .visual-style-hero {
+    min-height: 40dvh;
+    padding: var(--space-7);
+
+    .visual-style-hero__title {
+      font-size: var(--text-3xl);
+    }
   }
 }

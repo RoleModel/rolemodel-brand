@@ -15,7 +15,7 @@
 .icon-panel {
   background: var(--surface);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
+  border: solid 1px var(--border-color);
   padding: var(--space-7) 0 var(--space-8);
   overflow: hidden;
   --icon-accent: var(--page-accent);
@@ -187,7 +187,7 @@
 .icon-principle {
   background: var(--surface);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
+  border: solid 1px var(--border-color);
   display: grid;
   grid-template-columns: var(--space-6) 1fr;
   gap: var(--space-4);

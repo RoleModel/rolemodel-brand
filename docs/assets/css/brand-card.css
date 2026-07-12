@@ -22,8 +22,8 @@
   background: var(--card-bg);
   color: contrast-color(var(--card-bg));
   transition:
-    background-color var(--duration-slow) var(--ease-in-out),
-    color var(--duration-slow) var(--ease-in-out);
+    background-color var(--duration-fast) var(--ease-in-out),
+    color var(--duration-fast) var(--ease-in-out);
 
   /* ---- Faces (both are buttons; reset chrome) ---- */
   .brand-card__face,
@@ -87,8 +87,8 @@
 
   /* ---- Tile face internals ---- */
   .brand-card__mark {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
   }
 
   .brand-card__mark-img {
@@ -117,7 +117,7 @@
 
   .brand-card__glyph {
     display: inline-block;
-    font-size: 44px;
+    font-size: 74px;
     font-weight: var(--weight-regular);
     line-height: var(--leading-none);
     /* font-weight is tweened directly by icon-animations.js against the
@@ -130,16 +130,6 @@
     font-weight: var(--weight-bold);
     letter-spacing: var(--tracking-snug);
     margin: 0;
-  }
-
-  .brand-card__tagline {
-    font-size: var(--text-base);
-    opacity: 0;
-    max-height: 0;
-    margin-top: var(--space-2);
-    transition:
-      opacity var(--duration-base) var(--ease-out),
-      max-height var(--duration-base) var(--ease-out);
   }
 
   /* ---- Kind: brand tile (logo mark layout + active ring) ---- */
@@ -155,6 +145,7 @@
   &.brand-card--active {
     opacity: 1;
     transform: scale(1);
+    background-color: var(--card-bg);
     --card-bg: var(--rolemodel-dark);
   }
 
@@ -172,10 +163,6 @@
     &.brand-card--span-4 {
       grid-column: span 4;
     }
-  }
-  &.brand-card--grid:hover .brand-card__tagline {
-    opacity: 0.85;
-    max-height: 60px;
   }
 
   /* ---- State: mini (a flex item inside .portal-rail) ---- */
@@ -218,7 +205,8 @@
 
 .brand-card:hover {
   z-index: var(--z-raised);
-  --card-bg: var(--rolemodel-dark);
+  background-color: var(--rolemodel-dark);
+  color: var(--white);
 }
 
 /* Reveal the other brand pills when the active brand pill is clicked. */
@@ -249,6 +237,7 @@
 
     /* Bento spans collapse to the 2-column mobile grid */
     &.brand-card--grid {
+      &.brand-card--span-1,
       &.brand-card--span-2,
       &.brand-card--span-3,
       &.brand-card--span-4 {

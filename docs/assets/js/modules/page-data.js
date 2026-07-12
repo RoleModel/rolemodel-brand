@@ -1,3 +1,6 @@
+// GENERATED FILE — do not edit directly.
+// Source: docs/content/** — edit there, then push. CI regenerates this file.
+
 // Extended brand data for individual pages.
 // Augments brand-data.js (BRANDS + CATEGORIES) with named colors, CMYK,
 // typography scale, voice concepts, logo file paths, etc.
@@ -9,8 +12,18 @@ import { BRAND_ASSET_BASE } from "./brand-data.js";
 const _framerImg = (file, size) =>
   `https://framerusercontent.com/images/${file}${size ? `?scale-down-to=${size}` : ""}`;
 
-// ---- Imagery grids (source: Framer CMS "Grid image" entries on
-//      /brand/rolemodel and /brand/academy) ----
+const _imageEntries = (files) =>
+  files.map((file) => ({
+    full: _framerImg(file, 2048),
+    src: _framerImg(file, 1024),
+  }));
+
+const _repoImageEntries = (files, dir) =>
+  files.map((file) => {
+    const url = `../assets/imagery/${dir}/${encodeURIComponent(file)}`;
+    return { full: url, src: url };
+  });
+
 const ROLEMODEL_IMAGERY = [
   "SP3ekiKEAIeCRNlounJDgnIVo6A.jpg",
   "r9rk4GNEoxzWq6Yar5LcgfItfM.jpg",
@@ -40,31 +53,41 @@ const ROLEMODEL_IMAGERY = [
   "3qFOjRqmsjxykB3es7HdJEWnNJg.jpg",
 ];
 
-// Academy renders live in the repo (imagery/site/, mirrored into
-// docs/assets/imagery/academy/ so GitHub Pages serves them). Filenames match
-// the committed files exactly (including the two "Acadmey" typos).
 const ACADEMY_IMAGERY_FILES = [
   "Academy-Logo-Clay.png",
-  "Acadmey-Keyboard.png",
+  "poster-style.webp",
   "Academy-Rocket.webp",
+  "ruby.webp",
+  "Acadmey-Keyboard.png",
+  "Academy-Phone.png",
+  "poster-style-2.webp",
+  "plant.avif",
   "Academy-Browser.png",
   "Acadmey-Cursor.png",
-  "Academy-Phone.png",
+  "question.webp",
   "Academy-Slide.png",
+  "t-shirt.avif",
+  "poster-style-3.webp",
   "Academy-Cursor-2.png",
+  "javascript.webp",
 ];
 
-const _imageEntries = (files) =>
-  files.map((file) => ({
-    full: _framerImg(file, 2048),
-    src: _framerImg(file, 1024),
-  }));
-
-const _repoImageEntries = (files) =>
-  files.map((file) => {
-    const url = `../assets/imagery/academy/${encodeURIComponent(file)}`;
-    return { full: url, src: url };
-  });
+const ROLEMODEL_VISUAL_STYLE_IMAGERY_FILES = [
+  "ken-auer.png",
+  "developing-engineers.png",
+  "minding-your-business.png",
+  "approach.png",
+  "25-years.png",
+  "process-scaling.png",
+  "expertise-amplification.png",
+  "iterative-value.png",
+  "agile-approach.png",
+  "craftsman-poster.avif",
+  "poster-style.png",
+  "approach-diagram.avif",
+  "poster-style-2.png",
+  "working-genius.png",
+];
 
 export const PAGE_DATA = {
   academy: {
@@ -75,35 +98,50 @@ export const PAGE_DATA = {
         group: "core",
         hex: "#293747",
         name: "Academy Dark",
-        span: { c: 2, r: 2 },
+        span: {
+          c: 2,
+          r: 2,
+        },
       },
       {
         cmyk: "C100 M0 Y39 K28",
         group: "core",
         hex: "#00B871",
         name: "Primary Green",
-        span: { c: 3, r: 1 },
+        span: {
+          c: 3,
+          r: 1,
+        },
       },
       {
         cmyk: "C66 M46 Y0 K29",
         group: "accent",
         hex: "#3E61B5",
         name: "Blue",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
       {
         cmyk: "C64 M0 Y13 K27",
         group: "accent",
         hex: "#43BBA4",
         name: "Teal",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C0 M0 Y0 K5",
         group: "neutral",
         hex: "#F2F2F2",
         name: "Light Gray",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
     ],
     fonts: [
@@ -123,7 +161,7 @@ export const PAGE_DATA = {
       },
     ],
     gridCols: 6,
-    imagery: _repoImageEntries(ACADEMY_IMAGERY_FILES),
+    imagery: _repoImageEntries(ACADEMY_IMAGERY_FILES, "academy"),
     imageryIntro:
       "Academy imagery is built on handcrafted 3D clay-style renders—tactile, playful, and unmistakably made by hand. Every icon and scene reinforces the craftsmanship metaphor at the heart of the Academy.",
     logoRules: [
@@ -169,7 +207,6 @@ export const PAGE_DATA = {
     zipUrl:
       "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
   },
-
   lightningcad: {
     aseUrl: "../downloads/lightningcad-colors.ase",
     colors: [
@@ -178,21 +215,30 @@ export const PAGE_DATA = {
         group: "core",
         hex: "#2A83F7",
         name: "CAD Blue",
-        span: { c: 4, r: 2 },
+        span: {
+          c: 4,
+          r: 2,
+        },
       },
       {
         cmyk: "C59 M33 Y0 K2",
         group: "core",
         hex: "#66A5F9",
         name: "CAD Light Blue",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
       {
         cmyk: "C97 M55 Y0 K63",
         group: "dark",
         hex: "#032A5E",
         name: "CAD Navy",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
     ],
     fonts: [
@@ -212,8 +258,6 @@ export const PAGE_DATA = {
       },
     ],
     gridCols: 6,
-    // LightningCAD has no dedicated CMS image set yet; it shares the
-    // RoleModel photography until one is populated in Framer.
     imagery: _imageEntries(ROLEMODEL_IMAGERY),
     imageryIntro:
       "LightningCAD imagery leans on the RoleModel photography library—real projects, real people—paired with clean product UI captures of the design tools themselves.",
@@ -253,101 +297,130 @@ export const PAGE_DATA = {
     zipUrl:
       "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip",
   },
-
   rolemodel: {
     aseUrl: "../downloads/rolemodel-colors.ase",
-    // ---- Named color palette (HEX + official CMYK from brand reference) ----
-    // span: {c, r} — column/row span for the full-screen bento grid.
     colors: [
-      // Core
       {
         cmyk: "C81 M54 Y3 K0",
         group: "core",
         hex: "#3A70B3",
         name: "RM Blue",
-        span: { c: 2, r: 2 },
+        span: {
+          c: 2,
+          r: 2,
+        },
       },
       {
         cmyk: "C98 M80 Y35 K23",
         group: "core",
         hex: "#193C64",
         name: "RM Dark Blue",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
-      // Accent
       {
         cmyk: "C33 M40 Y0 K0",
         group: "accent",
         hex: "#A998C9",
         name: "Light Purple",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C81 M98 Y37 K39",
         group: "dark",
         hex: "#3C194A",
         name: "Dark Purple",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C42 M9 Y0 K9",
         group: "accent",
         hex: "#87D4E9",
         name: "Light Blue",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C18 M0 Y29 K15",
         group: "accent",
         hex: "#B3D99A",
         name: "Light Green",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C71 M25 Y76 K8",
         group: "dark",
         hex: "#538C5E",
         name: "Dark Green",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C51 M0 Y72 K0",
         group: "accent",
         hex: "#86C774",
         name: "Medium Green",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C0 M20 Y63 K0",
         group: "accent",
         hex: "#FFCD74",
         name: "Orange",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
       {
         cmyk: "C2 M0 Y51 K0",
         group: "accent",
         hex: "#FCF496",
         name: "Bright Yellow",
-        span: { c: 1, r: 1 },
+        span: {
+          c: 1,
+          r: 1,
+        },
       },
-      // Dark
       {
         cmyk: "C89 M66 Y59 K68",
         group: "dark",
         hex: "#04242B",
         name: "Dark Blue Green",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
       {
         cmyk: "C84 M61 Y52 K40",
         group: "dark",
         hex: "#27434D",
         name: "Blue Green",
-        span: { c: 2, r: 1 },
+        span: {
+          c: 2,
+          r: 1,
+        },
       },
     ],
-    // ---- Font family ----
     fonts: [
       {
         googleUrl: "https://fonts.google.com/specimen/DM+Sans",
@@ -365,7 +438,6 @@ export const PAGE_DATA = {
       },
     ],
     gridCols: 6,
-    // ---- Imagery (Framer CMS grid images) ----
     imagery: _imageEntries(ROLEMODEL_IMAGERY),
     imageryIntro:
       'Imagery should feel real, grounded, and people-centered—showing the work, the process, and the partnership. Favor authentic moments over stocky "tech" clichés. Choose photos and illustrations that reinforce trust, competence, and momentum.',
@@ -386,7 +458,6 @@ export const PAGE_DATA = {
         value: "Light · Dark",
       },
     ],
-    // ---- Logos ----
     logos: [
       {
         bg: "#FAFAF7",
@@ -410,6 +481,10 @@ export const PAGE_DATA = {
         svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/icon.svg`,
       },
     ],
+    visualStyleImagery: _repoImageEntries(
+      ROLEMODEL_VISUAL_STYLE_IMAGERY_FILES,
+      "rolemodel"
+    ),
     zipUrl:
       "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip",
   },
@@ -503,11 +578,10 @@ export const VOICE_CONCEPTS = [
       "Shared ownership of outcomes, not a service transaction. Partners are integral members of the team, and trust is a moral commitment.",
     name: "Trusted Partnership",
     practice: [
-      '"Together we build the tailored solution your company needs."',
       '"integral members of our development team"',
       '"navigate together"',
     ],
-    quote: "We treat your money as if it was our own.",
+    quote: "Together we build the tailored solution your company needs.",
   },
   {
     description:

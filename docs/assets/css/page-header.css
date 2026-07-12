@@ -42,7 +42,7 @@
   }
 
   &.page-header--bar {
-    padding: var(--space-9) var(--space-2) var(--space-5);
+    padding: var(--space-9) var(--space-8) var(--space-5);
     max-width: none;
     display: flex;
     align-items: flex-end;

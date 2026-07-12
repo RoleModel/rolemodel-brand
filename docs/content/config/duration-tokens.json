@@ -1,0 +1,5 @@
+[
+  { "slug": "fast", "cssVar": "--duration-fast", "value": "200ms" },
+  { "slug": "base", "cssVar": "--duration-base", "value": "400ms" },
+  { "slug": "slow", "cssVar": "--duration-slow", "value": "600ms" }
+]

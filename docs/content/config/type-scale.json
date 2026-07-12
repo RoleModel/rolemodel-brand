@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "hero",
+    "size": "10rem",
+    "lh": "1em",
+    "ls": "-0.05em",
+    "weight": 700
+  },
+  {
+    "slug": "display",
+    "size": "4.5rem",
+    "lh": "1.1em",
+    "ls": "-0.05em",
+    "weight": 700
+  },
+  {
+    "slug": "h1",
+    "size": "3.7rem",
+    "lh": "1.1em",
+    "ls": "-0.04em",
+    "weight": 700
+  },
+  {
+    "slug": "h2",
+    "size": "3.7rem",
+    "lh": "1.1em",
+    "ls": "-0.04em",
+    "weight": 600
+  },
+  {
+    "slug": "subheading",
+    "size": "2.875rem",
+    "lh": "1.3em",
+    "ls": "-0.03em",
+    "weight": 500
+  },
+  {
+    "slug": "body",
+    "size": "1.6rem",
+    "lh": "1.6em",
+    "ls": "-0.02em",
+    "weight": 400
+  },
+  {
+    "slug": "mono-caps",
+    "size": "1.05rem",
+    "lh": "1.2em",
+    "ls": "0.06em",
+    "weight": 700,
+    "mono": true
+  }
+]

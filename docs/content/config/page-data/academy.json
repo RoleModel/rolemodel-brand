@@ -1,0 +1,108 @@
+{
+  "aseUrl": "../downloads/academy-colors.ase",
+  "gridCols": 6,
+  "zipUrl": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
+  "imagery": {
+    "source": "repo",
+    "dir": "academy",
+    "files": [
+      "Academy-Logo-Clay.png",
+      "poster-style.webp",
+      "Academy-Rocket.webp",
+      "ruby.webp",
+      "Acadmey-Keyboard.png",
+      "Academy-Phone.png",
+      "poster-style-2.webp",
+      "plant.avif",
+      "Academy-Browser.png",
+      "Acadmey-Cursor.png",
+      "question.webp",
+      "Academy-Slide.png",
+      "t-shirt.avif",
+      "poster-style-3.webp",
+      "Academy-Cursor-2.png",
+      "javascript.webp"
+    ]
+  },
+  "colors": [
+    {
+      "hex": "#293747",
+      "cmyk": "C29 M3 Y0 K78",
+      "name": "Academy Dark",
+      "group": "core",
+      "span": { "c": 2, "r": 2 }
+    },
+    {
+      "hex": "#00B871",
+      "cmyk": "C100 M0 Y39 K28",
+      "name": "Primary Green",
+      "group": "core",
+      "span": { "c": 3, "r": 1 }
+    },
+    {
+      "hex": "#3E61B5",
+      "cmyk": "C66 M46 Y0 K29",
+      "name": "Blue",
+      "group": "accent",
+      "span": { "c": 2, "r": 1 }
+    },
+    {
+      "hex": "#43BBA4",
+      "cmyk": "C64 M0 Y13 K27",
+      "name": "Teal",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#F2F2F2",
+      "cmyk": "C0 M0 Y0 K5",
+      "name": "Light Gray",
+      "group": "neutral",
+      "span": { "c": 2, "r": 1 }
+    }
+  ],
+  "fonts": [
+    {
+      "slug": "space-grotesk",
+      "name": "Space Grotesk",
+      "role": "Display & UI",
+      "googleUrl": "https://fonts.google.com/specimen/Space+Grotesk",
+      "weights": [300, 400, 500, 600, 700]
+    },
+    {
+      "slug": "geist-mono",
+      "name": "Geist Mono",
+      "role": "Mono Caps / Code",
+      "googleUrl": "https://fonts.google.com/specimen/Geist+Mono",
+      "weights": [400, 600, 700]
+    }
+  ],
+  "logos": [
+    {
+      "label": "Academy logo — light backgrounds",
+      "bg": "#F2F2F2",
+      "src": "logos/academy/Academy.svg",
+      "svgHref": "logos/academy/Academy.svg",
+      "pngHref": "logos/academy/Academy@2x.png"
+    },
+    {
+      "label": "Academy logo — dark backgrounds",
+      "bg": "#293747",
+      "src": "logos/academy/AcademyLogoWhite.svg",
+      "svgHref": "logos/academy/AcademyLogoWhite.svg",
+      "pngHref": "logos/academy/AcademyLogoWhite@2x.png"
+    },
+    {
+      "label": "Academy icon",
+      "bg": "#F2F2F2",
+      "src": "logos/academy/AcademyIcon.svg",
+      "svgHref": "logos/academy/AcademyIcon.svg",
+      "pngHref": "logos/academy/AcademyIcon@4x.png"
+    }
+  ],
+  "logoRules": [
+    { "slug": "min-size", "label": "Min size", "value": "50 px" },
+    { "slug": "clear-space", "label": "Clear space", "value": "40%" },
+    { "slug": "backgrounds", "label": "Backgrounds", "value": "Light · Dark" }
+  ]
+}

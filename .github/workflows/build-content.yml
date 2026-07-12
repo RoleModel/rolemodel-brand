@@ -1,0 +1,51 @@
+name: Build content
+
+# Regenerates docs/assets/js/modules/{brand-data,page-data,site-content}.js
+# from docs/content/** whenever content changes, and commits the result back
+# to the branch. Content editors never need to run anything locally — edit
+# a markdown/JSON file under docs/content/ and push (or merge a PR); this
+# workflow does the regeneration.
+#
+# See docs/scripts/build-content.mjs for the generator itself.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/content/**"
+      - "docs/scripts/build-content.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  build-content:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: npm ci
+
+      - name: Run generator regression tests
+        run: node --test docs/scripts/*.test.mjs
+
+      - name: Regenerate content
+        run: node docs/scripts/build-content.mjs
+
+      - name: Commit regenerated files if changed
+        run: |
+          if git diff --quiet -- docs/assets/js/modules/; then
+            echo "No content changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/js/modules/
+          git commit -m "chore: regenerate content [skip ci]"
+          git push

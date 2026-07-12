@@ -23,7 +23,10 @@
 import { BRANDS, BRAND_ORDER, CATEGORIES } from "./modules/brand-data.js";
 import { initIconAnimations } from "./modules/icon-animations.js";
 import { renderIcon } from "./modules/icons.js";
+import { staggerReveal } from "./modules/page-utils.js";
 import "./components/brand-card.js";
+
+const INTRO_STAGGER_STEP_MS = 45;
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 
@@ -66,6 +69,39 @@ class BrandPortal {
     this.build();
     this.wireEvents();
     this.restoreFromHash();
+    this.playIntro();
+  }
+
+  // ---- First-load intro ---------------------------------------------------
+  // The bento settles into place: each card scales down from slightly oversized
+  // to its final size, staggered across the grid (same staggerReveal() helper
+  // the other pages use for their scroll-in reveals). Skipped when a section
+  // is deep-linked open, and under reduced-motion.
+  playIntro() {
+    if (this.openSlug || prefersReducedMotion()) {
+      return;
+    }
+    const cards = this.allCards();
+    staggerReveal(cards, 0, INTRO_STAGGER_STEP_MS);
+    for (const card of cards) {
+      card.style.setProperty("--intro-delay", `${card.dataset.delay}ms`);
+    }
+
+    // Drop the class once every card's own card-intro animation has
+    // finished, instead of guessing the total duration from a timer.
+    let finished = 0;
+    const onAnimationEnd = (e) => {
+      if (e.animationName !== "card-intro") {
+        return;
+      }
+      finished += 1;
+      if (finished >= cards.length) {
+        this.grid.removeEventListener("animationend", onAnimationEnd);
+        this.grid.classList.remove("portal-grid--intro");
+      }
+    };
+    this.grid.addEventListener("animationend", onAnimationEnd);
+    this.grid.classList.add("portal-grid--intro");
   }
 
   brandCards() {
@@ -107,7 +143,6 @@ class BrandPortal {
       card.setAttribute("kind", "category");
       card.setAttribute("slug", category.slug);
       card.setAttribute("label", category.name);
-      card.setAttribute("tagline", category.tagline);
       card.setAttribute("bg", bg);
       card.setAttribute("span", String(category.span));
       card.dataset.index = this.brandOrder.length + index;
@@ -189,10 +224,15 @@ class BrandPortal {
   }
 
   onBrandSelect(slug) {
-    // Grid mode: a brand tile just switches the active brand.
+    // Grid mode: a brand tile just swaps colors/content in place — no card
+    // moves or resizes, so this skips the View Transition wrapper entirely.
+    // Wrapping a same-layout change in startViewTransition() still makes the
+    // browser snapshot and crossfade every named card whose content differs
+    // (a full-card fade), which is worse than the plain CSS
+    // background-color/color transition already on .brand-card.
     if (!this.openSlug) {
       if (slug !== getActiveBrandSlug()) {
-        BrandPortal.transition(() => this.applyBrand(slug));
+        this.applyBrand(slug);
       }
       return;
     }
@@ -212,6 +252,24 @@ class BrandPortal {
 
   // ---- open / close / swap ----------------------------------------------
 
+  // Exactly one of {a category's card, the panel} owns that category's
+  // view-transition-name at a time. Handing it to the panel when a section
+  // opens lets the browser morph the clicked tile's box straight into the
+  // panel's box — the card visibly grows to contain its content, instead of
+  // the tile and the panel animating as two unrelated elements.
+  assignPanelIdentity(slug) {
+    const card = this.cards.get(`category:${slug}`);
+    this.panel.style.viewTransitionName = card.style.viewTransitionName;
+    card.style.viewTransitionName = "";
+  }
+
+  assignCardIdentity(slug) {
+    this.cards.get(`category:${slug}`).style.viewTransitionName = vtName(
+      "category",
+      slug
+    );
+  }
+
   openSection(slug, animate = true) {
     const card = this.cards.get(`category:${slug}`);
     if (!card) {
@@ -221,6 +279,7 @@ class BrandPortal {
     const mutate = () => {
       this.openSlug = slug;
       this.brandsExpanded = false;
+      this.assignPanelIdentity(slug);
       this.grid.classList.add("portal-grid--open");
       this.grid.classList.remove("portal-grid--brands-open");
       this.panel.hidden = false;
@@ -242,7 +301,9 @@ class BrandPortal {
       return;
     }
     BrandPortal.transition(() => {
+      this.assignCardIdentity(this.openSlug);
       this.openSlug = slug;
+      this.assignPanelIdentity(slug);
       this.frame.src = pageUrlFor(slug, getActiveBrandSlug());
       this.markCurrent();
     });
@@ -251,6 +312,7 @@ class BrandPortal {
 
   closeSection() {
     const mutate = () => {
+      this.assignCardIdentity(this.openSlug);
       this.grid.classList.remove(
         "portal-grid--open",
         "portal-grid--brands-open"

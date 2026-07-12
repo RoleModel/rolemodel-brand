@@ -1,0 +1,66 @@
+{
+  "aseUrl": "../downloads/lightningcad-colors.ase",
+  "gridCols": 6,
+  "zipUrl": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip",
+  "imagery": { "sharedWith": "rolemodel" },
+  "colors": [
+    {
+      "hex": "#2A83F7",
+      "cmyk": "C83 M49 Y0 K3",
+      "name": "CAD Blue",
+      "group": "core",
+      "span": { "c": 4, "r": 2 }
+    },
+    {
+      "hex": "#66A5F9",
+      "cmyk": "C59 M33 Y0 K2",
+      "name": "CAD Light Blue",
+      "group": "core",
+      "span": { "c": 2, "r": 1 }
+    },
+    {
+      "hex": "#032A5E",
+      "cmyk": "C97 M55 Y0 K63",
+      "name": "CAD Navy",
+      "group": "dark",
+      "span": { "c": 2, "r": 1 }
+    }
+  ],
+  "fonts": [
+    {
+      "slug": "dm-sans",
+      "name": "DM Sans",
+      "role": "Display & UI",
+      "googleUrl": "https://fonts.google.com/specimen/DM+Sans",
+      "weights": [400, 500, 600, 700]
+    },
+    {
+      "slug": "geist-mono",
+      "name": "Geist Mono",
+      "role": "Mono Caps / Code",
+      "googleUrl": "https://fonts.google.com/specimen/Geist+Mono",
+      "weights": [400, 600, 700]
+    }
+  ],
+  "logos": [
+    {
+      "label": "CAD logo — light backgrounds",
+      "bg": "#FAFAF7",
+      "src": "logos/lightningcad/LightningCad.svg",
+      "svgHref": "logos/lightningcad/LightningCad.svg",
+      "pngHref": "logos/lightningcad/LightningCad@2x.png"
+    },
+    {
+      "label": "CAD logo — dark backgrounds",
+      "bg": "#032A5E",
+      "src": "logos/lightningcad/LightningCadWhite.svg",
+      "svgHref": "logos/lightningcad/LightningCadWhite.svg",
+      "pngHref": "logos/lightningcad/LightningCadWhite@2x.png"
+    }
+  ],
+  "logoRules": [
+    { "slug": "min-size", "label": "Min size", "value": "50 px" },
+    { "slug": "clear-space", "label": "Clear space", "value": "40%" },
+    { "slug": "backgrounds", "label": "Backgrounds", "value": "Light · Dark" }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  { "slug": "logo", "span": 3 },
+  { "slug": "color", "span": 2 },
+  { "slug": "voice", "span": 1 },
+  { "slug": "imagery", "span": 1 },
+  { "slug": "typography", "span": 2 },
+  { "slug": "icons", "span": 3 },
+  { "slug": "motion", "span": 4 },
+  { "slug": "visual-style", "span": 2 }
+]

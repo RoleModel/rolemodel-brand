@@ -1,0 +1,186 @@
+{
+  "aseUrl": "../downloads/rolemodel-colors.ase",
+  "gridCols": 6,
+  "zipUrl": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip",
+  "imagery": {
+    "source": "framer",
+    "files": [
+      "SP3ekiKEAIeCRNlounJDgnIVo6A.jpg",
+      "r9rk4GNEoxzWq6Yar5LcgfItfM.jpg",
+      "4xMCoSTISeeivPFqvNz2OQolXIg.jpg",
+      "OpAzLF77c4GVQiDhPOxI3h4DQR4.jpg",
+      "9gX9sfBK6SDUfYtKRFsOWH3Ps7M.jpg",
+      "uJtZe6XGMLMKfXic46lx4L79o.jpg",
+      "eEwVoGGBWjKUr5ioADS51QpT4.jpg",
+      "KxAyMj6qGZzI4US3bgZEf4xmyM.jpg",
+      "TKb9aNWWjqUHWA0Z70N0pr8VXI.jpg",
+      "msMz4LpVawbyaMVKVddxXCTtC10.jpg",
+      "4CwnVwU8yJCPnmrlgkeHSNjfVtE.jpg",
+      "YzyBQH7yL9o4dsOIAnZxqMIewX4.jpg",
+      "t82COAQziwottdArJt6RqQo.jpg",
+      "gaGkThpjmaBhUf0FIMtahUWVPj8.jpg",
+      "YDHeJat9CwvVVSxzu16yX1XhSTI.jpg",
+      "Bq3RGphbTrykV2yyR5jb5bL5w.jpg",
+      "CSRfCToqWoEzT1G6RDWlZQBujdk.jpg",
+      "8iSDPW1fGUyGQZTfV7zOmZ3GVg.jpg",
+      "kYNPV7Ph4VdLFbdnxjS3QRFHOM8.jpg",
+      "FIdyHJhvtQrcqTHJERXk6xWsftk.jpg",
+      "hgiNhKMpy61bN6n7tsZjWUuJ0.jpg",
+      "sDs9osCQn9Y0ZASDfl0UYd9jH0.jpg",
+      "RsGV7fCaCyPeTwlbsYPKw4VpXdc.jpg",
+      "4MPRK6rIAbXyEexuZbTxqtfhn4.jpg",
+      "fXb0rZn4HOG9Yh3oGYvYfMv1UU.jpg",
+      "3qFOjRqmsjxykB3es7HdJEWnNJg.jpg"
+    ]
+  },
+  "visualStyleImagery": {
+    "source": "repo",
+    "dir": "rolemodel",
+    "files": [
+      "ken-auer.png",
+      "developing-engineers.png",
+      "minding-your-business.png",
+      "approach.png",
+      "25-years.png",
+      "process-scaling.png",
+      "expertise-amplification.png",
+      "iterative-value.png",
+      "agile-approach.png",
+      "craftsman-poster.avif",
+      "poster-style.png",
+      "approach-diagram.avif",
+      "poster-style-2.png",
+      "working-genius.png"
+    ]
+  },
+  "colors": [
+    {
+      "hex": "#3A70B3",
+      "cmyk": "C81 M54 Y3 K0",
+      "name": "RM Blue",
+      "group": "core",
+      "span": { "c": 2, "r": 2 }
+    },
+    {
+      "hex": "#193C64",
+      "cmyk": "C98 M80 Y35 K23",
+      "name": "RM Dark Blue",
+      "group": "core",
+      "span": { "c": 2, "r": 1 }
+    },
+    {
+      "hex": "#A998C9",
+      "cmyk": "C33 M40 Y0 K0",
+      "name": "Light Purple",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#3C194A",
+      "cmyk": "C81 M98 Y37 K39",
+      "name": "Dark Purple",
+      "group": "dark",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#87D4E9",
+      "cmyk": "C42 M9 Y0 K9",
+      "name": "Light Blue",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#B3D99A",
+      "cmyk": "C18 M0 Y29 K15",
+      "name": "Light Green",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#538C5E",
+      "cmyk": "C71 M25 Y76 K8",
+      "name": "Dark Green",
+      "group": "dark",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#86C774",
+      "cmyk": "C51 M0 Y72 K0",
+      "name": "Medium Green",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#FFCD74",
+      "cmyk": "C0 M20 Y63 K0",
+      "name": "Orange",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#FCF496",
+      "cmyk": "C2 M0 Y51 K0",
+      "name": "Bright Yellow",
+      "group": "accent",
+      "span": { "c": 1, "r": 1 }
+    },
+    {
+      "hex": "#04242B",
+      "cmyk": "C89 M66 Y59 K68",
+      "name": "Dark Blue Green",
+      "group": "dark",
+      "span": { "c": 2, "r": 1 }
+    },
+    {
+      "hex": "#27434D",
+      "cmyk": "C84 M61 Y52 K40",
+      "name": "Blue Green",
+      "group": "dark",
+      "span": { "c": 2, "r": 1 }
+    }
+  ],
+  "fonts": [
+    {
+      "slug": "dm-sans",
+      "name": "DM Sans",
+      "role": "Display & UI",
+      "googleUrl": "https://fonts.google.com/specimen/DM+Sans",
+      "weights": [400, 500, 600, 700]
+    },
+    {
+      "slug": "geist-mono",
+      "name": "Geist Mono",
+      "role": "Mono Caps / Code",
+      "googleUrl": "https://fonts.google.com/specimen/Geist+Mono",
+      "weights": [400, 600, 700]
+    }
+  ],
+  "logos": [
+    {
+      "label": "Color logo — light backgrounds",
+      "bg": "#FAFAF7",
+      "src": "logos/rolemodel/logo.svg",
+      "svgHref": "logos/rolemodel/logo.svg",
+      "pngHref": "logos/rolemodel/RMS-logo-Color@2x.png"
+    },
+    {
+      "label": "White logo — dark backgrounds",
+      "bg": "#04242B",
+      "src": "logos/rolemodel/RMS-logo-White.svg",
+      "svgHref": "logos/rolemodel/RMS-logo-White.svg",
+      "pngHref": "logos/rolemodel/RMS-logo-White@2x.png"
+    },
+    {
+      "label": "Brand icon — color",
+      "bg": "#FAFAF7",
+      "src": "logos/rolemodel/icon.svg",
+      "svgHref": "logos/rolemodel/icon.svg",
+      "pngHref": "logos/rolemodel/icon.png"
+    }
+  ],
+  "logoRules": [
+    { "slug": "min-size", "label": "Min size", "value": "50 px" },
+    { "slug": "clear-space", "label": "Clear space", "value": "40%" },
+    { "slug": "backgrounds", "label": "Backgrounds", "value": "Light · Dark" }
+  ]
+}

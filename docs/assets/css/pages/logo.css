@@ -22,31 +22,18 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-12) var(--space-10);
-  background-color: #ffffff;
+  background-color: var(--white);
 
-  /* The logo sits inside two dashed boxes: the inner one hugs the mark,
-     the outer one visualizes the required clear space. */
+  /* The mark sits inside a dashed clear-space guide. The default guide is
+     proportioned for the wordmark; .logo-card--icon swaps in the square one. */
   .logo-card__stage {
     position: relative;
 
     &::before {
       content: "";
       position: absolute;
+      inset: -35px;
       background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22313%22%20height%3D%22170%22%20fill%3D%22none%22%20overflow%3D%22visible%22%3E%3Cpath%20d%3D%22M%2036.794%2036.648%20L%20276.124%2036.648%20M%202.878%20170%20C%201.289%20170%200%20168.713%200%20167.125%20L%200%203.287%20C%200%201.699%201.289%200.412%202.878%200.412%20L%20310.122%200.412%20C%20311.711%200.412%20313%201.699%20313%203.287%20L%20313%20167.125%20C%20313%20168.713%20311.711%20170%20310.122%20170%20Z%20M%2036.794%2036.648%20L%2036.794%20132.939%20M%2036.794%2036.648%20L%2036.794%200%20M%2036.794%2036.648%20L%200%2036.648%20M%20276.123%2036.648%20L%20276.123%20133.119%20M%20276.123%2036.648%20L%20276.123%200%20M%20276.123%2036.648%20L%20312.82%2036.648%20M%20276%20133%20L%2037%20133%20M%20276.123%20133.119%20L%20276%20170%20M%20276%20133%20L%20313%20133%20M%2036.794%20132.939%20L%2036.794%20169.588%20M%2037%20133%20L%200.18%20132.939%22%20fill%3D%22transparent%22%20stroke%3D%22rgb(204%2C%20204%2C%20204)%22%20stroke-miterlimit%3D%2210%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%226%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-    }
-    &::before {
-      inset: -40px;
-    }
-  }
-    
-  .logo-card__stage.logo-card--icon {
-
-    &::before {
-      content: "";
-      position: absolute;
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22170%22%20height%3D%22170%22%20fill%3D%22none%22%20overflow%3D%22visible%22%3E%3Cpath%20d%3D%22M%2037.949%2037.825%20L%20132.125%2037.825%20M%2037.949%2037.825%20L%2037.949%20132.229%20M%2037.949%2037.826%20L%2037.949%200.212%20M%2037.949%2037.826%20L%200%2037.826%20M%20132.125%2037.826%20L%20132.125%20132.413%20M%20132.125%2037.825%20L%20132.125%200.212%20M%20132.125%2037.826%20L%20170%2037.826%20M%20132.125%20132.413%20L%2037.949%20132.229%20M%20132.125%20132.413%20L%20132.125%20169.289%20M%20132.125%20132.413%20L%20170%20132.229%20M%2037.949%20132.229%20L%2038%20170%20M%2037.949%20132.229%20L%200%20132.229%20M%203.533%20170%20C%201.698%20170%200.212%20168.514%200.212%20166.681%20L%200.212%203.319%20C%200.212%201.486%201.698%200%203.533%200%20L%20166.625%200%20C%20168.459%200%20169.945%201.486%20169.945%203.319%20L%20169.945%20166.681%20C%20169.945%20168.514%20168.459%20170%20166.625%20170%20Z%22%20fill%3D%22transparent%22%20stroke-width%3D%221.5%22%20stroke%3D%22rgb(204%2C%20204%2C%20204)%22%20stroke-miterlimit%3D%2210%22%20stroke-dasharray%3D%226%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }
@@ -59,9 +46,16 @@
     display: block;
   }
 
-  .logo-card__stage--icon .logo-card__image {
-    max-width: 72px;
-    max-height: 72px;
+  /* ---- Icon variant: square mark + matching square clear-space guide ---- */
+  &.logo-card--icon {
+    .logo-card__stage::before {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22170%22%20height%3D%22170%22%20fill%3D%22none%22%20overflow%3D%22visible%22%3E%3Cpath%20d%3D%22M%2037.949%2037.825%20L%20132.125%2037.825%20M%2037.949%2037.825%20L%2037.949%20132.229%20M%2037.949%2037.826%20L%2037.949%200.212%20M%2037.949%2037.826%20L%200%2037.826%20M%20132.125%2037.826%20L%20132.125%20132.413%20M%20132.125%2037.825%20L%20132.125%200.212%20M%20132.125%2037.826%20L%20170%2037.826%20M%20132.125%20132.413%20L%2037.949%20132.229%20M%20132.125%20132.413%20L%20132.125%20169.289%20M%20132.125%20132.413%20L%20170%20132.229%20M%2037.949%20132.229%20L%2038%20170%20M%2037.949%20132.229%20L%200%20132.229%20M%203.533%20170%20C%201.698%20170%200.212%20168.514%200.212%20166.681%20L%200.212%203.319%20C%200.212%201.486%201.698%200%203.533%200%20L%20166.625%200%20C%20168.459%200%20169.945%201.486%20169.945%203.319%20L%20169.945%20166.681%20C%20169.945%20168.514%20168.459%20170%20166.625%20170%20Z%22%20fill%3D%22transparent%22%20stroke-width%3D%221.5%22%20stroke%3D%22rgb(204%2C%20204%2C%20204)%22%20stroke-miterlimit%3D%2210%22%20stroke-dasharray%3D%226%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
+    }
+
+    .logo-card__image {
+      max-width: 72px;
+      max-height: 72px;
+    }
   }
 
   .logo-card__download {
@@ -140,6 +134,59 @@
 @media (prefers-reduced-motion: reduce) {
   .logo-watermark .logo-watermark__image {
     animation: none;
+  }
+}
+
+/* ---- Product family (sub-brand) cards ---- */
+.subbrand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.subbrand-card {
+  /* background/border-radius/box-shadow come from the shared white-card-chrome
+     rule in page-shell.css */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .subbrand-card__stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 128px;
+    padding: var(--space-8) var(--space-6);
+    background: var(--white);
+  }
+
+  .subbrand-card__logo {
+    max-width: 100%;
+    max-height: var(--space-11);
+    object-fit: contain;
+    display: block;
+  }
+
+  .subbrand-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border-top: var(--border-hairline);
+  }
+
+  .subbrand-card__dot {
+    flex: 0 0 auto;
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: var(--radius-round);
+  }
+
+  .subbrand-card__name {
+    font-size: var(--text-md);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
   }
 }
 

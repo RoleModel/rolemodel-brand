@@ -20,7 +20,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "check": "ultracite check",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix",
+    "content:build": "node docs/scripts/build-content.mjs",
+    "content:watch": "node docs/scripts/build-content.mjs --watch",
+    "content:test": "node --test docs/scripts/*.test.mjs"
   },
   "devDependencies": {
     "oxfmt": "^0.58.0",

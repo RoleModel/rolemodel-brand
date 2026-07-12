@@ -16,6 +16,10 @@
   position: relative;
 }
 
+.page-content.page-content--visual-style {
+  max-width: var(--content-full);
+}
+
 /* ============================================================
    Shared pattern: white card chrome.
    Every white "card" block on the guideline pages shares this
@@ -29,10 +33,11 @@
 .duration-row,
 .principle-card,
 .style-card,
-.shadow-demo {
+.shadow-demo,
+.subbrand-card {
   background: var(--surface);
+  border: solid 1px var(--border-color);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
 }
 
 /* ============================================================
@@ -69,9 +74,20 @@
   display: block;
 }
 
+/* ---- Section intro note under the label ---- */
+.section-note {
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-tight);
+  opacity: var(--emphasis-muted);
+  max-width: 60ch;
+  margin-top: calc(-1 * var(--space-3));
+  margin-bottom: var(--space-6);
+}
+
 /* ---- Scroll-in reveal ---- */
 .reveal {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(20px);
   transition:
     opacity var(--duration-slow) var(--ease-out),

@@ -1,0 +1,64 @@
+{
+  "font": "'DM Sans', sans-serif",
+  "heroColor": "#2a83f7",
+  "icon": "logos/lightningcad/LightningCAD-Icon.svg",
+  "logo": "logos/lightningcad/LightningCad.svg",
+  "logoWhite": "logos/lightningcad/LightningCadWhite.svg",
+  "name": "LightningCAD",
+  "palette": [
+    "#2a83f7",
+    "#66a5f9",
+    "#032a5e",
+    "#2a83f7",
+    "#66a5f9",
+    "#032a5e",
+    "#2a83f7",
+    "#66a5f9"
+  ],
+  "primary": "#2a83f7",
+  "subBrands": [
+    {
+      "slug": "airfield-designer",
+      "color": "#07BBC2",
+      "logo": "logos/designers/AirfieldDesigner.svg",
+      "name": "Airfield Designer"
+    },
+    {
+      "slug": "building-designer",
+      "color": "#ADBF08",
+      "logo": "logos/designers/BuildingDesigner.svg",
+      "name": "Building Designer"
+    },
+    {
+      "slug": "deck-designer",
+      "color": "#FFAC08",
+      "logo": "logos/designers/DeckDesigner.svg",
+      "name": "Deck Designer"
+    },
+    {
+      "slug": "dock-designer",
+      "color": "#0E8A6B",
+      "logo": "logos/designers/DockDesigner.svg",
+      "name": "Dock Designer"
+    },
+    {
+      "slug": "dpq",
+      "color": "#2A83F7",
+      "logo": "logos/designers/DPQ.svg",
+      "name": "DPQ"
+    },
+    {
+      "slug": "flow-designer",
+      "color": "#0BCAF0",
+      "logo": "logos/designers/FlowDesigner.svg",
+      "name": "Flow Designer"
+    },
+    {
+      "slug": "railing-designer",
+      "color": "#8D3DE3",
+      "logo": "logos/designers/RailingDesigner.svg",
+      "name": "Railing Designer"
+    }
+  ],
+  "zip": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip"
+}

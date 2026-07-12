@@ -48,6 +48,7 @@
       } from "../assets/js/modules/icon-library.js";
       import { BRAND_ICONS } from "../assets/js/modules/brand-icons.js";
       import { createIconTicker } from "../assets/js/modules/icon-ticker.js";
+      import { ICON_PRINCIPLES } from "../assets/js/modules/site-content.js";
 
       const { slug, brand, accentHex } = initPage("icons");
       const { category: cat, numLabel } = categoryInfo("icons", "06");
@@ -56,7 +57,7 @@
   <div class="page-header">
     <span class="page-header__num">${numLabel}</span>
     <h1 class="page-header__title" style="color:${accentHex}">${cat.name || "Icons"}</h1>
-    <p class="page-header__tagline">${cat.tagline || "Icons help us recognize complex ideas instantly."}</p>
+    <p class="page-header__tagline">${cat.tagline}</p>
   </div>
 `);
       document.title = `Icons — ${brand.name || "Brand Guidelines"}`;
@@ -148,40 +149,15 @@
 
       panelsRoot.append(hugePanel);
 
-      const principles = [
-        {
-          mark: "✓",
-          text: "Match icon style to context: spot icons for features, UI icons for interactive controls.",
-        },
-        {
-          mark: "✓",
-          text: "Maintain consistent stroke weight within a single composition (don't mix 1px and 2px strokes).",
-        },
-        {
-          mark: "✓",
-          text: "Use brand colors for fills and strokes. Avoid generic grays in non-system contexts.",
-        },
-        {
-          mark: "✗",
-          text: "Never use a UI icon at spot scale. A 16px icon blown up to 80px loses all visual intent.",
-        },
-        {
-          mark: "✗",
-          text: "Never mix icon families in the same component or page section.",
-        },
-      ];
-
       document.querySelector("#icon-principles").setHTMLUnsafe(
-        principles
-          .map(
-            (p, i) => /* html */ `
+        ICON_PRINCIPLES.map(
+          (p, i) => /* html */ `
   <div class="icon-principle reveal" data-delay="${i * 50}">
     <span class="icon-principle__mark icon-principle__mark--${p.mark === "✓" ? "do" : "dont"}">${p.mark}</span>
     <p class="icon-principle__text">${p.text}</p>
   </div>
 `
-          )
-          .join("")
+        ).join("")
       );
 
       staggerReveal(document.querySelectorAll(".reveal"), 0, 60);

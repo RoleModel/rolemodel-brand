@@ -45,6 +45,16 @@ Design source files (.afdesign, .afphoto, .psd, .ai, print projects) stay in Dri
 
 Note: the Drive folder spells it "LightingCAD" — normalized to `lightningcad` here.
 
+`docs/` is a separate, self-contained static site (the brand guidelines portal, served via GitHub Pages) — its content workflow is documented below.
+
+## Editing the brand guidelines site (`docs/`)
+
+Copy (taglines, voice quotes, principle text) and structural config (grid spans, colors, font paths) both live under `docs/content/` — markdown for copy, JSON for structural "dials." A GitHub Actions workflow (`.github/workflows/build-content.yml`) regenerates `docs/assets/js/modules/{brand-data,page-data,site-content}.js` from `docs/content/**` automatically on every push to `main` and commits the result back — editing a file under `docs/content/` and pushing is enough; nothing needs to be run locally.
+
+For local previewing before you push: `npm run content:build` (one-off) or `npm run content:watch` (rebuilds on save). `npm run content:test` runs the generator's own regression tests. See `docs/scripts/build-content.mjs` for the generator itself — it's the only thing that should ever write to `docs/assets/js/modules/{brand-data,page-data,site-content}.js`; those files are generated and get overwritten on the next build.
+
+Note: `tokens/brand.json` (above) is a separate, legacy artifact from when the brand page was Framer-CMS-driven — nothing in `docs/` reads it.
+
 ## Consumers
 
 - **Website brand page** — download links point at raw files here (or a CDN in front of this repo)
