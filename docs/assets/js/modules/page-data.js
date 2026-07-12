@@ -321,7 +321,7 @@ export const PAGE_DATA = {
         },
       },
       {
-        cmyk: "C98 M80 Y35 K23",
+        cmyk: "C75 M53 Y0 K0",
         group: "core",
         hex: "#193C64",
         name: "RM Dark Blue",

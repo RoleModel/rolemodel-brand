@@ -119,8 +119,8 @@ export class BrandCard extends HTMLElement {
   static _categoryFaceMarkup() {
     /* html */
     return `
-      <div class="brand-card__icon"></div>
       <h3 class="brand-card__title"></h3>
+      <div class="brand-card__icon"></div>
     `;
   }
 
