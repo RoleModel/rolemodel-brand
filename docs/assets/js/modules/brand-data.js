@@ -118,13 +118,13 @@ export const CATEGORIES = [
   {
     name: "Logo",
     slug: "logo",
-    span: 2,
+    span: 3,
     tagline: "Our wordmark and icon are the clearest signal of who we are.",
   },
   {
     name: "Color",
     slug: "color",
-    span: 1,
+    span: 2,
     tagline: "Our palette carries our energy and warmth.",
   },
   {
@@ -142,19 +142,19 @@ export const CATEGORIES = [
   {
     name: "Typography",
     slug: "typography",
-    span: 1,
+    span: 2,
     tagline: "Confident and approachable, with clear hierarchy.",
   },
   {
     name: "Icons",
     slug: "icons",
-    span: 2,
+    span: 3,
     tagline: "Icons help us recognize complex ideas instantly.",
   },
   {
     name: "Motion",
     slug: "motion",
-    span: 2,
+    span: 4,
     tagline: "Fast, precise, never decorative for its own sake.",
   },
   {
