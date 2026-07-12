@@ -1,0 +1,30 @@
+{
+  "name": "rolemodel-brand",
+  "version": "1.0.0",
+  "description": "Brand Assets for RoleModel Software",
+  "homepage": "https://github.com/RoleModel/rolemodel-brand#readme",
+  "bugs": {
+    "url": "https://github.com/RoleModel/rolemodel-brand/issues"
+  },
+  "license": "ISC",
+  "author": "RoleModel Software",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoleModel/rolemodel-brand.git"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "ultracite check",
+    "fix": "ultracite fix"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.58.0",
+    "oxlint": "^1.73.0",
+    "ultracite": "^7.9.3"
+  }
+}
