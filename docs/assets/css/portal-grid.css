@@ -16,7 +16,7 @@
 .portal-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   min-height: 100dvh;
   gap: var(--grid-gap);
   padding: var(--grid-gap);

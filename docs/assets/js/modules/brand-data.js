@@ -130,13 +130,13 @@ export const CATEGORIES = [
   {
     name: "Voice",
     slug: "voice",
-    span: 1,
+    span: 2,
     tagline: "Humble confidence, grounded in partnership.",
   },
   {
     name: "Imagery",
     slug: "imagery",
-    span: 1,
+    span: 2,
     tagline: "Photography should feel human and unscripted.",
   },
   {
@@ -160,7 +160,7 @@ export const CATEGORIES = [
   {
     name: "Visual Style",
     slug: "visual-style",
-    span: 2,
+    span: 4,
     tagline: "Crafted and considered — consistent geometry and restraint.",
   },
 ];
