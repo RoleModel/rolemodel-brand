@@ -311,13 +311,23 @@ export const PAGE_DATA = {
         },
       },
       {
+        cmyk: "C81 M54 Y3 K0",
+        group: "core",
+        hex: "#2A84F8",
+        name: "RM Bright Blue",
+        span: {
+          c: 1,
+          r: 3,
+        },
+      },
+      {
         cmyk: "C98 M80 Y35 K23",
         group: "core",
         hex: "#193C64",
         name: "RM Dark Blue",
         span: {
           c: 2,
-          r: 1,
+          r: 2,
         },
       },
       {
@@ -396,8 +406,8 @@ export const PAGE_DATA = {
         hex: "#FCF496",
         name: "Bright Yellow",
         span: {
-          c: 1,
-          r: 1,
+          c: 2,
+          r: 2,
         },
       },
       {
@@ -407,7 +417,7 @@ export const PAGE_DATA = {
         name: "Dark Blue Green",
         span: {
           c: 2,
-          r: 1,
+          r: 2,
         },
       },
       {
@@ -417,7 +427,7 @@ export const PAGE_DATA = {
         name: "Blue Green",
         span: {
           c: 2,
-          r: 1,
+          r: 2,
         },
       },
     ],

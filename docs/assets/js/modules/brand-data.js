@@ -124,7 +124,7 @@ export const CATEGORIES = [
   {
     name: "Color",
     slug: "color",
-    span: 2,
+    span: 1,
     tagline: "Our palette carries our energy and warmth.",
   },
   {
@@ -148,13 +148,13 @@ export const CATEGORIES = [
   {
     name: "Icons",
     slug: "icons",
-    span: 3,
+    span: 2,
     tagline: "Icons help us recognize complex ideas instantly.",
   },
   {
     name: "Motion",
     slug: "motion",
-    span: 4,
+    span: 2,
     tagline: "Fast, precise, never decorative for its own sake.",
   },
   {

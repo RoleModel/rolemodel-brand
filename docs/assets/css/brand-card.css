@@ -39,9 +39,10 @@
 
   /* Grid-state face: full bento tile */
   .brand-card__face {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: stretch;
+    place-content: stretch space-between;
     width: 100%;
     padding: var(--space-8);
   }
@@ -101,6 +102,7 @@
     width: 86px;
     height: 86px;
     margin-bottom: var(--space-4);
+    place-self: end;
   }
 
   .brand-card__icon-svg {
@@ -126,7 +128,7 @@
   }
 
   .brand-card__title {
-    font-size: var(--text-3xl);
+    font-size: var(--text-4xl);
     font-weight: var(--weight-bold);
     letter-spacing: var(--tracking-snug);
     margin: 0;
