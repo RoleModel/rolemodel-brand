@@ -34,6 +34,17 @@ const getActiveBrandSlug = () =>
   localStorage.getItem(STORAGE_KEY) || "rolemodel";
 const setActiveBrandSlug = (slug) => localStorage.setItem(STORAGE_KEY, slug);
 
+// A ?brand= in the URL is authoritative on load: it seeds localStorage so the
+// embed always opens on the brand the host (Framer) asked for, regardless of
+// what was last clicked. In-session switching still writes localStorage and is
+// re-seeded from the param on the next load.
+const seedBrandFromUrl = () => {
+  const fromUrl = new URLSearchParams(window.location.search).get("brand");
+  if (fromUrl && BRANDS[fromUrl]) {
+    setActiveBrandSlug(fromUrl);
+  }
+};
+
 const prefersReducedMotion = () =>
   matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -64,6 +75,7 @@ class BrandPortal {
     this.cards = new Map();
     this.brandOrder = BRAND_ORDER;
 
+    seedBrandFromUrl();
     this.build();
     this.wireEvents();
     this.restoreFromHash();

@@ -4,26 +4,26 @@
    ----------------------------------------------------------------------- */
 
 /* Tokens + document defaults */
-@import url("../tokens.css");
-@import url("./base.css");
+@import url("../tokens.css?v=0a0787d0");
+@import url("./base.css?v=476088be");
 
 /* Shared blocks */
-@import url("./page-nav.css");
-@import url("./page-header.css");
-@import url("./page-shell.css");
-@import url("./download-button.css");
+@import url("./page-nav.css?v=123ce805");
+@import url("./page-header.css?v=8a95defd");
+@import url("./page-shell.css?v=6b6f3d12");
+@import url("./download-button.css?v=01c9cf9b");
 
 /* Homepage portal */
-@import url("./portal-grid.css");
-@import url("./brand-card.css");
-@import url("./intro.css");
+@import url("./portal-grid.css?v=a5cc561c");
+@import url("./brand-card.css?v=f182686e");
+@import url("./intro.css?v=f8c28ae6");
 
 /* Guideline pages */
-@import url("./pages/color.css");
-@import url("./pages/voice.css");
-@import url("./pages/typography.css");
-@import url("./pages/logo.css");
-@import url("./pages/imagery.css");
-@import url("./pages/icons.css");
-@import url("./pages/motion.css");
-@import url("./pages/visual-style.css");
+@import url("./pages/color.css?v=a322c8bf");
+@import url("./pages/voice.css?v=1c5376f4");
+@import url("./pages/typography.css?v=9c9bdba4");
+@import url("./pages/logo.css?v=a3601a4f");
+@import url("./pages/imagery.css?v=db3b3f5a");
+@import url("./pages/icons.css?v=d683bdcd");
+@import url("./pages/motion.css?v=c949dca1");
+@import url("./pages/visual-style.css?v=b9896e6e");

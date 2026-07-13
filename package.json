@@ -23,7 +23,9 @@
     "fix": "ultracite fix",
     "content:build": "node docs/scripts/build-content.mjs",
     "content:watch": "node docs/scripts/build-content.mjs --watch",
-    "content:test": "node --test docs/scripts/*.test.mjs"
+    "content:test": "node --test docs/scripts/*.test.mjs",
+    "css:version": "node docs/scripts/bust-css.mjs",
+    "build": "npm run content:build && npm run css:version"
   },
   "devDependencies": {
     "oxfmt": "^0.58.0",
