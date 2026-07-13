@@ -103,8 +103,8 @@
 }
 
 .portal-intro__cue-icon {
-  width: var(--space-7);
-  height: var(--space-7);
+  width: var(--space-13);
+  height: var(--space-13);
 }
 
 @keyframes intro-cue-bob {
