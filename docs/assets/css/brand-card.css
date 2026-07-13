@@ -113,6 +113,13 @@
     overflow: visible;
   }
 
+  /* Color icon: clip to the viewBox so the paint wells, parked off-screen at
+     rest, stay hidden until they rotate into their wells on hover
+     (icon-animations.js, "color" case). */
+  .brand-card__icon-svg[data-icon="color"] {
+    overflow: hidden;
+  }
+
   /* GSAP morph targets need a stable transform origin */
   .brand-card__icon .point {
     transform-origin: center;

@@ -1,16 +1,11 @@
 /* -----------------------------------------------------------------------
-   Portal grid — homepage bento of brand cards, with two layout modes:
+   Portal grid — homepage bento of brand cards.
 
-     default              classic bento
-     .portal-grid--open   nav rail on top (row 1) + one content panel below
-
-   In open mode the cards reflow into .portal-rail: [active brand] +
-   [category pills]. The other brand pills stay collapsed until
-   .portal-grid--brands-open is set (clicking the active brand pill). The
-   open category's pill is highlighted via .brand-card--current; clicking
-   it again closes the section. Page content lives in one shared
-   .portal-panel. The View Transitions API animates every card between the
-   two layouts (main.js); no GSAP Flip.
+   Opening a section flies every bento card off-screen along its own
+   per-card vector (the same vectors as the scroll-in intro, set in
+   main.js) while a full-screen content panel fades in over the top.
+   Closing reverses it: the cards fly back in and reassemble the bento.
+   Pure CSS transforms/transitions — no View Transitions API.
    ----------------------------------------------------------------------- */
 
 .portal-grid {
@@ -25,72 +20,53 @@
   font-family: var(--font-active);
 }
 
-/* ---- Open mode ----
-   The SAME container becomes a flex wrap: the mini pills flow across the
-   top, then the panel wraps to a full-width second row that fills the rest
-   of the viewport. No separate rail element — the cards stay put and the
-   View Transition morphs each one from its bento tile to its pill. */
-.portal-grid--open {
-  display: grid;
-  align-content: flex-start;
-  grid-template-columns: max-content repeat(8, minmax(0, 1fr));
-  grid-template-rows: repeat(9, 1fr);
-  height: 100dvh;
-  min-height: 0;
-  overflow: hidden;
-  gap: 0;
-  padding: 0;
-  
-  .brand-card {display: none;}
-}
-
-.portal-grid.portal-grid--open.portal-grid--brands-open {
-  grid-template-columns: repeat(3, max-content) repeat(8, minmax(0, 1fr));
-}
-
-/* Desktop grid open mode: pills must be able to shrink to their equal column.
-   Without this the base `min-width: max-content` (brand-card.css) blows the
-   column tracks — and therefore the full-bleed panel (grid-column: 1 / -1) —
-   past the viewport, sliding the panel out of view. The narrow/short fallback
-   below re-enables max-content width with horizontal scroll instead. */
-.portal-grid--open .brand-card--mini {
-  min-width: 0;
-}
-
-/* Pill ordering: active brand → other brands → category pills → panel. */
-.portal-grid--open .brand-card--mini {
-  flex: 0 0 auto;
-  height: var(--row-mini);
-  order: 3;
-}
-.portal-grid--open .brand-card--brand-alt {
-  order: 2;
-}
-.portal-grid--open .brand-card--nav-active {
-  order: 1;
-}
-
-/* ---- Content panel (wraps to its own row below the pills) ---- */
+/* ---- Content panel (full-screen fly-out overlay) ---- */
 .portal-panel {
-  position: relative;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-raised);
   background: var(--paper);
-}
-.portal-panel[hidden] {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.985);
+  transition:
+    opacity var(--duration-slow) var(--ease-in-out),
+    transform var(--duration-slow) var(--ease-in-out),
+    visibility 0s linear var(--duration-slow);
 }
 
-/* In open mode the panel wraps to a full-width row and fills the space
-   left under the single pill row. */
-.portal-grid--open .portal-panel {
-  order: 4;
-  flex: 1 1 100%;
-  height: 100dvh;
-  min-height: 0;
-  /* min-width:0 stops the panel's content min-content from stretching the
-     grid item past its 1 / -1 track, which would push it under the clipped
-     right edge (download button off-screen). */
-  min-width: 0;
-  grid-column: 1 /-1;
+.portal-grid--section-open .portal-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  transition:
+    opacity var(--duration-slow) var(--ease-in-out),
+    transform var(--duration-slow) var(--ease-in-out);
+}
+
+/* Cards fly out to their per-card intro vector (set in main.js) and back in.
+   Same vectors as the scroll-in intro, so open/close mirrors the assembly. */
+.portal-grid .brand-card {
+  transition:
+    transform var(--duration-slow) var(--ease-in-out) var(--exit-delay, 0ms),
+    opacity var(--duration-slow) var(--ease-in-out) var(--exit-delay, 0ms),
+    background-color var(--duration-fast) var(--ease-in-out),
+    color var(--duration-fast) var(--ease-in-out);
+}
+.portal-grid--section-open .brand-card {
+  transform: translate3d(var(--exit-x, 0px), var(--exit-y, 0px), 0) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+/* Deep-link opens and the scroll intro must not run these transitions. */
+.portal-grid--no-anim .brand-card,
+.portal-grid--no-anim .portal-panel {
+  transition: none !important;
+}
+.is-introing .portal-grid .brand-card {
+  transition: none;
 }
 
 .portal-panel__frame {
@@ -122,114 +98,8 @@
 }
 
 @media (max-width: 900px) {
-  /* Grid-mode bento only: collapse to 3 columns. Scoped with :not(--open)
-     so it can't override the open-mode layout below. */
-  .portal-grid:not(.portal-grid--open) {
+  .portal-grid {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(160px, auto);
-  }
-}
-
-/* Open mode on narrow OR short viewports: the top pill row becomes a single
-   horizontally scrollable bar (pills keep their natural width, so full labels
-   show and nothing truncates), and the panel is pinned below it, filling the
-   rest of the viewport. Fixed positioning takes the panel out of the scroll
-   flow so it doesn't slide when you scroll the pill bar. */
-@media (max-width: 1200px), (max-height: 500px) {
-  .portal-grid--open {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: stretch;
-    height: var(--row-mini);
-    padding: 0;
-    background: var(--paper);
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .portal-grid--open::-webkit-scrollbar {
-    display: none;
-  }
-
-  .portal-grid--open .brand-card--mini {
-    flex: 1 0 auto;
-    width: auto;
-    min-width: max-content;
-    height: var(--row-mini);
-  }
-
-  .portal-grid--open .portal-panel {
-    position: fixed;
-    inset: var(--row-mini) 0 0 0;
-    height: auto;
-    flex: none;
-  }
-}
-
-/* ---- View Transition timing ----
-   The browser morphs each named card (and the panel) between the grid and
-   rail layouts. Keep it visible but snappy. main.js skips the transition
-   entirely under prefers-reduced-motion. */
-::view-transition-group(*) {
-  animation-duration: 800ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Scale the pop ONLY on elements that truly enter or leave the transition.
-   `:only-child` matches a ::view-transition-new that has no matching -old
-   (an entering element) or a ::view-transition-old with no -new (a leaving
-   element). Cards that PERSIST across the swap (present before and after —
-   every brand/category card just moves from its bento tile to its nav pill)
-   have BOTH an -old and a -new, so they are NOT :only-child and skip this
-   rule entirely: the browser just morphs their box smoothly from the old
-   position to the new one via ::view-transition-group. Without this scoping,
-   the catch-all pop replayed on every persisting card, so the whole grid
-   looked like it re-animated in on each open/close instead of settling. */
-::view-transition-old(*):only-child {
-  animation: scale-out var(--duration-slow) var(--ease-in-out) both;
-  transform-origin: 0% 0%;
-}
-
-::view-transition-new(*):only-child {
-  animation: scale-in var(--duration-slow) var(--ease-in-out) both;
-  transform-origin: 0% 0%;
-  mix-blend-mode: normal;
-}
-
-/* Root = everything not individually named in this transition. It should
-   just sit there unchanged, not scale with the one card that's morphing. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-  opacity: 1;
-}
-
-@keyframes scale-out {
-  0% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(0);
-  }
-}
-
-@keyframes scale-in {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation: none !important;
   }
 }

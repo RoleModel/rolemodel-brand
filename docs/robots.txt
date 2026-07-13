@@ -1,0 +1,19 @@
+# rolemodel-brand — GitHub Pages embed source for
+# https://rolemodelsoftware.com/brand (loaded via <iframe> from Framer).
+#
+# These pages must NOT be indexed on their own, or they would duplicate the
+# Framer page in search results. That is enforced by the `noindex` <meta> tag
+# in every page's <head>, which is honored regardless of URL path.
+#
+# Crawling is intentionally left OPEN: a crawler must be able to fetch a page
+# to see its `noindex` tag. Do NOT add `Disallow: /` here — it would block the
+# crawl and the `noindex` would never be read, defeating the whole purpose.
+#
+# NOTE: robots.txt is only honored at a HOST ROOT (e.g. a custom domain, or
+# <org>.github.io/robots.txt). On a project page served under
+# <org>.github.io/rolemodel-brand/ this file lives at a subpath and search
+# engines ignore it — there, the per-page `noindex` is what does the work.
+# This file becomes effective automatically if a custom domain is added.
+
+User-agent: *
+Allow: /

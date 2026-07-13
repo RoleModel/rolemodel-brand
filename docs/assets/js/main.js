@@ -23,10 +23,12 @@
 import { BRANDS, BRAND_ORDER, CATEGORIES } from "./modules/brand-data.js";
 import { initIconAnimations } from "./modules/icon-animations.js";
 import { renderIcon } from "./modules/icons.js";
-import { setupIntro } from "./modules/intro.js";
+import { ENTRY_VECTORS, setupIntro } from "./modules/intro.js";
 import "./components/brand-card.js";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
+
+const EXIT_STAGGER_MS = 28;
 
 const getActiveBrandSlug = () =>
   localStorage.getItem(STORAGE_KEY) || "rolemodel";
@@ -58,8 +60,6 @@ class BrandPortal {
     this.grid = grid;
     // open category slug, or null in grid mode
     this.openSlug = null;
-    // are the non-active brand pills revealed?
-    this.brandsExpanded = false;
     // "kind:slug" -> <brand-card>
     this.cards = new Map();
     this.brandOrder = BRAND_ORDER;
@@ -140,11 +140,17 @@ class BrandPortal {
       }
     }
 
+    for (const [i, card] of this.allCards().entries()) {
+      const v = ENTRY_VECTORS[i % ENTRY_VECTORS.length];
+      card.style.setProperty("--exit-x", v.x);
+      card.style.setProperty("--exit-y", v.y);
+      card.style.setProperty("--exit-delay", `${i * EXIT_STAGGER_MS}ms`);
+    }
+
     // The ONE place page content ever renders — a single shared panel.
     // It's a direct child of the grid, like the cards.
     this.panel = document.createElement("div");
     this.panel.className = "portal-panel";
-    this.panel.hidden = true;
     this.panel.style.viewTransitionName = "vt_panel";
     this.frame = document.createElement("iframe");
     this.frame.className = "portal-panel__frame";
@@ -184,16 +190,6 @@ class BrandPortal {
     });
   }
 
-  // ---- View Transitions wrapper -----------------------------------------
-
-  static transition(mutate) {
-    if (!document.startViewTransition || prefersReducedMotion()) {
-      mutate();
-      return;
-    }
-    document.startViewTransition(() => mutate());
-  }
-
   // ---- interactions -----------------------------------------------------
 
   onCategorySelect(slug) {
@@ -207,74 +203,37 @@ class BrandPortal {
   }
 
   onBrandSelect(slug) {
-    // Grid mode: a brand tile just swaps colors/content in place — no card
-    // moves or resizes, so this skips the View Transition wrapper entirely.
-    // Wrapping a same-layout change in startViewTransition() still makes the
-    // browser snapshot and crossfade every named card whose content differs
-    // (a full-card fade), which is worse than the plain CSS
-    // background-color/color transition already on .brand-card.
-    if (!this.openSlug) {
-      if (slug !== getActiveBrandSlug()) {
-        this.applyBrand(slug);
-      }
-      return;
-    }
-    // Open mode: the active brand pill toggles the other brands; a revealed
-    // brand pill switches to it (and collapses the group).
-    if (slug === getActiveBrandSlug()) {
-      this.toggleBrands(!this.brandsExpanded);
-    } else {
-      BrandPortal.transition(() => {
-        this.applyBrand(slug);
-        this.brandsExpanded = false;
-        this.grid.classList.remove("portal-grid--brands-open");
-        this.applyOpenLayout();
-      });
+    if (slug !== getActiveBrandSlug()) {
+      this.applyBrand(slug);
     }
   }
 
   // ---- open / close / swap ----------------------------------------------
 
-  // Exactly one of {a category's card, the panel} owns that category's
-  // view-transition-name at a time. Handing it to the panel when a section
-  // opens lets the browser morph the clicked tile's box straight into the
-  // panel's box — the card visibly grows to contain its content, instead of
-  // the tile and the panel animating as two unrelated elements.
-  assignPanelIdentity(slug) {
-    const card = this.cards.get(`category:${slug}`);
-    this.panel.style.viewTransitionName = card.style.viewTransitionName;
-    card.style.viewTransitionName = "";
-  }
-
-  assignCardIdentity(slug) {
-    this.cards.get(`category:${slug}`).style.viewTransitionName = vtName(
-      "category",
-      slug
-    );
-  }
-
+  // Opening flies every bento card off-screen along its own vector (set in
+  // build()) while a full-screen content panel fades in — pure CSS transforms
+  // driven by .portal-grid--section-open, no View Transitions API.
   openSection(slug, animate = true) {
     const card = this.cards.get(`category:${slug}`);
     if (!card) {
       return;
     }
 
-    const mutate = () => {
-      this.openSlug = slug;
-      this.brandsExpanded = false;
-      this.assignPanelIdentity(slug);
-      this.grid.classList.add("portal-grid--open");
-      this.grid.classList.remove("portal-grid--brands-open");
-      this.panel.hidden = false;
-      this.frame.src = pageUrlFor(slug, getActiveBrandSlug());
-      this.applyOpenLayout();
-    };
+    this.openSlug = slug;
+    this.frame.src = pageUrlFor(slug, getActiveBrandSlug());
 
     if (animate) {
-      BrandPortal.transition(mutate);
+      this.grid.classList.add("portal-grid--section-open");
     } else {
-      mutate();
+      this.grid.classList.add(
+        "portal-grid--no-anim",
+        "portal-grid--section-open"
+      );
+      requestAnimationFrame(() => {
+        this.grid.classList.remove("portal-grid--no-anim");
+      });
     }
+
     BrandPortal.setHash(slug);
   }
 
@@ -283,74 +242,21 @@ class BrandPortal {
     if (!next) {
       return;
     }
-    BrandPortal.transition(() => {
-      this.assignCardIdentity(this.openSlug);
-      this.openSlug = slug;
-      this.assignPanelIdentity(slug);
-      this.frame.src = pageUrlFor(slug, getActiveBrandSlug());
-      this.markCurrent();
-    });
+    this.openSlug = slug;
+    this.frame.src = pageUrlFor(slug, getActiveBrandSlug());
     BrandPortal.setHash(slug);
   }
 
   closeSection() {
-    const mutate = () => {
-      this.assignCardIdentity(this.openSlug);
-      this.grid.classList.remove(
-        "portal-grid--open",
-        "portal-grid--brands-open"
-      );
-      this.brandsExpanded = false;
-      this.openSlug = null;
-      for (const c of this.allCards()) {
-        c.setState("grid");
-        c.classList.remove(
-          "brand-card--current",
-          "brand-card--brand-alt",
-          "brand-card--nav-active"
-        );
+    this.openSlug = null;
+    this.grid.classList.remove("portal-grid--section-open");
+    // Blank the iframe only after the fade-out finishes, so it doesn't flash.
+    setTimeout(() => {
+      if (!this.openSlug) {
+        this.frame.src = "about:blank";
       }
-      this.panel.hidden = true;
-      this.frame.src = "about:blank";
-    };
-    BrandPortal.transition(mutate);
+    }, 650);
     BrandPortal.setHash(null);
-  }
-
-  toggleBrands(open) {
-    BrandPortal.transition(() => {
-      this.brandsExpanded = open;
-      this.grid.classList.toggle("portal-grid--brands-open", open);
-    });
-  }
-
-  // ---- open-mode layout (cards stay in the grid; classes drive layout) ---
-
-  /* In open mode each card becomes a mini pill and gets an ordering class:
-     active brand first, other brands next (hidden until expanded), then the
-     category pills. No DOM moves — CSS order + the grid's open-mode rules
-     do the arranging, so the whole grid morphs as one. */
-  applyOpenLayout() {
-    const activeSlug = getActiveBrandSlug();
-
-    for (const c of this.brandCards()) {
-      c.setState("mini");
-      const isActive = c.slug === activeSlug;
-      c.classList.toggle("brand-card--nav-active", isActive);
-      c.classList.toggle("brand-card--brand-alt", !isActive);
-    }
-
-    for (const c of this.categoryCards()) {
-      c.setState("mini");
-    }
-
-    this.markCurrent();
-  }
-
-  markCurrent() {
-    for (const c of this.categoryCards()) {
-      c.classList.toggle("brand-card--current", c.slug === this.openSlug);
-    }
   }
 
   // ---- brand switching ---------------------------------------------------

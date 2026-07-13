@@ -22,11 +22,10 @@ export const ICONS = {
   },
   color: {
     markup: `
-    <g class="colors">
-      <circle class="color-a" cx="9" cy="9" r="6" fill="currentColor" opacity="0.9"/>
-      <circle class="color-b" cx="15" cy="9" r="6" fill="currentColor" opacity=".8"/>
-      <circle class="color-c" cx="12" cy="15" r="6" fill="currentColor" opacity=".7"/>
-    </g>
+    <path stroke="currentColor" stroke-width="1.5" d="M2 12C2 17.5228 6.47715 22 12 22L12.0709 21.9998C12.0242 21.6732 12 21.3394 12 21C12 17.134 15.134 14 19 14C19.9482 14 20.8524 14.1885 21.6771 14.5302C21.8878 13.7221 22 12.8741 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12Z"></path>
+    <circle class="hole" stroke="currentColor" stroke-width="1.5" cx="9.5" cy="8.5" r="1.5"></circle>
+    <circle class="hole2" stroke="currentColor" stroke-width="1.5" cx="16.5" cy="9.5" r="1.5"></circle>
+    <path class="hole3" stroke="currentColor" stroke-width="1.5" d="M7.125 15H7M7.25 15C7.25 15.1381 7.13807 15.25 7 15.25C6.86193 15.25 6.75 15.1381 6.75 15C6.75 14.8619 6.86193 14.75 7 14.75C7.13807 14.75 7.25 14.8619 7.25 15Z" stroke-linecap="round" stroke-linejoin="round"></path>
     `,
   },
   icons: {

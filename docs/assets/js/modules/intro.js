@@ -35,7 +35,7 @@ const CARD_SPAN = 0.5;
 // truly start beyond the frame regardless of their size.
 // Units are required on BOTH axes: a unitless "0" would make the composed
 // translate3d() invalid and drop the whole transform.
-const ENTRY_VECTORS = [
+export const ENTRY_VECTORS = [
   // top
   { x: "0vw", y: "-115vh" },
   // right
