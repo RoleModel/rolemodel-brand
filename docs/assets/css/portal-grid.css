@@ -33,7 +33,7 @@
 .portal-grid--open {
   display: grid;
   align-content: flex-start;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-columns: max-content repeat(8, minmax(0, 1fr));
   grid-template-rows: repeat(9, 1fr);
   height: 100dvh;
   min-height: 0;
@@ -43,7 +43,7 @@
 }
 
 .portal-grid.portal-grid--open.portal-grid--brands-open {
-  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-template-columns: repeat(3, max-content) repeat(8, minmax(0, 1fr));
 }
 
 /* Desktop grid open mode: pills must be able to shrink to their equal column.
