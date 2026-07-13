@@ -16,6 +16,8 @@
   /* --card-bg is set inline per card (main.js/brand-card.js). Text color is
      derived from it so it always meets contrast — no JS luminance math. */
   --card-bg: var(--surface);
+  --icon-size: 100px;
+  --mark-size: 60px;
   position: relative;
   display: flex;
   overflow: hidden;
@@ -88,8 +90,8 @@
 
   /* ---- Tile face internals ---- */
   .brand-card__mark {
-    width: 60px;
-    height: 60px;
+    width: var(--mark-size);
+    height: var(--mark-size);
   }
 
   .brand-card__mark-img {
@@ -99,9 +101,8 @@
   }
 
   .brand-card__icon {
-    width: 86px;
-    height: 86px;
-    margin-bottom: var(--space-4);
+    width: var(--icon-size);
+    height: var(--icon-size);
     place-self: end;
   }
 
@@ -235,13 +236,13 @@
       font-size: var(--text-xl);
     }
     .brand-card__icon {
-      width: 56px;
-      height: 56px;
+      width: var(--icon-size);
+      height: var(--icon-size);
       margin-bottom: var(--space-3);
     }
     .brand-card__mark {
-      width: 64px;
-      height: 64px;
+      width: var(--mark-size);
+      height: var(--mark-size);
     }
     .brand-card__glyph {
       font-size: var(--text-4xl);
