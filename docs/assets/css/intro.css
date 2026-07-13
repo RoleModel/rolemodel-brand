@@ -1,0 +1,189 @@
+/* -----------------------------------------------------------------------
+   Scroll-driven intro — a Dropbox-style "assembly" of the bento.
+
+   Active only while <html> carries .is-introing (added synchronously by
+   main.js/intro.js before first paint, torn down once the scroll completes).
+   When it's not present the portal is exactly the normal interactive grid,
+   so open mode, view transitions, deep links and reduced-motion are all
+   untouched — the intro is a one-time gate, not a permanent wrapper.
+
+   Mechanics: the .portal-grid is pinned in the viewport (position: sticky)
+   and a tall .portal-intro-spacer below it supplies the scroll distance.
+   intro.js maps scroll progress → a global --enter (0 → 1) on <html>; the
+   hero fades and each card interpolates from a per-card off-screen vector
+   (--enter-x/y over its own --enter-start…--enter-end window) to its slot.
+   ----------------------------------------------------------------------- */
+
+/* Pin the bento and hold it non-interactive until the assembly finishes. */
+.is-introing .portal-grid {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-raised);
+  pointer-events: none;
+}
+
+/* The scroll runway beneath the pinned hero. */
+.portal-intro-spacer {
+  height: var(--intro-scroll);
+}
+
+/* ---- Hero layer: faint grid backdrop + heading + mark + scroll cue ---- */
+.portal-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1; /* behind the pinned grid's flying cards */
+  background: var(--paper);
+  pointer-events: none; /* never intercepts clicks meant for the cards */
+  /* Fades out as the bento assembles. */
+  opacity: clamp(0, calc(1 - var(--enter) / var(--intro-hero-fade)), 1);
+}
+
+/* Hairline grid aligned to the bento's 12 columns: a line every
+   --grid-hairline-cols column tracks lands on the real grid gaps. */
+.portal-intro__grid {
+  --col-pitch: calc((100vw - 13 * var(--grid-gap)) / 12 + var(--grid-gap));
+  --cell: calc(var(--col-pitch) * var(--grid-hairline-cols));
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--grid-hairline) 0 1px,
+      transparent 1px var(--cell)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--grid-hairline) 0 1px,
+      transparent 1px var(--cell)
+    );
+  background-position: var(--grid-gap) var(--grid-gap);
+}
+
+.portal-intro__inner {
+  position: absolute;
+  inset: var(--space-9);
+}
+
+.portal-intro__heading {
+  max-width: min(62vw, 800px);
+  margin: 0;
+  font-family: var(--font-active);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-snug);
+  color: var(--rm-color-dark-blue-green);
+  /* Gentle lift as it gives way to the cards. */
+  transform: translateY(calc(var(--enter) * var(--intro-hero-rise) * -1));
+}
+
+.portal-intro__mark {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--space-12);
+  height: var(--space-12);
+}
+
+.portal-intro__mark-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.portal-intro__cue {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  color: var(--intro-accent, var(--page-accent));
+  /* Fades earlier than the heading — it's only a "keep scrolling" hint. */
+  opacity: clamp(0, calc(1 - var(--enter) / var(--intro-cue-fade)), 1);
+  animation: intro-cue-bob 1.6s var(--ease-in-out) infinite;
+}
+
+.portal-intro__cue-icon {
+  width: var(--space-7);
+  height: var(--space-7);
+}
+
+@keyframes intro-cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--space-2));
+  }
+}
+
+/* ---- Per-card entry ----
+   --p is this card's own 0 → 1 progress carved out of the global --enter by
+   its staggered window; at --p = 0 it sits at its off-screen vector (scaled
+   down, dim), at --p = 1 it's home. Vectors + window are set inline per card
+   in intro.js so each tile enters from a distinct edge, staggered. */
+.is-introing .portal-grid .brand-card {
+  --p: clamp(
+    0,
+    calc(
+      (var(--enter) - var(--enter-start)) /
+        (var(--enter-end) - var(--enter-start))
+    ),
+    1
+  );
+  transform: translate3d(
+      calc(var(--enter-x, 0px) * (1 - var(--p))),
+      calc(var(--enter-y, 0px) * (1 - var(--p))),
+      0
+    )
+    scale(calc(1 - (1 - var(--p)) * var(--intro-enter-scale)));
+  opacity: calc(
+    var(--intro-enter-opacity) + (1 - var(--intro-enter-opacity)) * var(--p)
+  );
+  will-change: transform, opacity;
+}
+
+/* ---- Mobile / small viewports ----
+   The bento is taller than the screen here, so the large off-screen vectors
+   would drag below-the-fold cards up into view. Swap them for a gentle local
+   rise + scale so the assembly still reads without any peeking, and size the
+   hero for a narrow column. */
+@media (max-width: 900px) {
+  .portal-intro__inner {
+    inset: var(--space-5);
+  }
+  .portal-intro__heading {
+    max-width: 100%;
+    font-size: var(--text-4xl);
+  }
+  .is-introing .portal-grid .brand-card {
+    transform: translateY(calc((1 - var(--p)) * 8vh))
+      scale(calc(1 - (1 - var(--p)) * var(--intro-enter-scale)));
+    /* Fully transparent at the start so the hero stays clean — the small
+       local rise can't push a tall bento's cards off-screen the way the
+       desktop vectors do. */
+    opacity: var(--p);
+  }
+}
+
+/* Belt-and-braces: if the module can't run, never leave cards stranded
+   off-screen — a static viewport (no scroll) would otherwise show a bare
+   hero forever. Reduced-motion users skip the intro in JS, but this also
+   guarantees a visible, assembled grid if scripting is degraded. */
+@media (prefers-reduced-motion: reduce) {
+  .is-introing .portal-grid {
+    position: static;
+    pointer-events: auto;
+  }
+  .is-introing .portal-grid .brand-card {
+    transform: none;
+    opacity: 1;
+  }
+  .portal-intro,
+  .portal-intro-spacer {
+    display: none;
+  }
+  .portal-intro__cue {
+    animation: none;
+  }
+}

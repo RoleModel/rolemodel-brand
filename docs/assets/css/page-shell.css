@@ -102,7 +102,7 @@
 /* ---- Copied toast ---- */
 .copy-toast {
   position: fixed;
-  bottom: var(--space-8);
+  top: var(--space-8);
   left: 50%;
   transform: translateX(-50%) translateY(12px);
   background: var(--ink);

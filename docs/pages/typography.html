@@ -12,8 +12,17 @@
     />
     <link rel="stylesheet" href="../assets/css/index.css" />
     <script>
-      if (new URLSearchParams(location.search).get("embed") === "1")
-        document.documentElement.classList.add("is-embedded");
+      (() => {
+        const de = document.documentElement;
+        if (new URLSearchParams(location.search).get("embed") === "1") {
+          de.classList.add("is-embedded");
+        }
+        // Hide the page until its module has built the injected DOM (cleared in
+        // page-utils initPage). The timeout is a failsafe so the page still
+        // reveals if the module loads slowly or fails to run.
+        de.classList.add("is-building");
+        setTimeout(() => de.classList.remove("is-building"), 2000);
+      })();
     </script>
   </head>
 
@@ -94,7 +103,7 @@
               f.name.toLowerCase().includes("mono") ||
               f.name.toLowerCase().includes("geist");
             const previewStyle = isMono
-              ? `font-family:'${f.name}',monospace`
+              ? "font-family:var(--font-mono)"
               : `font-family:'${f.name}',${brandFont}`;
             const weights = f.weights
               .map(
@@ -136,7 +145,7 @@
         TYPE_SCALE.map((step, i) => {
           const isMono = step.mono || step.name === "Mono Caps";
           const fontStyle = isMono
-            ? `font-family:'Geist Mono',monospace`
+            ? "font-family:var(--font-mono)"
             : `font-family:${brandFont}`;
           const previewRem = PREVIEW_CLAMP[step.name] || 1.2;
           const cssRule = `font-size:${step.size};font-weight:${step.weight};line-height:${step.lh};letter-spacing:${step.ls};`;

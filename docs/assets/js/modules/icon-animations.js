@@ -60,22 +60,52 @@ export const initIconAnimations = (tileIcon, slug) => {
       const [a, b, c] = [".color-a", ".color-b", ".color-c"].map((s) =>
         svg.querySelector(s)
       );
+      const spin = svg.querySelector(".colors");
       const hover = gsap.timeline({
         defaults: { duration: 0.8, ease: "sine.inOut" },
         paused: true,
         repeat: -1,
         yoyo: true,
       });
+      gsap.fromTo(
+        ".color-a",
+        {
+          fill: "var(--rolemodel-purple)",
+        },
+        {
+          fill: "var(--rolemodel-cyan)",
+        }
+      );
+      gsap.fromTo(
+        ".color-b",
+        {
+          fill: "var(--rolemodel-cyan)",
+        },
+        {
+          fill: "var(--rolemodel-yellow)",
+        }
+      );
+      gsap.fromTo(
+        ".color-c",
+        {
+          fill: "var(--rolemodel-yellow)",
+        },
+        {
+          fill: "var(--rolemodel-purple)",
+        }
+      );
       hover
-        .to(a, { scale: 1.05, x: -6, y: -7 }, 0)
-        .to(b, { scale: 1.05, x: 7, y: -4 }, 0)
-        .to(c, { scale: 1.05, x: -3, y: 7 }, 0);
+        .to(a, { fill: "var(--rolemodel-purple)", x: -6, y: -7 }, 0)
+        .to(b, { fill: "var(--rolemodel-cyan)", x: 7, y: -4 }, 0)
+        .to(c, { fill: "var(--rolemodel-yellow)", x: -3, y: 7 }, 0)
+        .to(spin, { rotation: 360, transformOrigin: "50% 50%" }, 0);
       hoverTarget.addEventListener("mouseenter", () => hover.play());
       hoverTarget.addEventListener("mouseleave", () => {
         hover.pause();
         gsap.to([a, b, c], {
-          duration: 0.35,
+          duration: 0.25,
           ease: "power2.out",
+          fill: "currentColor",
           scale: 1,
           x: 0,
           y: 0,
@@ -85,8 +115,37 @@ export const initIconAnimations = (tileIcon, slug) => {
     }
 
     case "voice": {
-      const mic = svg.querySelector(".mic");
-      if (!mic) {
+      // Two filled quote glyphs. drawSVG is intentionally NOT used: that plugin
+      // isn't loaded (index.html ships gsap + MorphSVG/MotionPath/Flip only) and
+      // it animates a stroke dash, which does nothing on these fill-only paths.
+      // Instead the pair "speaks" on hover — a staggered pop + lift, like a line
+      // of dialogue landing — and settles back on leave. Core GSAP, no plugin.
+      const quote1 = svg.querySelectorAll(".quote");
+      const quote2 = svg.querySelectorAll(".quote2");
+
+      const hoverTimeline = gsap.timeline({ paused: true });
+      hoverTimeline.to(quote1, {
+        scale: 1.12,
+        transformOrigin: "100% 50%",
+        duration: 0.35,
+        x: 1,
+      });
+      hoverTimeline.to(quote2, {
+        scale: 1.12,
+        transformOrigin: "50% 50%",
+        x: -15,
+        duration: 0.35,
+      }, "<");
+      hoverTarget.addEventListener("mouseenter", () => hoverTimeline.play());
+      hoverTarget.addEventListener("mouseleave", () => hoverTimeline.reverse());
+      break;
+    }
+
+    case "academy": {
+      const line1 = svg.querySelector(".line-1");
+      const line2 = svg.querySelector(".line-2");
+      const line3 = svg.querySelector(".line-3");
+      if (!line1 || !line2 || !line3) {
         return;
       }
       const hover = gsap.timeline({
@@ -95,11 +154,17 @@ export const initIconAnimations = (tileIcon, slug) => {
         repeat: -1,
         yoyo: true,
       });
-      hover.to(mic, { y: -1.5 });
+      hover.to(line1, { y: -1.5 });
+      hover.to(line2, { y: -1.5 }, 0);
+      hover.to(line3, { y: -1.5 }, 0);
       hoverTarget.addEventListener("mouseenter", () => hover.play());
       hoverTarget.addEventListener("mouseleave", () => {
         hover.pause();
-        gsap.to(mic, { duration: 0.25, ease: "power2.out", y: 0 });
+        gsap.to([line1, line2, line3], {
+          duration: 0.25,
+          ease: "power2.out",
+          y: 0,
+        });
       });
       break;
     }

@@ -15,8 +15,8 @@
 
 .portal-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 200px repeat(2, 1fr);
   min-height: 100dvh;
   gap: var(--grid-gap);
   padding: var(--grid-gap);
@@ -87,8 +87,8 @@
 
 .portal-panel__close {
   position: absolute;
-  left: var(--space-5);
-  bottom: 50%;
+  right: var(--space-5);
+  top: var(--space-5);
   z-index: var(--z-close);
   width: var(--space-10);
   height: var(--space-10);
@@ -107,23 +107,48 @@
 }
 
 @media (max-width: 900px) {
-  /* Two columns, not three: every span collapses to full-width except the
-     span-1 cards (Voice, Imagery), which pair up to exactly fill a row.
-     Three columns left a dead gap next to them since nothing else was ever
-     narrow enough to backfill it. */
-  .portal-grid {
+  /* Grid-mode bento only: collapse to 3 columns. Scoped with :not(--open)
+     so it can't override the open-mode layout below. */
+  .portal-grid:not(.portal-grid--open) {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(160px, auto);
   }
+}
 
-  /* Open mode on small screens: let the pills wrap and the whole thing
-     scroll vertically, so nothing is clipped or truncated. */
+/* Open mode on narrow OR short viewports: the top pill row becomes a single
+   horizontally scrollable bar (pills keep their natural width, so full labels
+   show and nothing truncates), and the panel is pinned below it, filling the
+   rest of the viewport. Fixed positioning takes the panel out of the scroll
+   flow so it doesn't slide when you scroll the pill bar. */
+@media (max-width: 1200px), (max-height: 500px) {
   .portal-grid--open {
-    overflow-y: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: var(--row-mini);
+    padding: 0;
+    background: var(--paper);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .portal-grid--open::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portal-grid--open .brand-card--mini {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: max-content;
+    height: var(--row-mini);
+  }
+
   .portal-grid--open .portal-panel {
+    position: fixed;
+    inset: var(--row-mini) 0 0 0;
     height: auto;
-    min-height: 80dvh;
+    flex: none;
   }
 }
 
@@ -136,19 +161,23 @@
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Pop the swapped content in/out instead of the browser's default opacity
-   crossfade. `*` here matches every view-transition-name, including the
-   implicit "root" one that covers every card NOT individually named in
-   THIS transition — so without the (root) override below, every card not
-   actually involved in the swap gets scaled away too, which reads as the
-   whole page flashing/reshuffling instead of just the one card morphing. */
-::view-transition-old(*) {
-  animation: scale-out var(--duration-fast) var(--ease-in-out) both;
+/* Scale the pop ONLY on elements that truly enter or leave the transition.
+   `:only-child` matches a ::view-transition-new that has no matching -old
+   (an entering element) or a ::view-transition-old with no -new (a leaving
+   element). Cards that PERSIST across the swap (present before and after —
+   every brand/category card just moves from its bento tile to its nav pill)
+   have BOTH an -old and a -new, so they are NOT :only-child and skip this
+   rule entirely: the browser just morphs their box smoothly from the old
+   position to the new one via ::view-transition-group. Without this scoping,
+   the catch-all pop replayed on every persisting card, so the whole grid
+   looked like it re-animated in on each open/close instead of settling. */
+::view-transition-old(*):only-child {
+  animation: scale-out var(--duration-slow) var(--ease-in-out) both;
   transform-origin: 0% 0%;
 }
 
-::view-transition-new(*) {
-  animation: scale-in var(--duration-fast) var(--ease-in-out) both;
+::view-transition-new(*):only-child {
+  animation: scale-in var(--duration-slow) var(--ease-in-out) both;
   transform-origin: 0% 0%;
   mix-blend-mode: normal;
 }

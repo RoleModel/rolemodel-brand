@@ -145,7 +145,7 @@ export class BrandCard extends HTMLElement {
     for (const s of CARD_STATES) {
       this.classList.toggle(`brand-card--${s}`, s === this.state);
     }
-    for (let i = 1; i <= 4; i += 1) {
+    for (let i = 1; i <= 5; i += 1) {
       this.classList.toggle(`brand-card--span-${i}`, span === String(i));
     }
 

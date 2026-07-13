@@ -16,6 +16,7 @@
 /* Homepage portal */
 @import url("./portal-grid.css");
 @import url("./brand-card.css");
+@import url("./intro.css");
 
 /* Guideline pages */
 @import url("./pages/color.css");

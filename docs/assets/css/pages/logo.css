@@ -103,6 +103,7 @@
 
 /* ---- Background mark — animates in behind the page content ---- */
 .logo-watermark {
+  --watermark-opacity: 0.07;
   position: fixed;
   right: 0;
   bottom: 0;
@@ -110,13 +111,54 @@
   pointer-events: none;
   user-select: none;
 
-  .logo-watermark__image {
+  .logo-watermark__image,
+  .logo-watermark__svg {
     display: block;
     width: clamp(280px, 42vw, 560px);
     height: auto;
     transform: translate(18%, 22%) rotate(-8deg);
-    opacity: 0.07;
+    opacity: var(--watermark-opacity);
     animation: logo-watermark-enter 1.6s var(--ease-out) both;
+  }
+
+  /* The vector mark carries its own brand colors, so it needs a touch more
+     presence than a flat raster silhouette to read at the same weight. */
+  .logo-watermark__svg {
+    --watermark-opacity: 0.12;
+  }
+
+  /* The Academy mark is a live icon (ICONS.academy) — on the interactive
+     homepage its four cross-lines bob on hover (icon-animations.js). Here the
+     mark is a non-interactive background, so we autoplay that same bob as a
+     gentle, staggered idle loop instead of waiting for a hover that can't
+     happen. transform-box keeps the translate in the mark's own coordinate
+     space so it composes with the group's translate() rather than replacing it. */
+  .logo-watermark__svg .line-1,
+  .logo-watermark__svg .line-2,
+  .logo-watermark__svg .line-3,
+  .logo-watermark__svg .line-4 {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: academy-mark-bob var(--duration-idle) var(--ease-in-out) infinite;
+  }
+  .logo-watermark__svg .line-2 {
+    animation-delay: calc(var(--duration-idle) * 0.12);
+  }
+  .logo-watermark__svg .line-3 {
+    animation-delay: calc(var(--duration-idle) * 0.24);
+  }
+  .logo-watermark__svg .line-4 {
+    animation-delay: calc(var(--duration-idle) * 0.36);
+  }
+}
+
+@keyframes academy-mark-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
   }
 }
 
@@ -126,13 +168,18 @@
     transform: translate(30%, 40%) rotate(-14deg) scale(0.85);
   }
   to {
-    opacity: 0.07;
+    opacity: var(--watermark-opacity);
     transform: translate(18%, 22%) rotate(-8deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-watermark .logo-watermark__image {
+  .logo-watermark .logo-watermark__image,
+  .logo-watermark .logo-watermark__svg,
+  .logo-watermark__svg .line-1,
+  .logo-watermark__svg .line-2,
+  .logo-watermark__svg .line-3,
+  .logo-watermark__svg .line-4 {
     animation: none;
   }
 }
@@ -228,7 +275,7 @@
   font-size: var(--text-md);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .logo-grid {
     grid-template-columns: 1fr;
 
@@ -241,7 +288,7 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   .logo-grid {
     &.logo-grid--three {
       grid-template-columns: 1fr;

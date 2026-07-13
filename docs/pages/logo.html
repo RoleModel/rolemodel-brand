@@ -12,10 +12,20 @@
     />
     <link rel="stylesheet" href="../assets/css/index.css" />
     <script>
-      if (new URLSearchParams(location.search).get("embed") === "1")
-        document.documentElement.classList.add("is-embedded");
+      (() => {
+        const de = document.documentElement;
+        if (new URLSearchParams(location.search).get("embed") === "1") {
+          de.classList.add("is-embedded");
+        }
+        // Hide the page until its module has built the injected DOM (cleared in
+        // page-utils initPage). The timeout is a failsafe so the page still
+        // reveals if the module loads slowly or fails to run.
+        de.classList.add("is-building");
+        setTimeout(() => de.classList.remove("is-building"), 2000);
+      })();
     </script>
   </head>
+
   <body>
     <div id="nav-root"></div>
     <div id="page-header-root"></div>
@@ -63,8 +73,9 @@
         initReveal,
       } from "../assets/js/modules/page-utils.js";
       import { UI_STRINGS } from "../assets/js/modules/site-content.js";
+      import { ICONS } from "../assets/js/modules/icons.js";
 
-      const { brand, pageData, accentHex } = initPage("logo");
+      const { brand, pageData, accentHex, slug } = initPage("logo");
       const { category: cat, numLabel } = categoryInfo("logo", "01");
       const logos = pageData.logos || [];
       const logoRules = pageData.logoRules || [];
@@ -161,9 +172,16 @@
   </div>
 `);
 
-      // ---- Background mark — the brand icon animates in behind the content ----
-      if (brand.icon) {
-        const watermark = document.querySelector("#logo-watermark");
+      // ---- Background mark — animates in behind the content ----
+      // Academy has a hand-drawn vector mark (ICONS.academy, authored on a
+      // ~0–39 grid); every other brand falls back to its raster brand icon.
+      const watermark = document.querySelector("#logo-watermark");
+      const brandMark = ICONS[slug];
+      if (brandMark) {
+        watermark.setHTMLUnsafe(
+          /* html */ `<svg class="logo-watermark__svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${brandMark.markup}</svg>`
+        );
+      } else if (brand.icon) {
         watermark.setHTMLUnsafe(
           /* html */ `<img class="logo-watermark__image" src="${brand.icon}" alt=""/>`
         );

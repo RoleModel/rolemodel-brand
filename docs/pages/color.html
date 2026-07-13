@@ -12,8 +12,17 @@
     />
     <link rel="stylesheet" href="../assets/css/index.css" />
     <script>
-      if (new URLSearchParams(location.search).get("embed") === "1")
-        document.documentElement.classList.add("is-embedded");
+      (() => {
+        const de = document.documentElement;
+        if (new URLSearchParams(location.search).get("embed") === "1") {
+          de.classList.add("is-embedded");
+        }
+        // Hide the page until its module has built the injected DOM (cleared in
+        // page-utils initPage). The timeout is a failsafe so the page still
+        // reveals if the module loads slowly or fails to run.
+        de.classList.add("is-building");
+        setTimeout(() => de.classList.remove("is-building"), 2000);
+      })();
     </script>
   </head>
 

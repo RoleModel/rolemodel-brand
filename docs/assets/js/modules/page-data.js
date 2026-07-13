@@ -631,12 +631,6 @@ export const EASING_TOKENS = [
     name: "Ease In-Out",
     value: "cubic-bezier(0.76, 0, 0.24, 1)",
   },
-  {
-    cssVar: "--ease-overshoot",
-    desc: "Bouncy reveals — use sparingly",
-    name: "Overshoot",
-    value: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-  },
 ];
 
 export const DURATION_TOKENS = [

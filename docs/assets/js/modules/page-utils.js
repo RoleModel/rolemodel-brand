@@ -309,6 +309,18 @@ export const categoryInfo = (categorySlug, fallbackNum = "01") => {
   return { category, numLabel };
 };
 
+// ---- Reveal the page once its module has built the injected DOM ----
+// The pages hide themselves (html.is-building, set in the page <head>) so the
+// JS-injected header/content can't shift layout after first paint. initPage
+// runs at the top of every page module, so scheduling the reveal on the next
+// animation frame fires it after the module's synchronous setHTMLUnsafe calls
+// complete — collapsing many post-paint reflows into one shift-free paint.
+const revealWhenBuilt = () => {
+  requestAnimationFrame(() => {
+    document.documentElement.classList.remove("is-building");
+  });
+};
+
 // ---- Shared page scaffolding: nav + accent + document title ----
 export const initPage = (categorySlug) => {
   const { slug, brand, pageData } = resolveActiveBrand();
@@ -325,6 +337,8 @@ export const initPage = (categorySlug) => {
     navRoot.setHTMLUnsafe(buildNavHTML(slug, brand.name || "Brand"));
     wireNavSwitcher(slug, categorySlug);
   }
+
+  revealWhenBuilt();
 
   return { accentHex, brand, pageData, slug };
 };

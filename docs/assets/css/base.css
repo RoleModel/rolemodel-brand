@@ -4,6 +4,31 @@
    uses explicit BEM classes.
    ----------------------------------------------------------------------- */
 
+/* ============================================================
+   Metric-matched font fallbacks (capsize-generated).
+   The web fonts load with display=swap, so before they arrive
+   text is drawn in a local fallback. These faces override the
+   fallback's metrics to match the web font's dimensions, so the
+   swap changes glyphs without changing the box — removing the
+   font-load layout shift. Referenced from the token font stacks.
+   ============================================================ */
+@font-face {
+  font-family: "DM Sans Fallback";
+  src: local("Arial"), local("ArialMT");
+  ascent-override: 94.9001%;
+  descent-override: 29.6563%;
+  line-gap-override: 0%;
+  size-adjust: 104.531%;
+}
+
+@font-face {
+  font-family: "Geist Mono Fallback";
+  src: local("Courier New"), local("CourierNewPSMT");
+  ascent-override: 100.5164%;
+  descent-override: 29.5048%;
+  size-adjust: 99.9837%;
+}
+
 *,
 *::before,
 *::after {
@@ -27,6 +52,21 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+/* ============================================================
+   CLS guard — guideline pages ship empty containers and inject
+   their page header + main content with JS after first paint
+   (see page-utils initPage and each page module). While
+   `is-building` is set — added in the page <head> before paint,
+   then removed on the next animation frame once the module has
+   finished building the DOM — the page is held invisible so the
+   fill lands in a single shift-free paint instead of pushing
+   content down. A <head> timeout also clears `is-building`, so
+   the page still reveals if the module loads slowly or fails.
+   ============================================================ */
+html.is-building body {
+  visibility: hidden;
 }
 
 /* ============================================================

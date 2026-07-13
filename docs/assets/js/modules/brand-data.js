@@ -37,15 +37,18 @@ export const BRANDS = {
     logo: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad.svg`,
     logoWhite: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite.svg`,
     name: "LightningCAD",
+    // Grid palette pulls from the product-family sub-brand colors (below) so
+    // the bento reads as the full LightningCAD system, not one flat blue.
+    // Brand blue anchors the logo card; a deep navy closes the sequence.
     palette: [
       "#2a83f7",
-      "#66a5f9",
+      "#ffac08",
+      "#8d3de3",
+      "#07bbc2",
+      "#adbf08",
+      "#0e8a6b",
+      "#0bcaf0",
       "#032a5e",
-      "#2a83f7",
-      "#66a5f9",
-      "#032a5e",
-      "#2a83f7",
-      "#66a5f9",
     ],
     primary: "#2a83f7",
     subBrands: [
@@ -124,19 +127,19 @@ export const CATEGORIES = [
   {
     name: "Color",
     slug: "color",
-    span: 1,
+    span: 3,
     tagline: "Our palette carries our energy and warmth.",
   },
   {
-    name: "Voice",
+    name: "Voice & Tone",
     slug: "voice",
-    span: 2,
+    span: 3,
     tagline: "Humble confidence, grounded in partnership.",
   },
   {
     name: "Imagery",
     slug: "imagery",
-    span: 2,
+    span: 3,
     tagline: "Photography should feel human and unscripted.",
   },
   {
@@ -148,19 +151,19 @@ export const CATEGORIES = [
   {
     name: "Icons",
     slug: "icons",
-    span: 2,
+    span: 3,
     tagline: "Icons help us recognize complex ideas instantly.",
   },
   {
     name: "Motion",
     slug: "motion",
-    span: 2,
+    span: 4,
     tagline: "Fast, precise, never decorative for its own sake.",
   },
   {
     name: "Visual Style",
     slug: "visual-style",
-    span: 4,
+    span: 3,
     tagline: "Crafted and considered — consistent geometry and restraint.",
   },
 ];

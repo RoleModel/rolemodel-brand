@@ -56,16 +56,11 @@
   /* Per-page accent — overridden at runtime from brand data */
   --page-accent: var(--rolemodel-blue);
 
-  /* Status */
-  --color-do: var(--rolemodel-green);
-  --color-dont: #c0392b;
-  --color-dont-soft: color-mix(in srgb, var(--color-dont) 55%, var(--white));
-
   /* ============ Typography ============ */
   /* --font-active is set at runtime per active brand (see js/main.js) */
-  --font-display: "DM Sans", "Inter", system-ui, sans-serif;
+  --font-display: "DM Sans", "DM Sans Fallback", "Inter", system-ui, sans-serif;
   --font-active: var(--font-display);
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 
   /* Size scale */
   --text-2xs: 10px;
@@ -150,12 +145,28 @@
   /* ============ Motion ============ */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
-  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-fast: 0.2s;
   --duration-base: 0.4s;
   --duration-slow: 0.6s;
   --spring: 400; /* stiffness */
   --spring-damping: 30;
+
+  /* ============ Intro (scroll-driven bento assembly) ============ */
+  /* Scroll distance below the pinned hero that drives assembly (0 → 1). */
+  --intro-scroll: 130dvh;
+  /* How much smaller each card starts before flying in (0 = full size). */
+  --intro-enter-scale: 0.32;
+  /* Card opacity at the start of its entry. */
+  --intro-enter-opacity: 0.15;
+  /* --enter value by which the hero has fully faded / cue has gone. */
+  --intro-hero-fade: 0.55;
+  --intro-cue-fade: 0.18;
+  /* How far the hero heading lifts as it fades. */
+  --intro-hero-rise: 6vh;
+  /* Faint hairline for the intro grid backdrop (aligned to the bento cols). */
+  --grid-hairline: var(--ink-a06);
+  /* Backdrop line every N column tracks so lines sit on the bento gaps. */
+  --grid-hairline-cols: 3;
 
   /* ============ Z layers ============ */
   --z-raised: 2;

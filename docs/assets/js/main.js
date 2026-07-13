@@ -23,10 +23,8 @@
 import { BRANDS, BRAND_ORDER, CATEGORIES } from "./modules/brand-data.js";
 import { initIconAnimations } from "./modules/icon-animations.js";
 import { renderIcon } from "./modules/icons.js";
-import { staggerReveal } from "./modules/page-utils.js";
+import { setupIntro } from "./modules/intro.js";
 import "./components/brand-card.js";
-
-const INTRO_STAGGER_STEP_MS = 45;
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 
@@ -73,35 +71,20 @@ class BrandPortal {
   }
 
   // ---- First-load intro ---------------------------------------------------
-  // The bento settles into place: each card scales down from slightly oversized
-  // to its final size, staggered across the grid (same staggerReveal() helper
-  // the other pages use for their scroll-in reveals). Skipped when a section
-  // is deep-linked open, and under reduced-motion.
+  // Scroll-driven "assembly": the page opens on a hero and the bento cards fly
+  // in from off-screen as you scroll, settling into their slots (see
+  // modules/intro.js + css/intro.css). Skipped — grid assembled and instantly
+  // interactive, no scroll gate — when a section is deep-linked open on load
+  // and under prefers-reduced-motion.
   playIntro() {
     if (this.openSlug || prefersReducedMotion()) {
       return;
     }
-    const cards = this.allCards();
-    staggerReveal(cards, 0, INTRO_STAGGER_STEP_MS);
-    for (const card of cards) {
-      card.style.setProperty("--intro-delay", `${card.dataset.delay}ms`);
-    }
-
-    // Drop the class once every card's own card-intro animation has
-    // finished, instead of guessing the total duration from a timer.
-    let finished = 0;
-    const onAnimationEnd = (e) => {
-      if (e.animationName !== "card-intro") {
-        return;
-      }
-      finished += 1;
-      if (finished >= cards.length) {
-        this.grid.removeEventListener("animationend", onAnimationEnd);
-        this.grid.classList.remove("portal-grid--intro");
-      }
-    };
-    this.grid.addEventListener("animationend", onAnimationEnd);
-    this.grid.classList.add("portal-grid--intro");
+    setupIntro({
+      brand: BRANDS[getActiveBrandSlug()],
+      cards: this.allCards(),
+      grid: this.grid,
+    });
   }
 
   brandCards() {
