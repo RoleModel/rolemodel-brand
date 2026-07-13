@@ -23,6 +23,7 @@
   overflow: hidden;
   background: var(--card-bg);
   color: contrast-color(var(--card-bg));
+  border-radius: var(--radius-lg);
   transition:
     background-color var(--duration-fast) var(--ease-in-out),
     color var(--duration-fast) var(--ease-in-out);
@@ -46,7 +47,7 @@
     place-items: stretch;
     place-content: stretch space-between;
     width: 100%;
-    padding: var(--space-8);
+    padding: var(--space-4);
   }
 
   /* Mini-state face: compact rail button */
@@ -147,9 +148,8 @@
       font-size: var(--text-3xl);
     }
     .brand-card__face {
-  
-    padding: var(--space-4);
-  }
+      padding: var(--space-4);
+    }
   }
 
   /* ---- Kind: brand tile (logo mark layout + active ring) ---- */

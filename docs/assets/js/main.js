@@ -34,15 +34,18 @@ const getActiveBrandSlug = () =>
   localStorage.getItem(STORAGE_KEY) || "rolemodel";
 const setActiveBrandSlug = (slug) => localStorage.setItem(STORAGE_KEY, slug);
 
-// A ?brand= in the URL is authoritative on load: it seeds localStorage so the
-// embed always opens on the brand the host (Framer) asked for, regardless of
-// what was last clicked. In-session switching still writes localStorage and is
-// re-seeded from the param on the next load.
-const seedBrandFromUrl = () => {
+const DEFAULT_BRAND = "rolemodel";
+
+// The active brand on load is authoritative and always reset here: a ?brand=
+// from the host (Framer) wins, otherwise we force rolemodel. This deliberately
+// OVERWRITES whatever a previous session left in localStorage, so the embed can
+// never open on a stale brand (e.g. a visitor's last-clicked LightningCAD). In-
+// session switching still writes localStorage and drives the live UI — only the
+// initial load is forced.
+const seedActiveBrand = () => {
   const fromUrl = new URLSearchParams(window.location.search).get("brand");
-  if (fromUrl && BRANDS[fromUrl]) {
-    setActiveBrandSlug(fromUrl);
-  }
+  const target = fromUrl && BRANDS[fromUrl] ? fromUrl : DEFAULT_BRAND;
+  setActiveBrandSlug(target);
 };
 
 const prefersReducedMotion = () =>
@@ -75,7 +78,7 @@ class BrandPortal {
     this.cards = new Map();
     this.brandOrder = BRAND_ORDER;
 
-    seedBrandFromUrl();
+    seedActiveBrand();
     this.build();
     this.wireEvents();
     this.restoreFromHash();
