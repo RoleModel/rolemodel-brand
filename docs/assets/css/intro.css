@@ -71,7 +71,7 @@
   font-family: var(--font-active);
   font-size: var(--text-display);
   font-weight: var(--weight-bold);
-  line-height: var(--leading-tight);
+  line-height: var(--leading-none);
   letter-spacing: var(--tracking-snug);
   color: var(--rm-color-dark-blue-green);
   /* Gentle lift as it gives way to the cards. */
