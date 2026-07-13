@@ -43,6 +43,95 @@ const wireMorphTargets = (svg, entry, hoverTarget) => {
   }
 };
 
+// Motion icon: a traveler dot runs a bouncy bezier while its handles swing
+// out to the curve's control points on hover, snapping back on leave. Pulled
+// out of the main switch to keep initIconAnimations under the complexity cap.
+const wireMotionIcon = (svg, hoverTarget) => {
+  const traveler = svg.querySelector(".traveler");
+  const curvePath = "M5 19C5 7 19 17 19 5";
+  const handleLine1 = svg.querySelector(".handle-line-1");
+  const handleLine2 = svg.querySelector(".handle-line-2");
+  const handleDot1 = svg.querySelector(".handle-dot-1");
+  const handleDot2 = svg.querySelector(".handle-dot-2");
+
+  let travel = null;
+  if (traveler && typeof MotionPathPlugin !== "undefined") {
+    gsap.registerPlugin(MotionPathPlugin);
+    // The <circle> has no cx/cy, so until the tween renders it sits at
+    // the viewBox origin — park it on the curve's start anchor (5,19).
+    gsap.set(traveler, { x: 5, y: 19 });
+    travel = gsap.to(traveler, {
+      duration: 1.3,
+      ease: "sine.inOut",
+      motionPath: { autoRotate: false, path: curvePath },
+      paused: true,
+      repeat: -1,
+      yoyo: true,
+    });
+  }
+
+  // Handles swing from their resting position to the bouncy curve's
+  // control points, in step with the .curve morph above.
+  hoverTarget.addEventListener("mouseenter", () => {
+    if (travel) {
+      travel.restart();
+      gsap.to(traveler, { duration: 0.2, opacity: 1 });
+    }
+    gsap.to(handleLine1, {
+      attr: { x2: 4, y2: 0 },
+      duration: 0.6,
+      ease: "elastic.out(1, 0.6)",
+    });
+    gsap.to(handleDot1, {
+      attr: { cx: 4, cy: 0 },
+      duration: 0.6,
+      ease: "elastic.out(1, 0.6)",
+    });
+    gsap.to(handleLine2, {
+      attr: { x2: 19, y2: 22 },
+      duration: 0.6,
+      ease: "elastic.out(1, 0.6)",
+    });
+    gsap.to(handleDot2, {
+      attr: { cx: 19, cy: 22 },
+      duration: 0.6,
+      ease: "elastic.out(1, 0.6)",
+    });
+  });
+  hoverTarget.addEventListener("mouseleave", () => {
+    if (travel) {
+      travel.pause();
+      // Fade out and reset to the start anchor; the next hover restarts
+      // the path tween from 0, so it picks up exactly from there.
+      gsap.to(traveler, {
+        duration: 0.3,
+        onComplete: () => gsap.set(traveler, { x: 5, y: 19 }),
+        opacity: 0,
+      });
+    }
+    gsap.to(handleLine1, {
+      attr: { x2: 5, y2: 7 },
+      duration: 0.5,
+      ease: "power2.out",
+    });
+    gsap.to(handleDot1, {
+      attr: { cx: 5, cy: 7 },
+      duration: 0.5,
+      ease: "power2.out",
+    });
+    gsap.to(handleLine2, {
+      attr: { x2: 19, y2: 17 },
+      duration: 0.5,
+      ease: "power2.out",
+    });
+    gsap.to(handleDot2, {
+      attr: { cx: 19, cy: 17 },
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  });
+};
+
 export const initIconAnimations = (tileIcon, slug) => {
   if (typeof gsap === "undefined" || PREFERS_REDUCED_MOTION) {
     return;
@@ -125,17 +214,21 @@ export const initIconAnimations = (tileIcon, slug) => {
 
       const hoverTimeline = gsap.timeline({ paused: true });
       hoverTimeline.to(quote1, {
+        duration: 0.35,
         scale: 1.12,
         transformOrigin: "100% 50%",
-        duration: 0.35,
         x: 1,
       });
-      hoverTimeline.to(quote2, {
-        scale: 1.12,
-        transformOrigin: "50% 50%",
-        x: -15,
-        duration: 0.35,
-      }, "<");
+      hoverTimeline.to(
+        quote2,
+        {
+          duration: 0.35,
+          scale: 1.12,
+          transformOrigin: "50% 50%",
+          x: -15,
+        },
+        "<"
+      );
       hoverTarget.addEventListener("mouseenter", () => hoverTimeline.play());
       hoverTarget.addEventListener("mouseleave", () => hoverTimeline.reverse());
       break;
@@ -239,89 +332,7 @@ export const initIconAnimations = (tileIcon, slug) => {
     }
 
     case "motion": {
-      const traveler = svg.querySelector(".traveler");
-      const curvePath = "M5 19C5 7 19 17 19 5";
-      const handleLine1 = svg.querySelector(".handle-line-1");
-      const handleLine2 = svg.querySelector(".handle-line-2");
-      const handleDot1 = svg.querySelector(".handle-dot-1");
-      const handleDot2 = svg.querySelector(".handle-dot-2");
-
-      let travel = null;
-      if (traveler && typeof MotionPathPlugin !== "undefined") {
-        gsap.registerPlugin(MotionPathPlugin);
-        // The <circle> has no cx/cy, so until the tween renders it sits at
-        // the viewBox origin — park it on the curve's start anchor (5,19).
-        gsap.set(traveler, { x: 5, y: 19 });
-        travel = gsap.to(traveler, {
-          duration: 1.3,
-          ease: "sine.inOut",
-          motionPath: { autoRotate: false, path: curvePath },
-          paused: true,
-          repeat: -1,
-          yoyo: true,
-        });
-      }
-
-      // Handles swing from their resting position to the bouncy curve's
-      // control points, in step with the .curve morph above.
-      hoverTarget.addEventListener("mouseenter", () => {
-        if (travel) {
-          travel.restart();
-          gsap.to(traveler, { duration: 0.2, opacity: 1 });
-        }
-        gsap.to(handleLine1, {
-          attr: { x2: 4, y2: 0 },
-          duration: 0.6,
-          ease: "elastic.out(1, 0.6)",
-        });
-        gsap.to(handleDot1, {
-          attr: { cx: 4, cy: 0 },
-          duration: 0.6,
-          ease: "elastic.out(1, 0.6)",
-        });
-        gsap.to(handleLine2, {
-          attr: { x2: 19, y2: 22 },
-          duration: 0.6,
-          ease: "elastic.out(1, 0.6)",
-        });
-        gsap.to(handleDot2, {
-          attr: { cx: 19, cy: 22 },
-          duration: 0.6,
-          ease: "elastic.out(1, 0.6)",
-        });
-      });
-      hoverTarget.addEventListener("mouseleave", () => {
-        if (travel) {
-          travel.pause();
-          // Fade out and reset to the start anchor; the next hover restarts
-          // the path tween from 0, so it picks up exactly from there.
-          gsap.to(traveler, {
-            duration: 0.3,
-            onComplete: () => gsap.set(traveler, { x: 5, y: 19 }),
-            opacity: 0,
-          });
-        }
-        gsap.to(handleLine1, {
-          attr: { x2: 5, y2: 7 },
-          duration: 0.5,
-          ease: "power2.out",
-        });
-        gsap.to(handleDot1, {
-          attr: { cx: 5, cy: 7 },
-          duration: 0.5,
-          ease: "power2.out",
-        });
-        gsap.to(handleLine2, {
-          attr: { x2: 19, y2: 17 },
-          duration: 0.5,
-          ease: "power2.out",
-        });
-        gsap.to(handleDot2, {
-          attr: { cx: 19, cy: 17 },
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      });
+      wireMotionIcon(svg, hoverTarget);
       break;
     }
 

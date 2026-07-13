@@ -589,6 +589,15 @@ const buildSiteContent = () => {
     })
   );
 
+  const introProse = parseMarkdown(
+    readFileSync(path.join(PROSE_DIR, "intro.md"), "utf-8")
+  );
+  const introHeading = requireField(
+    { heading: introProse.body },
+    "heading",
+    "intro"
+  );
+
   const uiStringsProse = parseMarkdown(
     readFileSync(path.join(PROSE_DIR, "ui-strings.md"), "utf-8")
   );
@@ -609,6 +618,7 @@ const buildSiteContent = () => {
     cycleWords: motionConfig.cycleWords,
     iconPrinciples,
     imageryTreatments,
+    introHeading,
     mosaicSpans: imageryConfig.mosaicSpans,
     motionPrinciples,
     radii,
@@ -624,6 +634,8 @@ const writeSiteContent = (data) => {
 // Misc content that used to be hardcoded inline in individual pages'
 // <script> blocks — motion/icon/visual-style principles, imagery
 // treatments, and a couple of one-off UI strings.
+
+export const INTRO_HEADING = ${serialize(data.introHeading)};
 
 export const CYCLE_WORDS = ${serialize(data.cycleWords)};
 

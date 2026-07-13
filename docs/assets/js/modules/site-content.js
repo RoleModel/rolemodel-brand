@@ -5,6 +5,9 @@
 // <script> blocks — motion/icon/visual-style principles, imagery
 // treatments, and a couple of one-off UI strings.
 
+export const INTRO_HEADING =
+  "Our brand guidelines help us craft an identity as intentional as the software we build.";
+
 export const CYCLE_WORDS = ["purpose", "precision", "restraint", "intent"];
 
 export const MOTION_PRINCIPLES = [

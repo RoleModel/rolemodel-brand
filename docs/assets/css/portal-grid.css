@@ -33,7 +33,7 @@
 .portal-grid--open {
   display: grid;
   align-content: flex-start;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(9, minmax(0, 1fr));
   grid-template-rows: repeat(9, 1fr);
   height: 100dvh;
   min-height: 0;
@@ -43,7 +43,16 @@
 }
 
 .portal-grid.portal-grid--open.portal-grid--brands-open {
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+/* Desktop grid open mode: pills must be able to shrink to their equal column.
+   Without this the base `min-width: max-content` (brand-card.css) blows the
+   column tracks — and therefore the full-bleed panel (grid-column: 1 / -1) —
+   past the viewport, sliding the panel out of view. The narrow/short fallback
+   below re-enables max-content width with horizontal scroll instead. */
+.portal-grid--open .brand-card--mini {
+  min-width: 0;
 }
 
 /* Pill ordering: active brand → other brands → category pills → panel. */
@@ -75,6 +84,10 @@
   flex: 1 1 100%;
   height: calc(100dvh - var(--row-mini));
   min-height: 0;
+  /* min-width:0 stops the panel's content min-content from stretching the
+     grid item past its 1 / -1 track, which would push it under the clipped
+     right edge (download button off-screen). */
+  min-width: 0;
   grid-column: 1 /-1;
 }
 
@@ -138,7 +151,7 @@
   }
 
   .portal-grid--open .brand-card--mini {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     width: auto;
     min-width: max-content;
     height: var(--row-mini);

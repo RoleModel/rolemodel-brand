@@ -51,8 +51,19 @@ test("VOICE_CONCEPTS content round-trips through the real generator", async () =
   assert.equal(VOICE_CONCEPTS.length, 4);
   assert.equal(VOICE_CONCEPTS[0].name, "Humble Confidence");
   assert.equal(TYPE_SCALE.length, 7);
-  assert.equal(EASING_TOKENS.length, 3);
+  assert.equal(EASING_TOKENS.length, 2);
   assert.equal(DURATION_TOKENS.length, 3);
+});
+
+test("INTRO_HEADING content round-trips through the real generator", async () => {
+  const { build } = await import("./build-content.mjs");
+  build();
+  const { INTRO_HEADING } =
+    await import("../assets/js/modules/site-content.js");
+  assert.equal(
+    INTRO_HEADING,
+    "Our brand guidelines help us craft an identity as intentional as the software we build."
+  );
 });
 
 test("BRANDS content round-trips through the real generator", async () => {

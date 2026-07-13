@@ -17,6 +17,7 @@
    ----------------------------------------------------------------------- */
 
 import { clamp } from "./page-utils.js";
+import { INTRO_HEADING } from "./site-content.js";
 
 const ENTER_PROP = "--enter";
 const ACCENT_PROP = "--intro-accent";
@@ -35,36 +36,36 @@ const CARD_SPAN = 0.5;
 // Units are required on BOTH axes: a unitless "0" would make the composed
 // translate3d() invalid and drop the whole transform.
 const ENTRY_VECTORS = [
-  { x: "0vw", y: "-115vh" }, // top
-  { x: "115vw", y: "0vh" }, // right
-  { x: "0vw", y: "115vh" }, // bottom
-  { x: "-115vw", y: "0vh" }, // left
-  { x: "95vw", y: "-95vh" }, // top-right
-  { x: "-95vw", y: "95vh" }, // bottom-left
-  { x: "95vw", y: "95vh" }, // bottom-right
-  { x: "-95vw", y: "-95vh" }, // top-left
+  // top
+  { x: "0vw", y: "-115vh" },
+  // right
+  { x: "115vw", y: "0vh" },
+  // bottom
+  { x: "0vw", y: "115vh" },
+  // left
+  { x: "-115vw", y: "0vh" },
+  // top-right
+  { x: "95vw", y: "-95vh" },
+  // bottom-left
+  { x: "-95vw", y: "95vh" },
+  // bottom-right
+  { x: "95vw", y: "95vh" },
+  // top-left
+  { x: "-95vw", y: "-95vh" },
 ];
 
-const CUE_ICON = /* html */ `
+/* html */
+const CUE_ICON = `
   <svg class="portal-intro__cue-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path d="M5 8l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M5 14l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" />
   </svg>`;
 
-// RoleModel-voice hero copy. Lives inline here for now — the only natural
-// content-system home (UI_STRINGS in site-content.js) is a GENERATED file, so
-// it can't be hand-edited. Move it into the content pipeline (docs/content/**)
-// when convenient. Line breaks are layout only; the text content is exact.
-const HERO_HEADING = [
-  "At RoleModel, our brand guidelines",
-  "help us craft an identity",
-  "as intentional as the software we build.",
-].join(" ");
-
-const heroMarkup = (brand) => /* html */ `
+/* html */
+const heroMarkup = (brand) => `
   <div class="portal-intro__grid"></div>
   <div class="portal-intro__inner">
-    <h1 class="portal-intro__heading">${HERO_HEADING}</h1>
+    <h1 class="portal-intro__heading">${INTRO_HEADING}</h1>
     <span class="portal-intro__mark">
       <img class="portal-intro__mark-img" src="${brand.icon}" alt="" />
     </span>
@@ -74,7 +75,7 @@ const heroMarkup = (brand) => /* html */ `
 /**
  * Wire up and run the scroll-driven intro. Self-manages listeners and tears
  * everything down on completion. Assumes cards are already built into `grid`.
- * @param {object} opts
+ * @param {object} opts  Intro configuration.
  * @param {HTMLElement} opts.grid  the .portal-grid element
  * @param {HTMLElement[]} opts.cards  ordered <brand-card> list to stagger
  * @param {{name:string, icon:string, primary?:string}} opts.brand  active brand

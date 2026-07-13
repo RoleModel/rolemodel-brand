@@ -133,12 +133,12 @@ html.is-embedded .imagery-hero {
 
 .image-viewer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(3, minmax(320px, 1fr));
   gap: var(--space-2);
 
   .image-viewer__tile {
     position: relative;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 1 / 1;
     border: 0;
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -291,7 +291,7 @@ body.lightbox-open {
   }
 
   .image-viewer {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .lightbox {

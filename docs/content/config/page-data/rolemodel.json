@@ -62,11 +62,18 @@
       "span": { "c": 2, "r": 2 }
     },
     {
+      "hex": "#2A84F8",
+      "cmyk": "C81 M54 Y3 K0",
+      "name": "RM Bright Blue",
+      "group": "core",
+      "span": { "c": 1, "r": 3 }
+    },
+    {
       "hex": "#193C64",
-      "cmyk": "C98 M80 Y35 K23",
+      "cmyk": "C75 M53 Y0 K0",
       "name": "RM Dark Blue",
       "group": "core",
-      "span": { "c": 2, "r": 1 }
+      "span": { "c": 2, "r": 2 }
     },
     {
       "hex": "#A998C9",
@@ -122,21 +129,21 @@
       "cmyk": "C2 M0 Y51 K0",
       "name": "Bright Yellow",
       "group": "accent",
-      "span": { "c": 1, "r": 1 }
+      "span": { "c": 2, "r": 2 }
     },
     {
       "hex": "#04242B",
       "cmyk": "C89 M66 Y59 K68",
       "name": "Dark Blue Green",
       "group": "dark",
-      "span": { "c": 2, "r": 1 }
+      "span": { "c": 2, "r": 2 }
     },
     {
       "hex": "#27434D",
       "cmyk": "C84 M61 Y52 K40",
       "name": "Blue Green",
       "group": "dark",
-      "span": { "c": 2, "r": 1 }
+      "span": { "c": 2, "r": 2 }
     }
   ],
   "fonts": [

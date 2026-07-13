@@ -6,15 +6,15 @@
   "logoWhite": "logos/rolemodel/RMS-logo-White.svg",
   "name": "RoleModel Software",
   "palette": [
+    "#193c64",
     "#2a84f8",
     "#a998c9",
     "#fcf496",
     "#ffcd74",
     "#87d4e9",
     "#04242b",
-    "#193c64",
     "#3a1f47"
   ],
-  "primary": "#2a84f8",
+  "primary": "#3A70B3",
   "zip": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip"
 }

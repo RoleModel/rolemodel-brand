@@ -37,9 +37,6 @@ export const BRANDS = {
     logo: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad.svg`,
     logoWhite: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite.svg`,
     name: "LightningCAD",
-    // Grid palette pulls from the product-family sub-brand colors (below) so
-    // the bento reads as the full LightningCAD system, not one flat blue.
-    // Brand blue anchors the logo card; a deep navy closes the sequence.
     palette: [
       "#2a83f7",
       "#ffac08",

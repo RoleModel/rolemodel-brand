@@ -192,7 +192,7 @@
     .brand-card__mini {
       display: grid;
       align-items: center;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto minmax(0, 1fr);
     }
     .brand-card__check {
       display: none;
@@ -257,5 +257,11 @@
         grid-column: span 3;
       }
     }
+  }
+}
+
+.portal-grid--open {
+  .brand-card--mini {
+    flex: 1 0 auto;
   }
 }
