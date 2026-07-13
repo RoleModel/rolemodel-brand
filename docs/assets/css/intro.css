@@ -36,6 +36,7 @@
   pointer-events: none; /* never intercepts clicks meant for the cards */
   /* Fades out as the bento assembles. */
   opacity: clamp(0, calc(1 - var(--enter) / var(--intro-hero-fade)), 1);
+  height: 100vh;
 }
 
 /* Hairline grid aligned to the bento's 12 columns: a line every
