@@ -40,6 +40,8 @@
   overflow: hidden;
   gap: 0;
   padding: 0;
+  
+  .brand-card {display: none;}
 }
 
 .portal-grid.portal-grid--open.portal-grid--brands-open {
@@ -82,7 +84,7 @@
 .portal-grid--open .portal-panel {
   order: 4;
   flex: 1 1 100%;
-  height: calc(100dvh - var(--row-mini));
+  height: 100dvh;
   min-height: 0;
   /* min-width:0 stops the panel's content min-content from stretching the
      grid item past its 1 / -1 track, which would push it under the clipped

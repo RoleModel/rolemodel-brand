@@ -54,6 +54,14 @@ const wireMotionIcon = (svg, hoverTarget) => {
   const handleDot1 = svg.querySelector(".handle-dot-1");
   const handleDot2 = svg.querySelector(".handle-dot-2");
 
+  // The current motion icon (icons.js) is a single morphing `.curve` path —
+  // the traveler-dot + control-handle rig this function drives isn't in that
+  // markup. Bail before wiring anything so GSAP is never handed a null target;
+  // the hover animation is the `.curve` morph wired by wireMorphTargets.
+  if (!handleLine1 || !handleLine2 || !handleDot1 || !handleDot2) {
+    return;
+  }
+
   let travel = null;
   if (traveler && typeof MotionPathPlugin !== "undefined") {
     gsap.registerPlugin(MotionPathPlugin);
@@ -149,7 +157,6 @@ export const initIconAnimations = (tileIcon, slug) => {
       const [a, b, c] = [".color-a", ".color-b", ".color-c"].map((s) =>
         svg.querySelector(s)
       );
-      const spin = svg.querySelector(".colors");
       const hover = gsap.timeline({
         defaults: { duration: 0.8, ease: "sine.inOut" },
         paused: true,
@@ -186,8 +193,7 @@ export const initIconAnimations = (tileIcon, slug) => {
       hover
         .to(a, { fill: "var(--rolemodel-purple)", x: -6, y: -7 }, 0)
         .to(b, { fill: "var(--rolemodel-cyan)", x: 7, y: -4 }, 0)
-        .to(c, { fill: "var(--rolemodel-yellow)", x: -3, y: 7 }, 0)
-        .to(spin, { rotation: 360, transformOrigin: "50% 50%" }, 0);
+        .to(c, { fill: "var(--rolemodel-yellow)", x: -3, y: 7 }, 0);
       hoverTarget.addEventListener("mouseenter", () => hover.play());
       hoverTarget.addEventListener("mouseleave", () => {
         hover.pause();
@@ -337,40 +343,52 @@ export const initIconAnimations = (tileIcon, slug) => {
     }
 
     case "visual-style": {
+      // The shape itself morphs (hex-ring → star) via wireMorphTargets. Here we
+      // add a slow spin to the ring and a pulse to the core — but only for the
+      // elements that actually exist in the current markup (there is no .core),
+      // so GSAP never receives a null target.
       const ring = svg.querySelector(".hex-ring");
       const core = svg.querySelector(".core");
-      const ringSpin = gsap.to(ring, {
-        duration: 3,
-        ease: "none",
-        paused: true,
-        repeat: -1,
-        rotation: 360,
-        transformOrigin: "center",
-      });
-      const corePulse = gsap.to(core, {
-        duration: 0.6,
-        ease: "sine.inOut",
-        opacity: 1,
-        paused: true,
-        repeat: -1,
-        scale: 1.15,
-        transformOrigin: "center",
-        yoyo: true,
-      });
+      const ringSpin = ring
+        ? gsap.to(ring, {
+            duration: 3,
+            ease: "none",
+            paused: true,
+            repeat: -1,
+            rotation: 360,
+            transformOrigin: "center",
+          })
+        : null;
+      const corePulse = core
+        ? gsap.to(core, {
+            duration: 0.6,
+            ease: "sine.inOut",
+            opacity: 1,
+            paused: true,
+            repeat: -1,
+            scale: 1.15,
+            transformOrigin: "center",
+            yoyo: true,
+          })
+        : null;
       hoverTarget.addEventListener("mouseenter", () => {
-        ringSpin.play();
-        corePulse.play();
+        ringSpin?.play();
+        corePulse?.play();
       });
       hoverTarget.addEventListener("mouseleave", () => {
-        ringSpin.pause();
-        corePulse.pause();
-        gsap.to(ring, { duration: 0.3, ease: "power2.out", rotation: 0 });
-        gsap.to(core, {
-          duration: 0.3,
-          ease: "power2.out",
-          opacity: 0.9,
-          scale: 1,
-        });
+        ringSpin?.pause();
+        corePulse?.pause();
+        if (ring) {
+          gsap.to(ring, { duration: 0.3, ease: "power2.out", rotation: 0 });
+        }
+        if (core) {
+          gsap.to(core, {
+            duration: 0.3,
+            ease: "power2.out",
+            opacity: 0.9,
+            scale: 1,
+          });
+        }
       });
       break;
     }
