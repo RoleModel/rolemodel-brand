@@ -19,6 +19,7 @@
 import { BRAND_ORDER, BRANDS, CATEGORIES } from "./modules/brand-data.js";
 import { initIconAnimations } from "./modules/icon-animations.js";
 import { renderIcon } from "./modules/icons.js";
+import { setupIntro } from "./modules/intro.js";
 import { readableTextColor } from "./modules/page-utils.js";
 import "./components/brand-card.js";
 
@@ -72,7 +73,30 @@ class OnePage {
     this.wireScrollspy();
     this.wireBackToTop();
     this.paintBrand();
+    this.playIntro();
     this.restoreFromHash();
+  }
+
+  // ---- First-load intro -----------------------------------------------------
+  // Same scroll-driven bento assembly as the portal (modules/intro.js +
+  // css/intro.css). Skipped when a section is deep-linked (the reader asked
+  // for content, not theater) and under prefers-reduced-motion. The sticky
+  // header hides while .is-introing is set and slides in when it clears
+  // (see one-page.css).
+  playIntro() {
+    const hash = window.location.hash.replace("#", "");
+    const deepLinked = CATEGORIES.some((c) => c.slug === hash);
+    const reducedMotion = matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (deepLinked || reducedMotion) {
+      return;
+    }
+    setupIntro({
+      brand: BRANDS[this.activeBrand],
+      cards: [...this.cards.values()],
+      grid: this.root.querySelector("#op-grid"),
+    });
   }
 
   build() {

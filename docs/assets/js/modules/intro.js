@@ -152,8 +152,14 @@ export const setupIntro = ({ grid, cards, brand }) => {
     if (done) {
       return;
     }
-    const max = root.scrollHeight - window.innerHeight;
-    const raw = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+    // Progress is measured against the intro's own runway (everything up to
+    // the spacer's bottom edge), NOT the full document height — on the
+    // single-page layout thousands of pixels of sections live below the
+    // spacer. On the plain portal the spacer is the last element, so this
+    // is equivalent to the old scrollHeight math.
+    const runwayBottom = window.scrollY + spacer.getBoundingClientRect().bottom;
+    const max = runwayBottom - window.innerHeight;
+    const raw = max > 0 ? clamp(window.scrollY / max, 0, 1) : 1;
     root.style.setProperty(ENTER_PROP, raw.toFixed(4));
     if (raw >= FINALIZE_AT) {
       finalize();

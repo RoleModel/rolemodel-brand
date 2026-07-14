@@ -38,9 +38,20 @@ html {
   align-items: center;
   gap: var(--space-3) var(--space-5);
   padding: var(--space-3) var(--space-5);
-  background-color: var(--rolemodel-dark);
+  background-color: var(--op-header-veil);
   border-bottom: 1px solid var(--white-a12);
   color: var(--paper);
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+/* During the first-load intro the hero owns the viewport — the header stays
+   out of frame and slides in once the bento has assembled. */
+.is-introing .op-header {
+  transform: translateY(-100%);
+}
+
+.is-introing .op-top {
+  display: none;
 }
 
 .op-header__title {
