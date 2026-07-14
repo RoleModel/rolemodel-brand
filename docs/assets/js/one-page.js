@@ -101,7 +101,7 @@ class OnePage {
 
   build() {
     const switcherPills = BRAND_ORDER.map(
-      (slug) => /* html */ `
+      (slug) => `
         <button
           class="op-switcher__pill${slug === this.activeBrand ? " op-switcher__pill--active" : ""}"
           data-brand="${slug}"
@@ -110,12 +110,12 @@ class OnePage {
     ).join("");
 
     const navLinks = CATEGORIES.map(
-      (c) => /* html */ `
+      (c) => `
         <a class="op-nav__link" href="#${c.slug}" data-section="${c.slug}">${navLabel(c)}</a>`
     ).join("");
 
     const sections = CATEGORIES.map(
-      (c) => /* html */ `
+      (c) => `
         <section class="op-section" id="${c.slug}" aria-label="${c.name} guidelines">
           <iframe
             class="op-section__frame"
@@ -129,7 +129,7 @@ class OnePage {
         </section>`
     ).join("");
 
-    this.root.setHTMLUnsafe(/* html */ `
+    this.root.setHTMLUnsafe(`
       <header class="op-header">
         <span class="op-header__title">Brand Guidelines</span>
         <div class="op-switcher" role="navigation" aria-label="Switch brand">

@@ -41,11 +41,18 @@ html {
   background-color: var(--op-header-veil);
   border-bottom: 1px solid var(--white-a12);
   color: var(--paper);
-  transition: transform var(--duration-slow) var(--ease-out);
 }
 
 /* During the first-load intro the hero owns the viewport — the header stays
-   out of frame and slides in once the bento has assembled. */
+   out of frame and slides in once the bento has assembled. The transition
+   only exists OUTSIDE the intro: while .is-introing is set the hide is
+   instant, so the header can never be caught mid-slide on first paint;
+   removing the class at finalize re-arms the transition and animates the
+   reveal. */
+html:not(.is-introing) .op-header {
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
 .is-introing .op-header {
   transform: translateY(-100%);
 }
