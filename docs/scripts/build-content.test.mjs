@@ -70,7 +70,7 @@ test("BRANDS content round-trips through the real generator", async () => {
   const { BRANDS, BRAND_ORDER, CATEGORIES } =
     await import("../assets/js/modules/brand-data.js");
   assert.deepEqual(BRAND_ORDER, ["rolemodel", "academy", "lightningcad"]);
-  assert.equal(BRANDS.rolemodel.primary, "#2a84f8");
+  assert.equal(BRANDS.rolemodel.primary, "#3A70B3");
   assert.equal(BRANDS.lightningcad.subBrands.length, 7);
   assert.equal(CATEGORIES.length, 8);
 });

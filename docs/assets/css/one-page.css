@@ -87,8 +87,9 @@ html {
 
 .op-switcher__pill--active,
 .op-switcher__pill--active:hover {
-  background: var();
-  color: var(--paper);
+  /* Brand primary; both vars are set per brand in one-page.js paintBrand() */
+  background: var(--page-accent);
+  color: var(--page-accent-ink, var(--paper));
   opacity: 1;
 }
 

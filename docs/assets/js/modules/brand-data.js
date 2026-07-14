@@ -1,12 +1,15 @@
 // GENERATED FILE — do not edit directly.
 // Source: docs/content/** — edit there, then push. CI regenerates this file.
 
-export const BRAND_ASSET_BASE =
-  "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
+export const BRAND_ASSET_BASE = "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
 
 // Display order for the brand tiles / nav. Kept explicit so the BRANDS object
 // can stay alphabetized (lint) without affecting the order the UI renders in.
-export const BRAND_ORDER = ["rolemodel", "academy", "lightningcad"];
+export const BRAND_ORDER = [
+  "rolemodel",
+  "academy",
+  "lightningcad",
+];
 
 export const BRANDS = {
   academy: {

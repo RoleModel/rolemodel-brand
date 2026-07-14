@@ -19,6 +19,7 @@
 import { BRAND_ORDER, BRANDS, CATEGORIES } from "./modules/brand-data.js";
 import { initIconAnimations } from "./modules/icon-animations.js";
 import { renderIcon } from "./modules/icons.js";
+import { readableTextColor } from "./modules/page-utils.js";
 import "./components/brand-card.js";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
@@ -214,6 +215,13 @@ class OnePage {
   paintBrand() {
     const brand = BRANDS[this.activeBrand];
     document.documentElement.style.setProperty("--font-active", brand.font);
+    // Active switcher pill wears the brand primary (see one-page.css);
+    // derive its text color so contrast holds for every brand.
+    document.documentElement.style.setProperty("--page-accent", brand.primary);
+    document.documentElement.style.setProperty(
+      "--page-accent-ink",
+      readableTextColor(brand.primary)
+    );
     document.title = `${brand.name} — Brand Guidelines`;
 
     for (const pill of this.root.querySelectorAll(".op-switcher__pill")) {
