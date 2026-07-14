@@ -99,7 +99,7 @@
 
 @media (max-width: 900px) {
   .portal-grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: minmax(160px, auto);
+    display: flex;
+    flex-direction: column;
   }
 }

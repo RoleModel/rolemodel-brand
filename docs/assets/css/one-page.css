@@ -1,0 +1,223 @@
+/* -----------------------------------------------------------------------
+   One-page layout — single scrolling document of every guideline section.
+
+   Structure:
+     .op-header   sticky bar: title, brand switcher, section nav (scrollspy)
+     .op-grid     the existing portal bento (<brand-card> grid); brand cards
+                  switch the brand, category cards jump to their section
+     .op-section  one per category; contains an auto-height stacked iframe
+   ----------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.op-body {
+  /* Component constants — declared once, consumed below. */
+  --op-header-h: calc(var(--nav-h) + var(--space-2));
+  --op-frame-preheight: 70vh;
+
+  background: var(--paper);
+  min-height: 100vh;
+}
+
+/* ---- Sticky header ---- */
+
+.op-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--rolemodel-dark);
+  border-bottom: 1px solid var(--white-a12);
+  color: var(--paper);
+}
+
+.op-header__title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+}
+
+/* ---- Brand switcher (always in view) ---- */
+
+.op-switcher {
+  display: inline-flex;
+  border: 1px solid var(--white-a25);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.op-switcher__pill {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--paper);
+  opacity: var(--emphasis-faint);
+  white-space: nowrap;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.op-switcher__pill + .op-switcher__pill {
+  border-left: 1px solid var(--white-a12);
+}
+
+.op-switcher__pill:hover {
+  opacity: 1;
+  background: var(--white-a12);
+}
+
+.op-switcher__pill--active,
+.op-switcher__pill--active:hover {
+  background: var();
+  color: var(--paper);
+  opacity: 1;
+}
+
+/* ---- Section nav (scrollspy) ---- */
+
+.op-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-inline-start: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+
+@media (width <= 1300px) {
+  .op-nav {
+    margin-inline-start: 0;
+  }
+}
+
+.op-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.op-nav__link {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--paper);
+  white-space: nowrap;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.op-nav__link:hover {
+  opacity: 1;
+  background: var(--white-a12);
+}
+
+.op-nav__link--active {
+  opacity: 1;
+  background: var(--white-a12);
+  box-shadow: inset 0 0 0 1px var(--white-a25);
+}
+
+/* ---- Landing bento (portal-grid reuse) ---- */
+
+/* The portal grid fills the viewport on the homepage; here it shares the
+   viewport with the sticky header, so subtract it to avoid a scrollbar on
+   an "empty" landing. */
+.op-grid {
+  min-height: calc(100dvh - var(--op-header-h));
+}
+
+/* ---- Sections ---- */
+
+.op-section {
+  /* Anchor jumps land below the sticky header. */
+  scroll-margin-top: calc(var(--op-header-h) + var(--space-1));
+  border-top: 1px solid var(--border-color);
+}
+
+.op-section__frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  /* Pre-height default so lazy iframes below the fold stay below it. */
+  height: var(--op-frame-preheight);
+  transition: height var(--duration-base) var(--ease-out);
+}
+
+/* ---- Back to top ---- */
+
+.op-top {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: var(--z-close);
+  width: var(--space-10);
+  height: var(--space-10);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--ink-a15);
+  background: var(--paper);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(var(--space-2));
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.op-top--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+@media (width <= 500px) {
+  .op-header {
+    display: grid;
+  }
+  .op-switcher {
+    display: grid;
+  }
+}
+
+@media (max-width: 720px) {
+  .op-header {
+    gap: var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .op-header__title {
+    font-size: var(--text-lg);
+  }
+
+  .op-nav {
+    order: 3;
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .op-section {
+    scroll-margin-top: calc(var(--nav-h) + var(--space-10));
+  }
+}

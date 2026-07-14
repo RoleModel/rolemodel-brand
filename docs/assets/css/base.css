@@ -100,3 +100,42 @@ html.is-embedded .page-header {
     animation: none;
   }
 }
+
+/* ============================================================
+   Stack mode — page is one section of the single-page layout
+   (one-page.html). The parent sizes the iframe to the content
+   height, so the page must never scroll internally, and the
+   embed entrance animation is dropped (the parent owns motion).
+   ============================================================ */
+html.is-stacked {
+  /* Fixed stand-ins for viewport-relative hero heights (see below). */
+  --stack-hero-h: 620px;
+  --stack-hero-min-h: 480px;
+
+  overflow: hidden;
+}
+
+html.is-stacked body {
+  animation: none;
+  overflow: hidden;
+}
+
+html.is-stacked .page-header {
+  padding-top: var(--space-8);
+}
+
+/* Viewport-relative (dvh/vh) heights are poison in stack mode: the iframe
+   is sized to the content, so content sized to the viewport feeds back and
+   inflates the section without bound. Pin those blocks to fixed heights.
+   (.is-stacked.is-embedded outranks the pages' .is-embedded overrides.) */
+html.is-stacked.is-embedded .imagery-hero {
+  height: var(--stack-hero-h);
+}
+
+html.is-stacked.is-embedded .visual-style-hero {
+  min-height: var(--stack-hero-min-h);
+}
+
+html.is-stacked.is-embedded .palette {
+  min-height: 0;
+}

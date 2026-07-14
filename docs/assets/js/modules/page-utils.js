@@ -8,10 +8,47 @@ import { PAGE_DATA } from "./page-data.js";
 export const isEmbedded = () =>
   new URLSearchParams(window.location.search).get("embed") === "1";
 
+// True when the page is one section of the single-page stacked layout
+// (one-page.html) — the parent sizes this iframe to the content height,
+// so the page reports its height and never scrolls internally.
+export const isStacked = () =>
+  new URLSearchParams(window.location.search).get("stack") === "1";
+
 // Flag the document as early as possible so embed CSS applies before paint.
 if (isEmbedded()) {
   document.documentElement.classList.add("is-embedded");
 }
+if (isStacked()) {
+  document.documentElement.classList.add("is-stacked");
+}
+
+// ---- Stack mode: report content height to the parent page ----
+// one-page.html listens for these messages and sets the iframe height, so
+// the section participates in the parent's normal document flow.
+const startHeightReporting = (categorySlug) => {
+  // body.scrollHeight, not documentElement's: entrance transforms and
+  // absolutely-positioned decorations can permanently inflate the html
+  // element's scroll bounds past the real content (overflow is hidden in
+  // stack mode, so that phantom space would render as dead whitespace).
+  const post = () => {
+    const height = Math.ceil(document.body.scrollHeight);
+    window.parent.postMessage(
+      { height, slug: categorySlug, type: "rm-section-height" },
+      "*"
+    );
+  };
+  const observer = new ResizeObserver(post);
+  observer.observe(document.documentElement);
+  observer.observe(document.body);
+  // Fonts, images, and settling entrance animations change height without
+  // always resizing the observed border boxes — belt-and-braces re-posts.
+  window.addEventListener("load", post);
+  document.fonts?.ready?.then(post);
+  for (const ms of [600, 1600, 3200]) {
+    setTimeout(post, ms);
+  }
+  post();
+};
 
 // Read ?brand= from URL, fallback to stored value or 'rolemodel'
 export const getActiveBrandSlug = () => {
@@ -336,6 +373,10 @@ export const initPage = (categorySlug) => {
   if (navRoot) {
     navRoot.setHTMLUnsafe(buildNavHTML(slug, brand.name || "Brand"));
     wireNavSwitcher(slug, categorySlug);
+  }
+
+  if (isStacked()) {
+    startHeightReporting(categorySlug);
   }
 
   revealWhenBuilt();

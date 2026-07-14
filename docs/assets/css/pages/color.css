@@ -112,7 +112,7 @@
 
 /* ---- Product family swatches (sub-brands) ---- */
 .subpalette {
-  padding: 0 var(--grid-gap) var(--space-10);
+  padding: 0 var(--space-8) var(--space-10);
 }
 
 .subpalette__grid {
