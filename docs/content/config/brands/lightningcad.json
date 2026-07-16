@@ -60,5 +60,6 @@
       "name": "Railing Designer"
     }
   ],
+  "subBrandZip": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
   "zip": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip"
 }

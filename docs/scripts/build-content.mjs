@@ -160,6 +160,7 @@ const buildBrandData = () => {
         logo: assetUrl(sb.logo),
         name: sb.name,
       }));
+      entry.subBrandZip = config.subBrandZip ?? "";
     }
     brands[slug] = entry;
   }

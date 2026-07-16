@@ -74,7 +74,7 @@ class OnePage {
     this.wireBackToTop();
     this.paintBrand();
     this.playIntro();
-    this.restoreFromHash();
+    OnePage.restoreFromHash();
   }
 
   // ---- First-load intro -----------------------------------------------------
@@ -359,7 +359,7 @@ class OnePage {
 
   // ---- deep-linking -----------------------------------------------------------
 
-  restoreFromHash() {
+  static restoreFromHash() {
     const slug = window.location.hash.replace("#", "");
     if (!CATEGORIES.some((c) => c.slug === slug)) {
       return;

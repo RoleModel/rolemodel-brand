@@ -43,7 +43,7 @@ const startHeightReporting = (categorySlug) => {
   // Fonts, images, and settling entrance animations change height without
   // always resizing the observed border boxes — belt-and-braces re-posts.
   window.addEventListener("load", post);
-  document.fonts?.ready?.then(post);
+  document.fonts?.addEventListener("loadingdone", post);
   for (const ms of [600, 1600, 3200]) {
     setTimeout(post, ms);
   }

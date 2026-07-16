@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/index.css?v=6c4cd6d5" />
+    <link rel="stylesheet" href="../assets/css/index.css?v=32d600b5" />
     <script>
       (() => {
         const de = document.documentElement;
@@ -50,6 +50,7 @@
         <span class="section-label" id="family-heading">Product Family</span>
         <p class="section-note" id="family-note"></p>
         <div class="subbrand-grid" id="subbrand-grid"></div>
+        <div class="family-actions reveal" id="family-actions"></div>
       </section>
 
       <section aria-labelledby="rules-heading">
@@ -142,19 +143,33 @@
           subBrands
             .map(
               (sub) => /* html */ `
-    <div class="subbrand-card">
+    <a class="subbrand-card" href="${sub.logo}" download target="_blank" rel="noopener"
+       aria-label="Download ${sub.name} logo (SVG)">
       <div class="subbrand-card__stage">
         <img class="subbrand-card__logo" src="${sub.logo}" alt="${sub.name}" loading="lazy"/>
       </div>
       <div class="subbrand-card__meta">
         <span class="subbrand-card__dot" style="background:${sub.color}"></span>
         <span class="subbrand-card__name">${sub.name}</span>
+        <span class="subbrand-card__download" aria-hidden="true">
+          ${downloadIcon}
+        </span>
       </div>
-    </div>
+    </a>
   `
             )
             .join("")
         );
+
+        if (brand.subBrandZip) {
+          document.querySelector("#family-actions").setHTMLUnsafe(/* html */ `
+    <a href="${brand.subBrandZip}" target="_blank" rel="noopener"
+       class="download-button download-button--accent">
+      ${downloadIcon}
+      Download All Designer Logos (.zip)
+    </a>
+  `);
+        }
       }
 
       // ---- Usage rules ----

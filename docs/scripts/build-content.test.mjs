@@ -72,5 +72,9 @@ test("BRANDS content round-trips through the real generator", async () => {
   assert.deepEqual(BRAND_ORDER, ["rolemodel", "academy", "lightningcad"]);
   assert.equal(BRANDS.rolemodel.primary, "#3A70B3");
   assert.equal(BRANDS.lightningcad.subBrands.length, 7);
+  assert.equal(
+    BRANDS.lightningcad.subBrandZip,
+    "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip"
+  );
   assert.equal(CATEGORIES.length, 8);
 });
