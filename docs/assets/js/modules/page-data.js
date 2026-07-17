@@ -83,10 +83,10 @@ const ROLEMODEL_VISUAL_STYLE_IMAGERY_FILES = [
   "iterative-value.png",
   "agile-approach.png",
   "craftsman-poster.avif",
-  "poster-style.png",
+  "poster-style.jpeg",
   "approach-diagram.avif",
-  "poster-style-2.png",
-  "working-genius.png",
+  "poster-style-2.jpeg",
+  "working-genius.jpeg",
 ];
 
 export const PAGE_DATA = {
