@@ -46,7 +46,7 @@ export const BRANDS = {
     gridRows: 2,
     heroColor: "#2a83f7",
     icon: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCAD-Icon.svg`,
-    logo: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad.svg`,
+    logo: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad@2x.png`,
     logoWhite: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite.svg`,
     name: "LightningCAD",
     palette: [
@@ -92,7 +92,7 @@ export const BRANDS = {
       },
       {
         color: "#8D3DE3",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/RailingDesigner.svg`,
+        logo: `${BRAND_ASSET_BASE}/logos/designers/RailingDesigner@2x.png`,
         name: "Railing Designer",
       },
     ],

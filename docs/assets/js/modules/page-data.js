@@ -299,8 +299,8 @@ export const PAGE_DATA = {
         bg: "#FAFAF7",
         label: "CAD logo — light backgrounds",
         pngHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad.svg`,
+        src: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad@2x.png`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadBlack.svg`,
       },
       {
         bg: "#032A5E",

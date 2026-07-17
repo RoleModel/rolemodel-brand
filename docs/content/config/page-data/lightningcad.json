@@ -46,8 +46,8 @@
     {
       "label": "CAD logo — light backgrounds",
       "bg": "#FAFAF7",
-      "src": "logos/lightningcad/LightningCad.svg",
-      "svgHref": "logos/lightningcad/LightningCad.svg",
+      "src": "logos/lightningcad/LightningCad@2x.png",
+      "svgHref": "logos/lightningcad/LightningCadBlack.svg",
       "pngHref": "logos/lightningcad/LightningCad@2x.png"
     },
     {

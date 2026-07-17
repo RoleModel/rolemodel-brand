@@ -20,12 +20,12 @@ import {
   BRAND_ORDER,
   BRANDS,
   CATEGORIES,
-} from "./modules/brand-data.js?v=0271783e";
-import { initIconAnimations } from "./modules/icon-animations.js?v=0271783e";
-import { renderIcon } from "./modules/icons.js?v=0271783e";
-import { setupIntro } from "./modules/intro.js?v=0271783e";
-import { readableTextColor } from "./modules/page-utils.js?v=0271783e";
-import "./components/brand-card.js?v=0271783e";
+} from "./modules/brand-data.js?v=1454729e";
+import { initIconAnimations } from "./modules/icon-animations.js?v=1454729e";
+import { renderIcon } from "./modules/icons.js?v=1454729e";
+import { setupIntro } from "./modules/intro.js?v=1454729e";
+import { readableTextColor } from "./modules/page-utils.js?v=1454729e";
+import "./components/brand-card.js?v=1454729e";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 const DEFAULT_BRAND = "rolemodel";

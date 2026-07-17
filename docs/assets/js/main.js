@@ -24,11 +24,11 @@ import {
   BRANDS,
   BRAND_ORDER,
   CATEGORIES,
-} from "./modules/brand-data.js?v=0271783e";
-import { initIconAnimations } from "./modules/icon-animations.js?v=0271783e";
-import { renderIcon } from "./modules/icons.js?v=0271783e";
-import { ENTRY_VECTORS, setupIntro } from "./modules/intro.js?v=0271783e";
-import "./components/brand-card.js?v=0271783e";
+} from "./modules/brand-data.js?v=1454729e";
+import { initIconAnimations } from "./modules/icon-animations.js?v=1454729e";
+import { renderIcon } from "./modules/icons.js?v=1454729e";
+import { ENTRY_VECTORS, setupIntro } from "./modules/intro.js?v=1454729e";
+import "./components/brand-card.js?v=1454729e";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 

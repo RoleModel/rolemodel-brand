@@ -2,7 +2,7 @@
   "font": "'DM Sans', sans-serif",
   "heroColor": "#2a83f7",
   "icon": "logos/lightningcad/LightningCAD-Icon.svg",
-  "logo": "logos/lightningcad/LightningCad.svg",
+  "logo": "logos/lightningcad/LightningCad@2x.png",
   "logoWhite": "logos/lightningcad/LightningCadWhite.svg",
   "name": "LightningCAD",
   "palette": [
@@ -50,7 +50,7 @@
     {
       "slug": "railing-designer",
       "color": "#8D3DE3",
-      "logo": "logos/designers/RailingDesigner.svg",
+      "logo": "logos/designers/RailingDesigner@2x.png",
       "name": "Railing Designer"
     }
   ],
