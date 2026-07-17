@@ -211,7 +211,7 @@
 
   /* ============ Intro (scroll-driven bento assembly) ============ */
   /* Scroll distance below the pinned hero that drives assembly (0 → 1). */
-  --intro-scroll: 130dvh;
+  --intro-scroll: 110dvh;
   /* How much smaller each card starts before flying in (0 = full size). */
   --intro-enter-scale: 0.32;
   /* Card opacity at the start of its entry. */
