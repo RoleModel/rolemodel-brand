@@ -1,15 +1,12 @@
 // GENERATED FILE — do not edit directly.
 // Source: docs/content/** — edit there, then push. CI regenerates this file.
 
-export const BRAND_ASSET_BASE = "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
+export const BRAND_ASSET_BASE =
+  "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
 
 // Display order for the brand tiles / nav. Kept explicit so the BRANDS object
 // can stay alphabetized (lint) without affecting the order the UI renders in.
-export const BRAND_ORDER = [
-  "rolemodel",
-  "academy",
-  "lightningcad",
-];
+export const BRAND_ORDER = ["rolemodel", "academy", "lightningcad"];
 
 export const BRANDS = {
   academy: {
@@ -32,12 +29,7 @@ export const BRANDS = {
     ],
     primary: "#00b871",
     sectionSpans: {},
-    sections: [
-      "logo",
-      "color",
-      "imagery",
-      "typography",
-    ],
+    sections: ["logo", "color", "imagery", "typography"],
     tagline: "Building future leaders through hands on experience",
     zip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
   },
@@ -64,11 +56,9 @@ export const BRANDS = {
       color: 6,
       logo: 6,
     },
-    sections: [
-      "logo",
-      "color",
-    ],
-    subBrandZip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
+    sections: ["logo", "color"],
+    subBrandZip:
+      "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
     subBrands: [
       {
         color: "#07BBC2",
