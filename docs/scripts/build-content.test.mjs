@@ -79,11 +79,12 @@ test("BRANDS content round-trips through the real generator", async () => {
   ]);
   assert.deepEqual(BRANDS.lightningcad.sections, ["logo", "color"]);
   assert.equal(BRANDS.academy.gridRows, 2);
-  assert.deepEqual(BRANDS.academy.sectionSpans, {
-    imagery: 6,
-    typography: 6,
+  assert.deepEqual(BRANDS.academy.sectionSpans, {});
+  assert.equal(BRANDS.lightningcad.gridRows, 2);
+  assert.deepEqual(BRANDS.lightningcad.sectionSpans, {
+    color: 6,
+    logo: 6,
   });
-  assert.equal(BRANDS.lightningcad.gridRows, 1);
   assert.equal(BRANDS.lightningcad.subBrands.length, 5);
   assert.equal(
     BRANDS.lightningcad.subBrands.some(

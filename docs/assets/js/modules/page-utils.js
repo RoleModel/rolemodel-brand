@@ -1,7 +1,7 @@
 // ---- Shared utilities for brand page rendering ----
 
-import { BRANDS, CATEGORIES } from "./brand-data.js";
-import { PAGE_DATA } from "./page-data.js";
+import { BRANDS, CATEGORIES } from "./brand-data.js?v=0271783e";
+import { PAGE_DATA } from "./page-data.js?v=0271783e";
 
 // True when the page is loaded inside a <brand-card> iframe on the
 // homepage — the card supplies navigation, so the page hides its own.

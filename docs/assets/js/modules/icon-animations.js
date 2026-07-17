@@ -1,4 +1,4 @@
-import { ICONS } from "./icons.js";
+import { ICONS } from "./icons.js?v=0271783e";
 
 // Icon motion, powered by GSAP (+ MorphSVGPlugin for real shape morphs).
 // Nothing animates at rest — every icon starts static and its motion is

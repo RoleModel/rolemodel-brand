@@ -15,8 +15,8 @@
    under prefers-reduced-motion — see main.js.
    ----------------------------------------------------------------------- */
 
-import { clamp } from "./page-utils.js";
-import { INTRO_HEADING } from "./site-content.js";
+import { clamp } from "./page-utils.js?v=0271783e";
+import { INTRO_HEADING } from "./site-content.js?v=0271783e";
 
 const ENTER_PROP = "--enter";
 const ACCENT_PROP = "--intro-accent";
@@ -140,6 +140,7 @@ export const setupIntro = ({ grid, cards, brand }) => {
     const max = runwayBottom - window.innerHeight;
     const raw = max > 0 ? clamp(window.scrollY / max, 0, 1) : 1;
     root.style.setProperty(ENTER_PROP, raw.toFixed(4));
+    root.classList.toggle("is-intro-interactive", raw >= SETTLE_BY);
     root.classList.toggle("is-intro-settled", raw >= SETTLED_AT);
   };
 

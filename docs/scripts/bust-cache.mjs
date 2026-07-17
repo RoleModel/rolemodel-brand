@@ -11,9 +11,9 @@
 //      <link href=".../index.css"> in every HTML page.
 //
 // JS: a single hash over the whole assets/js module graph is stamped onto the
-//   <script src=".../main.js"> in index.html. Any JS change busts main.js;
-//   the module imports inside main.js resolve by path (the ?v is ignored), so
-//   nothing breaks. (JS is small — over-busting the whole graph is fine.)
+//   HTML entry point and every relative JS import. Any JS change therefore
+//   invalidates both one-page.js and its imported data/components instead of
+//   allowing a stale nested module to survive the entry-point refresh.
 //
 // Idempotent: existing ?v= values are stripped before re-stamping. Run before
 // committing CSS/JS changes:  node docs/scripts/bust-cache.mjs  (npm run cache:bust)
@@ -37,8 +37,10 @@ const stripVersion = (url) => url.replace(/\?v=[^"')]*$/u, "");
 const IMPORT_RE = /@import url\("(?<url>[^"]+?)"\)/gu;
 const LINK_RE =
   /(?<pre>href=")(?<path>[^"]*?index\.css)(?:\?v=[^"]*)?(?<post>")/gu;
-const MAIN_JS_RE =
-  /(?<pre>src=")(?<path>[^"]*?main\.js)(?:\?v=[^"]*)?(?<post>")/gu;
+const ENTRY_JS_RE =
+  /(?<pre>src=")(?<path>[^"]*?(?:main|one-page)\.js)(?:\?v=[^"]*)?(?<post>")/gu;
+const JS_IMPORT_RE =
+  /(?<pre>(?:from\s+|import\s+)["'])(?<path>\.{1,2}\/[^"']+?\.js)(?:\?v=[^"']*)?(?<post>["'])/gu;
 
 const listFilesDeep = (dir) => {
   const found = [];
@@ -66,12 +68,28 @@ const stampCssImports = () => {
   return shortHash(Buffer.from(stamped));
 };
 
-// JS: one hash over the entire module graph so any JS edit busts main.js.
-const jsBundleVersion = () => {
-  const buffers = listFilesDeep(JS_DIR)
-    .filter((file) => file.endsWith(".js"))
-    .map((file) => readFileSync(file));
-  return shortHash(Buffer.concat(buffers));
+// Normalize existing versions before hashing so repeated runs are stable, then
+// stamp the resulting graph version onto every relative module edge.
+const stampJsGraph = () => {
+  const jsFiles = listFilesDeep(JS_DIR).filter((file) => file.endsWith(".js"));
+  const normalized = jsFiles.map((file) => {
+    const source = readFileSync(file, "utf-8");
+    return source.replace(
+      JS_IMPORT_RE,
+      (_full, pre, importPath, post) => `${pre}${importPath}${post}`
+    );
+  });
+  const version = shortHash(Buffer.from(normalized.join("\n")));
+
+  for (const [index, file] of jsFiles.entries()) {
+    const stamped = normalized[index].replace(
+      JS_IMPORT_RE,
+      (_full, pre, importPath, post) =>
+        `${pre}${importPath}?v=${version}${post}`
+    );
+    writeFileSync(file, stamped);
+  }
+  return version;
 };
 
 const stampHtml = (cssVersion, jsVersion) => {
@@ -90,7 +108,7 @@ const stampHtml = (cssVersion, jsVersion) => {
         (_full, pre, cssPath, post) => `${pre}${cssPath}?v=${cssVersion}${post}`
       )
       .replace(
-        MAIN_JS_RE,
+        ENTRY_JS_RE,
         (_full, pre, jsPath, post) => `${pre}${jsPath}?v=${jsVersion}${post}`
       );
     if (after !== before) {
@@ -102,7 +120,7 @@ const stampHtml = (cssVersion, jsVersion) => {
 };
 
 const cssVersion = stampCssImports();
-const jsVersion = jsBundleVersion();
+const jsVersion = stampJsGraph();
 const touched = stampHtml(cssVersion, jsVersion);
 
 process.stdout.write(

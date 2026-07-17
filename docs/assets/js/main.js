@@ -20,11 +20,15 @@
    each one from its grid tile to its nav pill (and back) automatically.
    ----------------------------------------------------------------------- */
 
-import { BRANDS, BRAND_ORDER, CATEGORIES } from "./modules/brand-data.js";
-import { initIconAnimations } from "./modules/icon-animations.js";
-import { renderIcon } from "./modules/icons.js";
-import { ENTRY_VECTORS, setupIntro } from "./modules/intro.js";
-import "./components/brand-card.js";
+import {
+  BRANDS,
+  BRAND_ORDER,
+  CATEGORIES,
+} from "./modules/brand-data.js?v=0271783e";
+import { initIconAnimations } from "./modules/icon-animations.js?v=0271783e";
+import { renderIcon } from "./modules/icons.js?v=0271783e";
+import { ENTRY_VECTORS, setupIntro } from "./modules/intro.js?v=0271783e";
+import "./components/brand-card.js?v=0271783e";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 

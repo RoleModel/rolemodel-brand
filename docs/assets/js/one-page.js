@@ -16,12 +16,16 @@
    because the iframes hold their last height until the new one arrives.
    ----------------------------------------------------------------------- */
 
-import { BRAND_ORDER, BRANDS, CATEGORIES } from "./modules/brand-data.js";
-import { initIconAnimations } from "./modules/icon-animations.js";
-import { renderIcon } from "./modules/icons.js";
-import { setupIntro } from "./modules/intro.js";
-import { readableTextColor } from "./modules/page-utils.js";
-import "./components/brand-card.js";
+import {
+  BRAND_ORDER,
+  BRANDS,
+  CATEGORIES,
+} from "./modules/brand-data.js?v=0271783e";
+import { initIconAnimations } from "./modules/icon-animations.js?v=0271783e";
+import { renderIcon } from "./modules/icons.js?v=0271783e";
+import { setupIntro } from "./modules/intro.js?v=0271783e";
+import { readableTextColor } from "./modules/page-utils.js?v=0271783e";
+import "./components/brand-card.js?v=0271783e";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 const DEFAULT_BRAND = "rolemodel";
@@ -218,7 +222,13 @@ class OnePage {
         }
         return;
       }
-      document.querySelector(`#${slug}`)?.scrollIntoView();
+      // Category cards are direct navigation, not reader-driven scrolling.
+      // The intro runway and pre-sized iframe stack can make native smooth
+      // scrolling take several seconds, so jump to the destination in the
+      // same frame as the click. Header links retain normal smooth scrolling.
+      document
+        .querySelector(`#${slug}`)
+        ?.scrollIntoView({ behavior: "instant", block: "start" });
       this.setActiveSection(slug);
     });
   }

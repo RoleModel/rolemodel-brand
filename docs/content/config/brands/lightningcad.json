@@ -16,7 +16,11 @@
     "#032a5e"
   ],
   "primary": "#2a83f7",
-  "gridRows": 1,
+  "gridRows": 2,
+  "sectionSpans": {
+    "logo": 6,
+    "color": 6
+  },
   "sections": ["logo", "color"],
   "subBrands": [
     {

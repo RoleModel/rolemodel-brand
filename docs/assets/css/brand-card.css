@@ -189,6 +189,9 @@
     &.brand-card--span-5 {
       grid-column: span 5;
     }
+    &.brand-card--span-6 {
+      grid-column: span 6;
+    }
   }
 
   /* ---- State: mini (a flex item inside .portal-rail) ---- */
@@ -272,7 +275,9 @@
       &.brand-card--span-1,
       &.brand-card--span-2,
       &.brand-card--span-3,
-      &.brand-card--span-4 {
+      &.brand-card--span-4,
+      &.brand-card--span-5,
+      &.brand-card--span-6 {
         grid-column: span 3;
       }
     }
