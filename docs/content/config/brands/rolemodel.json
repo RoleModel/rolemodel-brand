@@ -16,5 +16,6 @@
     "#3a1f47"
   ],
   "primary": "#3A70B3",
+  "gridRows": 3,
   "zip": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip"
 }

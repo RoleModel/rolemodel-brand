@@ -46,6 +46,12 @@ const seedBrand = () => {
 const pageUrlFor = (categorySlug, brandSlug) =>
   `./pages/${categorySlug}.html?brand=${brandSlug}&embed=1&stack=1`;
 
+const hasSection = (brand, categorySlug) =>
+  !brand.sections || brand.sections.includes(categorySlug);
+
+const sectionSpan = (brand, category) =>
+  brand.sectionSpans?.[category.slug] ?? category.span;
+
 // Same category icon treatment as the portal homepage (main.js).
 const iconMarkupFor = (categorySlug, activeBrand) => {
   if (categorySlug === "logo") {
@@ -169,6 +175,7 @@ class OnePage {
   buildGrid() {
     const grid = this.root.querySelector("#op-grid");
     const active = BRANDS[this.activeBrand];
+    grid.dataset.gridRows = String(active.gridRows);
 
     for (const slug of BRAND_ORDER) {
       const brand = BRANDS[slug];
@@ -191,7 +198,8 @@ class OnePage {
       card.setAttribute("slug", category.slug);
       card.setAttribute("label", category.name);
       card.setAttribute("bg", bg);
-      card.setAttribute("span", String(category.span));
+      card.setAttribute("span", String(sectionSpan(active, category)));
+      card.hidden = !hasSection(active, category.slug);
       this.cards.set(`category:${category.slug}`, card);
       grid.append(card);
 
@@ -228,7 +236,9 @@ class OnePage {
     // Reload sections in place — each iframe keeps its last height until the
     // new page reports in, so the document doesn't collapse mid-switch.
     for (const [sectionSlug, frame] of this.frames) {
-      frame.src = pageUrlFor(sectionSlug, slug);
+      if (hasSection(BRANDS[slug], sectionSlug)) {
+        frame.src = pageUrlFor(sectionSlug, slug);
+      }
     }
 
     this.paintBrand();
@@ -238,6 +248,8 @@ class OnePage {
   // the card recolor mirrors the portal's applyBrand (main.js).
   paintBrand() {
     const brand = BRANDS[this.activeBrand];
+    const grid = this.root.querySelector("#op-grid");
+    grid.dataset.gridRows = String(brand.gridRows);
     document.documentElement.style.setProperty("--font-active", brand.font);
     // Active switcher pill wears the brand primary (see one-page.css);
     // derive its text color so contrast holds for every brand.
@@ -266,6 +278,14 @@ class OnePage {
         continue;
       }
       card.setAttribute("bg", brand.palette[index % brand.palette.length]);
+      card.setAttribute("span", String(sectionSpan(brand, category)));
+      card.hidden = !hasSection(brand, category.slug);
+
+      const section = this.root.querySelector(`#${category.slug}`);
+      const navLink = this.navLinks.get(category.slug);
+      const isVisible = hasSection(brand, category.slug);
+      section?.toggleAttribute("hidden", !isVisible);
+      navLink?.toggleAttribute("hidden", !isVisible);
 
       if (category.slug === "logo") {
         const img = card.iconHost?.querySelector("img");

@@ -1,16 +1,20 @@
 // GENERATED FILE — do not edit directly.
 // Source: docs/content/** — edit there, then push. CI regenerates this file.
 
-export const BRAND_ASSET_BASE =
-  "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
+export const BRAND_ASSET_BASE = "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
 
 // Display order for the brand tiles / nav. Kept explicit so the BRANDS object
 // can stay alphabetized (lint) without affecting the order the UI renders in.
-export const BRAND_ORDER = ["rolemodel", "academy", "lightningcad"];
+export const BRAND_ORDER = [
+  "rolemodel",
+  "academy",
+  "lightningcad",
+];
 
 export const BRANDS = {
   academy: {
     font: "'Space Grotesk', sans-serif",
+    gridRows: 2,
     heroColor: "#293747",
     icon: `${BRAND_ASSET_BASE}/logos/academy/AcademyIcon.svg`,
     logo: `${BRAND_ASSET_BASE}/logos/academy/Academy.svg`,
@@ -27,11 +31,22 @@ export const BRANDS = {
       "#293747",
     ],
     primary: "#00b871",
+    sectionSpans: {
+      imagery: 6,
+      typography: 6,
+    },
+    sections: [
+      "logo",
+      "color",
+      "imagery",
+      "typography",
+    ],
     tagline: "Building future leaders through hands on experience",
     zip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
   },
   lightningcad: {
     font: "'DM Sans', sans-serif",
+    gridRows: 1,
     heroColor: "#2a83f7",
     icon: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCAD-Icon.svg`,
     logo: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad.svg`,
@@ -48,18 +63,17 @@ export const BRANDS = {
       "#032a5e",
     ],
     primary: "#2a83f7",
-    subBrandZip:
-      "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
+    sectionSpans: {},
+    sections: [
+      "logo",
+      "color",
+    ],
+    subBrandZip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
     subBrands: [
       {
         color: "#07BBC2",
         logo: `${BRAND_ASSET_BASE}/logos/designers/AirfieldDesigner.svg`,
         name: "Airfield Designer",
-      },
-      {
-        color: "#ADBF08",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/BuildingDesigner.svg`,
-        name: "Building Designer",
       },
       {
         color: "#FFAC08",
@@ -77,11 +91,6 @@ export const BRANDS = {
         name: "DPQ",
       },
       {
-        color: "#0BCAF0",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/FlowDesigner.svg`,
-        name: "Flow Designer",
-      },
-      {
         color: "#8D3DE3",
         logo: `${BRAND_ASSET_BASE}/logos/designers/RailingDesigner.svg`,
         name: "Railing Designer",
@@ -92,6 +101,7 @@ export const BRANDS = {
   },
   rolemodel: {
     font: "'DM Sans', sans-serif",
+    gridRows: 3,
     heroColor: "#193c64",
     icon: `${BRAND_ASSET_BASE}/logos/rolemodel/icon.svg`,
     logo: `${BRAND_ASSET_BASE}/logos/rolemodel/logo.svg`,
@@ -108,6 +118,8 @@ export const BRANDS = {
       "#3a1f47",
     ],
     primary: "#3A70B3",
+    sectionSpans: {},
+    sections: null,
     tagline: "Software that Fits",
     zip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip",
   },

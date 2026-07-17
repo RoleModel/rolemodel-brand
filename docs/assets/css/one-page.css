@@ -43,21 +43,19 @@ html {
   color: var(--paper);
 }
 
-/* During the first-load intro the hero owns the viewport — the header stays
-   out of frame and slides in once the bento has assembled. The transition
-   only exists OUTSIDE the intro: while .is-introing is set the hide is
-   instant, so the header can never be caught mid-slide on first paint;
-   removing the class at finalize re-arms the transition and animates the
-   reveal. */
-html:not(.is-introing) .op-header {
+/* The hero owns the viewport until the reversible runway reaches its settled
+   state. The header returns for the assembled grid and guideline sections,
+   then hides again if the reader scrolls back into the intro. */
+html:not(.is-introing) .op-header,
+.is-intro-settled .op-header {
   transition: transform var(--duration-slow) var(--ease-out);
 }
 
-.is-introing .op-header {
+.is-introing:not(.is-intro-settled) .op-header {
   transform: translateY(-100%);
 }
 
-.is-introing .op-top {
+.is-introing:not(.is-intro-settled) .op-top {
   display: none;
 }
 

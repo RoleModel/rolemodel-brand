@@ -7,10 +7,9 @@
    a global --enter (0 → 1) on <html>, and intro.css flies every <brand-card>
    in from a per-card off-screen vector into its slot, staggered.
 
-   It's a one-time gate: once the scroll completes the scaffolding (hero +
-   spacer + sticky pin + per-card vars) is torn down and the scroll reset to
-   the top, leaving exactly the normal interactive portal. Open mode, view
-   transitions and deep links are therefore never wrapped by the intro.
+   The runway stays in the document so the sequence is reversible. Scrolling
+   down assembles the cards; scrolling back up drives the same progress value
+   toward zero and restores the headline while the cards leave in reverse.
 
    Callers skip it entirely (never call setupIntro) on deep-link opens and
    under prefers-reduced-motion — see main.js.
@@ -21,10 +20,9 @@ import { INTRO_HEADING } from "./site-content.js";
 
 const ENTER_PROP = "--enter";
 const ACCENT_PROP = "--intro-accent";
-const CARD_VARS = ["--enter-x", "--enter-y", "--enter-start", "--enter-end"];
-
-// Finalize once we've effectively hit the bottom of the runway.
-const FINALIZE_AT = 0.999;
+// Treat the last fraction as settled so the completed grid becomes interactive
+// and the one-page document can continue into its guideline sections.
+const SETTLED_AT = 0.999;
 // Progress by which the last card should be home (leaves a short dwell).
 const SETTLE_BY = 0.82;
 // Each card's own entry duration, in global-progress units (windows overlap).
@@ -73,8 +71,8 @@ const heroMarkup = (brand) => `
   </div>`;
 
 /**
- * Wire up and run the scroll-driven intro. Self-manages listeners and tears
- * everything down on completion. Assumes cards are already built into `grid`.
+ * Wire up the reversible scroll-driven intro. Assumes cards are already built
+ * into `grid`.
  * @param {object} opts  Intro configuration.
  * @param {HTMLElement} opts.grid  the .portal-grid element
  * @param {HTMLElement[]} opts.cards  ordered <brand-card> list to stagger
@@ -118,40 +116,21 @@ export const setupIntro = ({ grid, cards, brand }) => {
   spacer.className = "portal-intro-spacer";
   spacer.setAttribute("aria-hidden", "true");
 
-  // Hero behind the pinned grid; spacer after it is the scroll runway.
+  const stage = document.createElement("div");
+  stage.className = "portal-intro-stage";
+
+  // Keep the sticky grid and its runway in one containing block. The stage
+  // naturally carries the assembled grid out of view at its lower edge and
+  // brings it back on upward scroll, avoiding a static/sticky mode flash.
   grid.before(hero);
-  grid.after(spacer);
+  grid.before(stage);
+  stage.append(grid, spacer);
   root.classList.add("is-introing");
 
-  let done = false;
   let ticking = false;
-
-  const finalize = () => {
-    if (done) {
-      return;
-    }
-    done = true;
-    window.removeEventListener("scroll", onScroll);
-    window.removeEventListener("resize", onScroll);
-
-    root.classList.remove("is-introing");
-    root.style.removeProperty(ENTER_PROP);
-    for (const card of cards) {
-      for (const prop of CARD_VARS) {
-        card.style.removeProperty(prop);
-      }
-    }
-    hero.remove();
-    spacer.remove();
-    // Grid is no longer pinned; land at the top as the normal portal.
-    window.scrollTo(0, 0);
-  };
 
   const update = () => {
     ticking = false;
-    if (done) {
-      return;
-    }
     // Progress is measured against the intro's own runway (everything up to
     // the spacer's bottom edge), NOT the full document height — on the
     // single-page layout thousands of pixels of sections live below the
@@ -161,9 +140,7 @@ export const setupIntro = ({ grid, cards, brand }) => {
     const max = runwayBottom - window.innerHeight;
     const raw = max > 0 ? clamp(window.scrollY / max, 0, 1) : 1;
     root.style.setProperty(ENTER_PROP, raw.toFixed(4));
-    if (raw >= FINALIZE_AT) {
-      finalize();
-    }
+    root.classList.toggle("is-intro-settled", raw >= SETTLED_AT);
   };
 
   // rAF-throttled: one style write per frame no matter how many scroll events.

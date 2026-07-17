@@ -16,18 +16,14 @@
     "#032a5e"
   ],
   "primary": "#2a83f7",
+  "gridRows": 1,
+  "sections": ["logo", "color"],
   "subBrands": [
     {
       "slug": "airfield-designer",
       "color": "#07BBC2",
       "logo": "logos/designers/AirfieldDesigner.svg",
       "name": "Airfield Designer"
-    },
-    {
-      "slug": "building-designer",
-      "color": "#ADBF08",
-      "logo": "logos/designers/BuildingDesigner.svg",
-      "name": "Building Designer"
     },
     {
       "slug": "deck-designer",
@@ -46,12 +42,6 @@
       "color": "#2A83F7",
       "logo": "logos/designers/DPQ.svg",
       "name": "DPQ"
-    },
-    {
-      "slug": "flow-designer",
-      "color": "#0BCAF0",
-      "logo": "logos/designers/FlowDesigner.svg",
-      "name": "Flow Designer"
     },
     {
       "slug": "railing-designer",

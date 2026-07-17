@@ -1,11 +1,9 @@
 /* -----------------------------------------------------------------------
    Scroll-driven intro — a Dropbox-style "assembly" of the bento.
 
-   Active only while <html> carries .is-introing (added synchronously by
-   main.js/intro.js before first paint, torn down once the scroll completes).
-   When it's not present the portal is exactly the normal interactive grid,
-   so open mode, view transitions, deep links and reduced-motion are all
-   untouched — the intro is a one-time gate, not a permanent wrapper.
+   Active while <html> carries .is-introing. The runway remains mounted after
+   assembly so scrolling upward drives --enter back toward zero and reverses
+   the same transforms instead of replaying a separate exit animation.
 
    Mechanics: the .portal-grid is pinned in the viewport (position: sticky)
    and a tall .portal-intro-spacer below it supplies the scroll distance.
@@ -15,11 +13,22 @@
    ----------------------------------------------------------------------- */
 
 /* Pin the bento and hold it non-interactive until the assembly finishes. */
+.portal-intro-stage {
+  position: relative;
+}
+
 .is-introing .portal-grid {
   position: sticky;
   top: 0;
   z-index: var(--z-raised);
   pointer-events: none;
+}
+
+/* At the runway's end the assembled grid can be used. Its sticky position is
+   constrained by .portal-intro-stage, so it leaves and re-enters the viewport
+   through normal scrolling without changing positioning modes. */
+.is-introing.is-intro-settled .portal-grid {
+  pointer-events: auto;
 }
 
 /* The scroll runway beneath the pinned hero. */

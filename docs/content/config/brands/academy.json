@@ -16,5 +16,11 @@
     "#293747"
   ],
   "primary": "#00b871",
+  "gridRows": 2,
+  "sectionSpans": {
+    "imagery": 6,
+    "typography": 6
+  },
+  "sections": ["logo", "color", "imagery", "typography"],
   "zip": "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip"
 }

@@ -69,6 +69,12 @@ const iconMarkupFor = (categorySlug, activeBrand) => {
 const pageUrlFor = (categorySlug, brandSlug) =>
   `./pages/${categorySlug}.html?brand=${brandSlug}&embed=1`;
 
+const hasSection = (brand, categorySlug) =>
+  !brand.sections || brand.sections.includes(categorySlug);
+
+const sectionSpan = (brand, category) =>
+  brand.sectionSpans?.[category.slug] ?? category.span;
+
 class BrandPortal {
   constructor(grid) {
     this.grid = grid;
@@ -118,6 +124,7 @@ class BrandPortal {
     const activeSlug = getActiveBrandSlug();
     const active = BRANDS[activeSlug];
     document.documentElement.style.setProperty("--font-active", active.font);
+    this.grid.dataset.gridRows = String(active.gridRows);
 
     for (const [index, slug] of this.brandOrder.entries()) {
       const brand = BRANDS[slug];
@@ -142,7 +149,8 @@ class BrandPortal {
       card.setAttribute("slug", category.slug);
       card.setAttribute("label", category.name);
       card.setAttribute("bg", bg);
-      card.setAttribute("span", String(category.span));
+      card.setAttribute("span", String(sectionSpan(active, category)));
+      card.hidden = !hasSection(active, category.slug);
       card.dataset.index = this.brandOrder.length + index;
       card.style.viewTransitionName = vtName("category", category.slug);
       this.cards.set(`category:${category.slug}`, card);
@@ -280,6 +288,7 @@ class BrandPortal {
     setActiveBrandSlug(slug);
     const brand = BRANDS[slug];
     document.documentElement.style.setProperty("--font-active", brand.font);
+    this.grid.dataset.gridRows = String(brand.gridRows);
 
     for (const c of this.brandCards()) {
       c.classList.toggle("brand-card--active", c.slug === slug);
@@ -292,6 +301,8 @@ class BrandPortal {
       }
       const bg = brand.palette[index % brand.palette.length];
       card.setAttribute("bg", bg);
+      card.setAttribute("span", String(sectionSpan(brand, category)));
+      card.hidden = !hasSection(brand, category.slug);
 
       if (category.slug === "logo") {
         BrandPortal.swapLogoIcon(card, brand);
@@ -305,7 +316,11 @@ class BrandPortal {
     }
 
     if (this.openSlug) {
-      this.frame.src = pageUrlFor(this.openSlug, slug);
+      if (hasSection(brand, this.openSlug)) {
+        this.frame.src = pageUrlFor(this.openSlug, slug);
+      } else {
+        this.closeSection();
+      }
     }
   }
 

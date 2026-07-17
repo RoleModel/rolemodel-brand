@@ -71,7 +71,26 @@ test("BRANDS content round-trips through the real generator", async () => {
     await import("../assets/js/modules/brand-data.js");
   assert.deepEqual(BRAND_ORDER, ["rolemodel", "academy", "lightningcad"]);
   assert.equal(BRANDS.rolemodel.primary, "#3A70B3");
-  assert.equal(BRANDS.lightningcad.subBrands.length, 7);
+  assert.deepEqual(BRANDS.academy.sections, [
+    "logo",
+    "color",
+    "imagery",
+    "typography",
+  ]);
+  assert.deepEqual(BRANDS.lightningcad.sections, ["logo", "color"]);
+  assert.equal(BRANDS.academy.gridRows, 2);
+  assert.deepEqual(BRANDS.academy.sectionSpans, {
+    imagery: 6,
+    typography: 6,
+  });
+  assert.equal(BRANDS.lightningcad.gridRows, 1);
+  assert.equal(BRANDS.lightningcad.subBrands.length, 5);
+  assert.equal(
+    BRANDS.lightningcad.subBrands.some(
+      ({ name }) => name === "Building Designer" || name === "Flow Designer"
+    ),
+    false
+  );
   assert.equal(
     BRANDS.lightningcad.subBrandZip,
     "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip"

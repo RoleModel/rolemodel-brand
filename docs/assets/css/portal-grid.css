@@ -20,6 +20,14 @@
   font-family: var(--font-active);
 }
 
+.portal-grid[data-grid-rows="1"] {
+  grid-template-rows: 1fr;
+}
+
+.portal-grid[data-grid-rows="2"] {
+  grid-template-rows: 200px 1fr;
+}
+
 /* ---- Content panel (full-screen fly-out overlay) ---- */
 .portal-panel {
   position: fixed;

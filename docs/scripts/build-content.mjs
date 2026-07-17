@@ -144,6 +144,7 @@ const buildBrandData = () => {
     }
     const entry = {
       font: config.font,
+      gridRows: config.gridRows ?? 3,
       heroColor: config.heroColor,
       icon: assetUrl(config.icon),
       logo: assetUrl(config.logo),
@@ -151,6 +152,8 @@ const buildBrandData = () => {
       name: config.name,
       palette: config.palette,
       primary: config.primary,
+      sectionSpans: config.sectionSpans ?? {},
+      sections: config.sections ?? null,
       tagline: prose.data.tagline ?? "",
       zip: config.zip,
     };

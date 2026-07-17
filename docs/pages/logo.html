@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/index.css?v=32d600b5" />
+    <link rel="stylesheet" href="../assets/css/index.css?v=c64c61b5" />
     <script>
       (() => {
         const de = document.documentElement;
@@ -143,23 +143,47 @@
           subBrands
             .map(
               (sub) => /* html */ `
-    <a class="subbrand-card" href="${sub.logo}" download target="_blank" rel="noopener"
-       aria-label="Download ${sub.name} logo (SVG)">
+    <div class="subbrand-card">
       <div class="subbrand-card__stage">
         <img class="subbrand-card__logo" src="${sub.logo}" alt="${sub.name}" loading="lazy"/>
       </div>
       <div class="subbrand-card__meta">
         <span class="subbrand-card__dot" style="background:${sub.color}"></span>
         <span class="subbrand-card__name">${sub.name}</span>
-        <span class="subbrand-card__download" aria-hidden="true">
+        <button type="button" class="download-button subbrand-card__download"
+                data-logo-url="${sub.logo}" data-logo-name="${sub.name}">
           ${downloadIcon}
-        </span>
+          Download SVG
+        </button>
       </div>
-    </a>
+    </div>
   `
             )
             .join("")
         );
+
+        document
+          .querySelector("#subbrand-grid")
+          .addEventListener("click", async (event) => {
+            const button = event.target.closest("[data-logo-url]");
+            if (!button) {
+              return;
+            }
+
+            const response = await fetch(button.dataset.logoUrl);
+            if (!response.ok) {
+              throw new Error(
+                `Unable to download ${button.dataset.logoName} logo`
+              );
+            }
+
+            const blobUrl = URL.createObjectURL(await response.blob());
+            const download = document.createElement("a");
+            download.href = blobUrl;
+            download.download = `${button.dataset.logoName.replaceAll(" ", "-").toLowerCase()}.svg`;
+            download.click();
+            URL.revokeObjectURL(blobUrl);
+          });
 
         if (brand.subBrandZip) {
           document.querySelector("#family-actions").setHTMLUnsafe(/* html */ `

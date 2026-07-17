@@ -227,6 +227,14 @@
   }
 }
 
+/* Custom elements do not reliably inherit the browser's native [hidden]
+   presentation once their authored display rule wins. Keep unavailable brand
+   sections out of both interaction and grid layout so auto-placement repacks
+   the remaining cards when the active brand changes. */
+.brand-card[hidden] {
+  display: none !important;
+}
+
 .brand-card:hover {
   z-index: var(--z-raised);
   background-color: var(--rolemodel-dark);
