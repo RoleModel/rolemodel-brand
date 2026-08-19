@@ -1,0 +1,58 @@
+name: Build logo zips
+
+# Builds the downloadable logo bundles that the brand site links to and
+# uploads them to the latest GitHub release, which is what
+# releases/latest/download/<name>.zip resolves against.
+#
+# Only bundles listed in BUNDLES below are built. The other release assets
+# (rolemodel-brand-all, academy-logos, lightningcad-logos,
+# designer-product-logos, ...) were uploaded by hand and are left alone —
+# add them to BUNDLES when you want CI to own them too, keeping in mind that
+# --clobber replaces whatever is already published under that name.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "logos/almanac/**"
+      - "logos/compass/**"
+      - "logos/standard/**"
+      - ".github/workflows/build-logo-zips.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-logo-zips:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # name:dir[ dir...] — paths are relative to logos/ and are preserved
+      # inside the archive, so the family zip unpacks as almanac/, compass/,
+      # standard/ rather than a flat pile of similarly-named files.
+      - name: Build bundles
+        id: build
+        run: |
+          set -euo pipefail
+          BUNDLES=(
+            "rolemodel-family-logos:almanac compass standard"
+          )
+          mkdir -p dist
+          for bundle in "${BUNDLES[@]}"; do
+            name="${bundle%%:*}"
+            dirs="${bundle#*:}"
+            (cd logos && zip -r -q "../dist/${name}.zip" $dirs -x "*.DS_Store")
+            echo "built dist/${name}.zip"
+          done
+
+      - name: Upload to the latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="$(gh release view --json tagName --jq .tagName)"
+          echo "Uploading to release ${tag}"
+          gh release upload "$tag" dist/*.zip --clobber
