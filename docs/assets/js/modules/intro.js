@@ -15,8 +15,8 @@
    under prefers-reduced-motion — see main.js.
    ----------------------------------------------------------------------- */
 
-import { clamp } from "./page-utils.js?v=1454729e";
-import { INTRO_HEADING } from "./site-content.js?v=1454729e";
+import { clamp } from "./page-utils.js?v=b8a53096";
+import { INTRO_HEADING } from "./site-content.js?v=b8a53096";
 
 const ENTER_PROP = "--enter";
 const ACCENT_PROP = "--intro-accent";

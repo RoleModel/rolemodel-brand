@@ -46,16 +46,16 @@
     {
       "label": "CAD logo — light backgrounds",
       "bg": "#FAFAF7",
-      "src": "logos/lightningcad/LightningCad@2x.png",
-      "svgHref": "logos/lightningcad/LightningCadBlack.svg",
-      "pngHref": "logos/lightningcad/LightningCad@2x.png"
+      "src": "logos/lightningcad/lightningcad-logo@2x.png",
+      "svgHref": "logos/lightningcad/lightningcad-logo-black.svg",
+      "pngHref": "logos/lightningcad/lightningcad-logo@2x.png"
     },
     {
       "label": "CAD logo — dark backgrounds",
       "bg": "#032A5E",
-      "src": "logos/lightningcad/LightningCadWhite.svg",
-      "svgHref": "logos/lightningcad/LightningCadWhite.svg",
-      "pngHref": "logos/lightningcad/LightningCadWhite@2x.png"
+      "src": "logos/lightningcad/lightningcad-logo-white.svg",
+      "svgHref": "logos/lightningcad/lightningcad-logo-white.svg",
+      "pngHref": "logos/lightningcad/lightningcad-logo-white@2x.png"
     }
   ],
   "logoRules": [

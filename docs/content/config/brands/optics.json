@@ -1,0 +1,27 @@
+{
+  "font": "'DM Sans', sans-serif",
+  "heroColor": "#336CC1",
+  "icon": "logos/optics/optics-icon.svg",
+  "logo": "logos/optics/optics-logo.svg",
+  "name": "Optics",
+  "palette": [
+    "#0868F7",
+    "#FACE0A",
+    "#FF7700",
+    "#336CC1",
+    "#6BDB7E",
+    "#FFD438",
+    "#FE8585",
+    "#76797F"
+  ],
+  "primary": "#0868F7",
+  "gridRows": 2,
+  "sections": ["logo", "color"],
+  "sectionSpans": {
+    "logo": 6,
+    "color": 6
+  },
+  "docsUrl": "https://docs.optics.rolemodel.design/",
+  "repoUrl": "https://github.com/RoleModel/optics",
+  "zip": ""
+}

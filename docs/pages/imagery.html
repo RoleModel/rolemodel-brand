@@ -6,6 +6,9 @@
     <meta name="robots" content="noindex, nofollow" />
     <link rel="canonical" href="https://rolemodelsoftware.com/brand" />
     <title>Imagery — Brand Guidelines</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="../assets/favicon.png" sizes="any" />
+    <link rel="apple-touch-icon" href="../assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://framerusercontent.com" />
@@ -13,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Geist+Mono:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/index.css?v=f3bfee27" />
+    <link rel="stylesheet" href="../assets/css/index.css?v=512d9cde" />
     <script>
       (() => {
         const de = document.documentElement;
@@ -56,6 +59,13 @@
         <div id="treatment-content"></div>
       </section>
     </main>
+    <section
+      id="subimagery-section"
+      aria-labelledby="subimagery-heading"
+      hidden
+    >
+      <div id="subimagery-content"></div>
+    </section>
 
     <script type="module">
       import {
@@ -67,6 +77,7 @@
         MOSAIC_SPANS,
         IMAGERY_TREATMENTS,
       } from "../assets/js/modules/site-content.js";
+      import "../assets/js/components/halftone-image.js";
 
       const { brand, pageData } = initPage("imagery");
       const { category: cat, numLabel } = categoryInfo("imagery", "05");
@@ -99,7 +110,7 @@
     <div class="spec-card__grid">
       ${IMAGERY_TREATMENTS.map(
         (t) => /* html */ `
-        <div>
+        <div class="${t.span === "full" ? "spec-card__item--full" : ""}">
           <span class="spec-card__label">${t.label}</span>
           <p class="spec-card__text">${t.text}</p>
         </div>
@@ -108,6 +119,43 @@
     </div>
   </div>
 `);
+
+      // ---- Product family imagery — only brands that define it ----
+      // A sub-brand has no page of its own (it isn't in brand-order), so its
+      // photography lives in a section beneath the parent brand's, the same
+      // shape the logo and color pages use for sub-brand content.
+      const subBrandImagery = pageData.subBrandImagery || [];
+      if (subBrandImagery.length) {
+        document.querySelector("#subimagery-section").hidden = false;
+        document.querySelector("#subimagery-content").setHTMLUnsafe(
+          subBrandImagery
+            .map(
+              (sub) => /* html */ `
+    <div class="subimagery reveal">
+      <div class="subimagery__intro">
+        <span class="section-label" id="subimagery-heading">Product Family</span>
+        <h2 class="subimagery__name">${sub.name}</h2>
+        <p class="subimagery__text">${sub.text}</p>
+        <a class="download-button download-button--accent" href="../tools/halftone/" target="_top">
+          Generate Standard images →
+        </a>
+      </div>
+        
+      <div class="subimagery__grid">
+        ${sub.images
+          .map(
+            (img) => /* html */ `
+          <halftone-image class="subimagery__tile" src="${img.src}"></halftone-image>
+        `
+          )
+          .join("")}
+      </div>
+    </div>
+  `
+            )
+            .join("")
+        );
+      }
 
       initReveal();
     </script>

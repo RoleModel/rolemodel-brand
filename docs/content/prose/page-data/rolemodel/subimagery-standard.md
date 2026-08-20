@@ -1,0 +1,1 @@
+Standard's photography is the work itself — desks mid-project, hands on keyboards, notes and screens in progress. Shot candidly and rendered as a halftone in brand ink so the images read as one set rather than a gallery of stock.

@@ -81,23 +81,23 @@
     {
       "label": "Academy logo — light backgrounds",
       "bg": "#F2F2F2",
-      "src": "logos/academy/Academy.svg",
-      "svgHref": "logos/academy/Academy.svg",
-      "pngHref": "logos/academy/Academy@2x.png"
+      "src": "logos/academy/academy-logo.svg",
+      "svgHref": "logos/academy/academy-logo.svg",
+      "pngHref": "logos/academy/academy-logo@2x.png"
     },
     {
       "label": "Academy logo — dark backgrounds",
       "bg": "#293747",
-      "src": "logos/academy/AcademyLogoWhite.svg",
-      "svgHref": "logos/academy/AcademyLogoWhite.svg",
-      "pngHref": "logos/academy/AcademyLogoWhite@2x.png"
+      "src": "logos/academy/academy-logo-white.svg",
+      "svgHref": "logos/academy/academy-logo-white.svg",
+      "pngHref": "logos/academy/academy-logo-white@2x.png"
     },
     {
       "label": "Academy icon",
       "bg": "#F2F2F2",
-      "src": "logos/academy/AcademyIcon.svg",
-      "svgHref": "logos/academy/AcademyIcon.svg",
-      "pngHref": "logos/academy/AcademyIcon@4x.png"
+      "src": "logos/academy/academy-icon.svg",
+      "svgHref": "logos/academy/academy-icon.svg",
+      "pngHref": "logos/academy/academy-icon@4x.png"
     }
   ],
   "logoRules": [

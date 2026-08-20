@@ -1,21 +1,25 @@
 // GENERATED FILE — do not edit directly.
 // Source: docs/content/** — edit there, then push. CI regenerates this file.
 
-export const BRAND_ASSET_BASE =
-  "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
+export const BRAND_ASSET_BASE = "https://raw.githubusercontent.com/RoleModel/rolemodel-brand/main";
 
 // Display order for the brand tiles / nav. Kept explicit so the BRANDS object
 // can stay alphabetized (lint) without affecting the order the UI renders in.
-export const BRAND_ORDER = ["rolemodel", "academy", "lightningcad"];
+export const BRAND_ORDER = [
+  "rolemodel",
+  "academy",
+  "lightningcad",
+  "optics",
+];
 
 export const BRANDS = {
   academy: {
     font: "'Space Grotesk', sans-serif",
     gridRows: 2,
     heroColor: "#293747",
-    icon: `${BRAND_ASSET_BASE}/logos/academy/AcademyIcon.svg`,
-    logo: `${BRAND_ASSET_BASE}/logos/academy/Academy.svg`,
-    logoWhite: `${BRAND_ASSET_BASE}/logos/academy/AcademyLogoWhite.svg`,
+    icon: `${BRAND_ASSET_BASE}/logos/academy/academy-icon.svg`,
+    logo: `${BRAND_ASSET_BASE}/logos/academy/academy-logo.svg`,
+    logoWhite: `${BRAND_ASSET_BASE}/logos/academy/academy-logo-white.svg`,
     name: "Craftsmanship Academy",
     palette: [
       "#293747",
@@ -29,17 +33,25 @@ export const BRANDS = {
     ],
     primary: "#00b871",
     sectionSpans: {},
-    sections: ["logo", "color", "imagery", "typography"],
+    sections: [
+      "logo",
+      "color",
+      "imagery",
+      "typography",
+    ],
     tagline: "Building future leaders through hands on experience",
     zip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
   },
   lightningcad: {
+    familyNote: "",
+    familyShader: false,
+    familyZipLabel: "Download All Designer Logos (.zip)",
     font: "'DM Sans', sans-serif",
     gridRows: 2,
     heroColor: "#2a83f7",
-    icon: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCAD-Icon.svg`,
-    logo: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad@2x.png`,
-    logoWhite: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite.svg`,
+    icon: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-icon.svg`,
+    logo: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo@2x.png`,
+    logoWhite: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo-white.svg`,
     name: "LightningCAD",
     palette: [
       "#2a83f7",
@@ -56,46 +68,87 @@ export const BRANDS = {
       color: 6,
       logo: 6,
     },
-    sections: ["logo", "color"],
-    subBrandZip:
-      "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
+    sections: [
+      "logo",
+      "color",
+    ],
+    subBrandZip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/designer-product-logos.zip",
     subBrands: [
       {
         color: "#07BBC2",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/AirfieldDesigner.svg`,
+        logo: `${BRAND_ASSET_BASE}/logos/designers/airfield-designer-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/designers/airfield-designer-logo-white.svg`,
         name: "Airfield Designer",
       },
       {
         color: "#FFAC08",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/DeckDesigner.svg`,
+        logo: `${BRAND_ASSET_BASE}/logos/designers/deck-designer-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/designers/deck-designer-logo-white.svg`,
         name: "Deck Designer",
       },
       {
         color: "#0E8A6B",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/DockDesigner.svg`,
+        logo: `${BRAND_ASSET_BASE}/logos/designers/dock-designer-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/designers/dock-designer-logo-white.svg`,
         name: "Dock Designer",
       },
       {
         color: "#2A83F7",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/DPQ.svg`,
+        logo: `${BRAND_ASSET_BASE}/logos/designers/dpq-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/designers/dpq-logo-white.svg`,
         name: "DPQ",
       },
       {
         color: "#8D3DE3",
-        logo: `${BRAND_ASSET_BASE}/logos/designers/RailingDesigner@2x.png`,
+        logo: `${BRAND_ASSET_BASE}/logos/designers/railing-designer-logo@2x.png`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/designers/railing-designer-logo-white.svg`,
         name: "Railing Designer",
       },
     ],
     tagline: "Faster quotes. Fewer errors. Software built for your products.",
     zip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip",
   },
+  optics: {
+    docsUrl: "https://docs.optics.rolemodel.design/",
+    font: "'DM Sans', sans-serif",
+    gridRows: 2,
+    heroColor: "#336CC1",
+    icon: `${BRAND_ASSET_BASE}/logos/optics/optics-icon.svg`,
+    logo: `${BRAND_ASSET_BASE}/logos/optics/optics-logo.svg`,
+    name: "Optics",
+    palette: [
+      "#0868F7",
+      "#FACE0A",
+      "#FF7700",
+      "#336CC1",
+      "#6BDB7E",
+      "#FFD438",
+      "#FE8585",
+      "#76797F",
+    ],
+    primary: "#0868F7",
+    repoUrl: "https://github.com/RoleModel/optics",
+    sectionSpans: {
+      color: 6,
+      logo: 6,
+    },
+    sections: [
+      "logo",
+      "color",
+    ],
+    tagline: "Where aesthetic precision meets technical finesse",
+    zip: "",
+  },
   rolemodel: {
+    familyNote: "Almanac, Compass, and Standard run together as one family. Each carries its own mark and signature color while sharing RoleModel's blue lineage — never present one of them in isolation from the others.",
+    familyShader: true,
+    familyZipLabel: "Download All Family Logos (.zip)",
     font: "'DM Sans', sans-serif",
     gridRows: 3,
     heroColor: "#193c64",
-    icon: `${BRAND_ASSET_BASE}/logos/rolemodel/icon.svg`,
-    logo: `${BRAND_ASSET_BASE}/logos/rolemodel/logo.svg`,
-    logoWhite: `${BRAND_ASSET_BASE}/logos/rolemodel/RMS-logo-White.svg`,
+    icon: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-icon.svg`,
+    logo: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo.svg`,
+    logoWhite: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo-white.svg`,
     name: "RoleModel Software",
     palette: [
       "#193c64",
@@ -110,6 +163,27 @@ export const BRANDS = {
     primary: "#3A70B3",
     sectionSpans: {},
     sections: null,
+    subBrandZip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-family-logos.zip",
+    subBrands: [
+      {
+        color: "#337BCC",
+        logo: `${BRAND_ASSET_BASE}/logos/almanac/almanac-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/almanac/almanac-logo-white.svg`,
+        name: "Almanac",
+      },
+      {
+        color: "#193C64",
+        logo: `${BRAND_ASSET_BASE}/logos/compass/compass-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/compass/compass-logo-white.svg`,
+        name: "Compass",
+      },
+      {
+        color: "#3A70B3",
+        logo: `${BRAND_ASSET_BASE}/logos/standard/standard-logo.svg`,
+        logoWhite: `${BRAND_ASSET_BASE}/logos/standard/standard-logo-white.svg`,
+        name: "Standard",
+      },
+    ],
     tagline: "Software that Fits",
     zip: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip",
   },

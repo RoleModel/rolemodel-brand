@@ -1,9 +1,9 @@
 {
   "font": "'Space Grotesk', sans-serif",
   "heroColor": "#293747",
-  "icon": "logos/academy/AcademyIcon.svg",
-  "logo": "logos/academy/Academy.svg",
-  "logoWhite": "logos/academy/AcademyLogoWhite.svg",
+  "icon": "logos/academy/academy-icon.svg",
+  "logo": "logos/academy/academy-logo.svg",
+  "logoWhite": "logos/academy/academy-logo-white.svg",
   "name": "Craftsmanship Academy",
   "palette": [
     "#293747",

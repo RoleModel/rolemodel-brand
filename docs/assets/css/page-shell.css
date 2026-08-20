@@ -101,8 +101,8 @@
 
 /* ---- Copied toast ---- */
 .copy-toast {
-  position: fixed;
-  top: var(--space-8);
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(12px);
   background: var(--ink);
@@ -166,4 +166,12 @@
       grid-template-columns: 1fr;
     }
   }
+}
+
+/* A treatment whose copy is much longer than its siblings runs the full width
+   of the spec grid rather than wrapping into one tall, narrow column.
+   1 / -1 rather than a numeric span, so it stays correct when the grid
+   collapses to a single column. */
+.spec-card__item--full {
+  grid-column: 1 / -1;
 }

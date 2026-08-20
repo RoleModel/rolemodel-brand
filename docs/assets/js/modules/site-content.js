@@ -5,10 +5,14 @@
 // <script> blocks — motion/icon/visual-style principles, imagery
 // treatments, and a couple of one-off UI strings.
 
-export const INTRO_HEADING =
-  "Our brand guidelines help us craft an identity as intentional as the software we build.";
+export const INTRO_HEADING = "Our brand guidelines help us craft an identity as intentional as the software we build.";
 
-export const CYCLE_WORDS = ["purpose", "precision", "restraint", "intent"];
+export const CYCLE_WORDS = [
+  "purpose",
+  "precision",
+  "restraint",
+  "intent",
+];
 
 export const MOTION_PRINCIPLES = [
   {
@@ -52,20 +56,36 @@ export const ICON_PRINCIPLES = [
   },
 ];
 
-export const MOSAIC_SPANS = ["a", "b", "c", "d", "e", "f", "g"];
+export const MOSAIC_SPANS = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+];
 
 export const IMAGERY_TREATMENTS = [
   {
     label: "Crop",
+    span: "",
     text: "Tight crops on faces or hands convey craft. Wide establishing shots need a clear subject in the foreground.",
   },
   {
     label: "Color",
+    span: "",
     text: "Slight warmth bias. Avoid cold, desaturated tones. The image doesn't have to match the brand palette exactly.",
   },
   {
     label: "Overlay",
+    span: "",
     text: "When placing text over images, use a single-color tint overlay at 50–70% opacity, or position text in a clear area.",
+  },
+  {
+    label: "Halftone",
+    span: "full",
+    text: "Reserve the dot treatment for Standard. It signals the product family, so applying it to RoleModel or client photography dilutes that. Use it on process and workspace shots, never on faces — dithering flattens skin and reads as a printing error. Apply it live rather than flattening it into the source file, and keep the originals: the treatment is a rendering, not an edit.",
   },
 ];
 
@@ -163,8 +183,6 @@ export const SPECS = [
 ];
 
 export const UI_STRINGS = {
-  subBrandFamilyNote:
-    "$BRAND is a platform of purpose-built design tools. Each product carries its own mark and signature color while sharing the CAD lineage.",
-  subpaletteNote:
-    "Each product in the family owns a signature color. Click a swatch to copy its hex.",
+  subBrandFamilyNote: "$BRAND is a platform of purpose-built design tools. Each product carries its own mark and signature color while sharing the CAD lineage.",
+  subpaletteNote: "Each product in the family owns a signature color. Click a swatch to copy its hex.",
 };

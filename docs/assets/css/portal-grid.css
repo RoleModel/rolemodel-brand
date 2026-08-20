@@ -24,8 +24,11 @@
   grid-template-rows: 1fr;
 }
 
+/* With only one row of category cards below them, a fixed 200px brand row
+   leaves the brands looking like a thin strip under a wall of colour. Give
+   them a proportional share instead, with 200px as the floor. */
 .portal-grid[data-grid-rows="2"] {
-  grid-template-rows: 200px 1fr;
+  grid-template-rows: minmax(200px, 0.6fr) 1fr;
 }
 
 /* ---- Content panel (full-screen fly-out overlay) ---- */

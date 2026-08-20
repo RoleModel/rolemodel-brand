@@ -148,7 +148,6 @@ const buildBrandData = () => {
       heroColor: config.heroColor,
       icon: assetUrl(config.icon),
       logo: assetUrl(config.logo),
-      logoWhite: assetUrl(config.logoWhite),
       name: config.name,
       palette: config.palette,
       primary: config.primary,
@@ -157,13 +156,41 @@ const buildBrandData = () => {
       tagline: prose.data.tagline ?? "",
       zip: config.zip,
     };
+    // A brand may live primarily somewhere else — Optics is a code + design
+    // system whose real home is its Storybook and repo, so it links out.
+    if (config.docsUrl) {
+      entry.docsUrl = config.docsUrl;
+    }
+    if (config.repoUrl) {
+      entry.repoUrl = config.repoUrl;
+    }
+    // Optional — not every brand has a reversed cut of its wordmark.
+    if (config.logoWhite) {
+      entry.logoWhite = assetUrl(config.logoWhite);
+    }
     if (config.subBrands) {
-      entry.subBrands = config.subBrands.map((sb) => ({
-        color: sb.color,
-        logo: assetUrl(sb.logo),
-        name: sb.name,
-      }));
+      // logoWhite is optional — a sub-brand without a white cut just omits it
+      // and consumers fall back to the color mark.
+      entry.subBrands = config.subBrands.map((sb) => {
+        const subBrand = {
+          color: sb.color,
+          logo: assetUrl(sb.logo),
+          name: sb.name,
+        };
+        if (sb.logoWhite) {
+          subBrand.logoWhite = assetUrl(sb.logoWhite);
+        }
+        return subBrand;
+      });
       entry.subBrandZip = config.subBrandZip ?? "";
+      // Family copy is per-brand prose: the shared UI_STRINGS note is written
+      // for LightningCAD's CAD lineage, so a brand with a family of its own
+      // supplies its own note/button label and only falls back when it doesn't.
+      entry.familyNote = prose.data.familyNote ?? "";
+      entry.familyZipLabel = prose.data.familyZipLabel ?? "";
+      // Opt-in: the shader field is built from the Standard mark, so only the
+      // family that mark belongs to gets the banner.
+      entry.familyShader = config.familyShader ?? false;
     }
     brands[slug] = entry;
   }
@@ -253,6 +280,57 @@ const buildImagery = (brandOrder, fieldName, constPrefix) => {
   return { constants, imageryRefs };
 };
 
+// Sub-brand imagery is a list rather than a single source, so it can't go
+// through buildImagery (one source per brand). A sub-brand has no PAGE_DATA
+// entry of its own — it isn't in brand-order — so its images ride along on
+// the parent brand and the Imagery page renders them in a section below.
+const buildSubBrandImagery = (brandOrder) => {
+  const constants = [];
+  const refs = {};
+
+  for (const slug of brandOrder) {
+    const config = readJSON(path.join(CONFIG_DIR, "page-data", `${slug}.json`));
+    if (!config.subBrandImagery) {
+      continue;
+    }
+    // The blurb under the heading is copy, so it lives in prose alongside the
+    // rest of the page's text rather than in the structural JSON.
+    const prose = readProseDir(path.join(PROSE_DIR, "page-data", slug));
+    refs[slug] = config.subBrandImagery.map((entry) => {
+      // The file list is a snapshot, so it drifts the moment an image is
+      // added or deleted by hand. Fail the build rather than shipping a
+      // page that 404s two tiles.
+      const missing = entry.files.filter(
+        (file) =>
+          !existsSync(path.join(DOCS_DIR, "assets", "imagery", entry.dir, file))
+      );
+      if (missing.length > 0) {
+        throw new Error(
+          `page-data/${slug}.json subBrandImagery "${entry.slug}" lists files missing from docs/assets/imagery/${entry.dir}/: ${missing.join(", ")}`
+        );
+      }
+
+      const constName = `${entry.slug.toUpperCase().replaceAll("-", "_")}_IMAGERY_FILES`;
+      constants.push({ files: entry.files, name: constName });
+      const key = `subimagery-${entry.slug}`;
+      const note = prose.get(key);
+      if (!note) {
+        throw new Error(`Missing prose/page-data/${slug}/${key}.md`);
+      }
+      return {
+        images: raw(
+          `_repoImageEntries(${constName}, ${JSON.stringify(entry.dir)})`
+        ),
+        name: entry.name,
+        slug: entry.slug,
+        text: requireField({ text: note.body }, "text", key),
+      };
+    });
+  }
+
+  return { constants, refs };
+};
+
 const buildPageData = (brandOrder) => {
   const main = buildImagery(brandOrder, "imagery", "IMAGERY");
   const visualStyle = buildImagery(
@@ -260,7 +338,12 @@ const buildPageData = (brandOrder) => {
     "visualStyleImagery",
     "VISUAL_STYLE_IMAGERY"
   );
-  const imageryConstants = [...main.constants, ...visualStyle.constants];
+  const subBrand = buildSubBrandImagery(brandOrder);
+  const imageryConstants = [
+    ...main.constants,
+    ...visualStyle.constants,
+    ...subBrand.constants,
+  ];
   const { imageryRefs } = main;
   const pageData = {};
 
@@ -322,6 +405,9 @@ const buildPageData = (brandOrder) => {
     };
     if (visualStyle.imageryRefs[slug]) {
       pageData[slug].visualStyleImagery = visualStyle.imageryRefs[slug];
+    }
+    if (subBrand.refs[slug]) {
+      pageData[slug].subBrandImagery = subBrand.refs[slug];
     }
   }
 
@@ -552,6 +638,9 @@ const buildSiteContent = () => {
     ...readProseDir(path.join(PROSE_DIR, "imagery-treatments")).values(),
   ].map((t) => ({
     label: requireField(t.data, "label", "imagery treatment"),
+    // Optional: "full" lets a longer treatment run the width of the grid
+    // instead of wrapping into one tall, narrow column.
+    span: t.data.span ?? "",
     text: requireField({ text: t.body }, "text", "imagery treatment"),
   }));
 

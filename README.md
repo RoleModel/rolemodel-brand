@@ -23,6 +23,9 @@ rolemodel-brand/
     academy/            # Craftsmanship Academy logos + icon
     lightningcad/       # LightningCAD logos (black/white variants)
     designers/          # DPQ + Designer product marks (Dock, Deck, Railing, Flow, Building)
+    almanac/            # Almanac logo (color/white SVG + @2x PNG)
+    compass/            # Compass logo (color/white SVG + PNG)
+    standard/           # Standard logo (color/white SVG + @2x PNG)
   css/                  # theme CSS (academy-theme.css)
   color/
     Colors.ase, RoleModelBrandColors.ase, ColorGridSmall@4x.png
@@ -43,6 +46,21 @@ rolemodel-brand/
 
 Design source files (.afdesign, .afphoto, .psd, .ai, print projects) stay in Drive; this repo versions exports only.
 
+### File naming
+
+Every asset filename is lowercase and hyphen-separated:
+
+```text
+<product>-<role>[-variant][@Nx].<ext>
+```
+
+- `role` is `logo` or `icon`
+- `variant` distinguishes cuts of the same role — `-white` (for dark backgrounds), `-black`, `-color-on-dark` (color mark with white type)
+- `@2x` / `@3x` / `@4x` mark pixel density and are the only non-hyphen characters allowed; SVGs never carry one
+- the icon set under `icons/black/` follows the same lowercase-hyphen rule
+
+So: `rolemodel-logo-white@2x.png`, `dock-designer-app-logo-black.svg`, `academy-icon.svg`. No spaces, capitals, underscores, or export suffixes like `-1` / `_2` — if two files would collide, name the difference.
+
 Note: the Drive folder spells it "LightingCAD" — normalized to `lightningcad` here.
 
 `docs/` is a separate, self-contained static site (the brand guidelines portal, served via GitHub Pages) — its content workflow is documented below.
@@ -54,6 +72,16 @@ Copy (taglines, voice quotes, principle text) and structural config (grid spans,
 For local previewing before you push: `npm run content:build` (one-off) or `npm run content:watch` (rebuilds on save). `npm run content:test` runs the generator's own regression tests. See `docs/scripts/build-content.mjs` for the generator itself — it's the only thing that should ever write to `docs/assets/js/modules/{brand-data,page-data,site-content}.js`; those files are generated and get overwritten on the next build.
 
 Note: `tokens/brand.json` (above) is a separate, legacy artifact from when the brand page was Framer-CMS-driven — nothing in `docs/` reads it.
+
+## Exporting logos to a consumer
+
+`npm run logos:export` copies the curated logo set — each brand's wordmark, white wordmark, and icon, plus every sub-brand's marks — into a consumer and writes a `README.md` index alongside them so an agent can pick the right file without listing the directory. It defaults to the `rolemodel-brand` skill in the sibling `standard` repo; pass `--dest <dir>` for anywhere else.
+
+The set is derived from `docs/content/config/brands/*.json`, the same config that drives the guidelines site, so a brand or sub-brand added there is exported automatically and nothing can be exported that the site doesn't know about. The family note in `docs/content/prose/brands/*.md` carries through to the generated index.
+
+`npm run logos:check` verifies a destination is current without writing — it exits non-zero listing missing, extra, and differing files.
+
+Exported files are generated. Fix a mark here, re-run the export; never edit the copy in the consumer.
 
 ## Consumers
 

@@ -1,0 +1,93 @@
+/* -----------------------------------------------------------------------
+   <standard-shader> — the Standard lockup over its mark-driven dither
+   field. See js/components/standard-shader.js; the canvas paints the
+   ground and the lockup sits in the clear circle the shader punches out
+   of the middle, so the two must stay concentric.
+   ----------------------------------------------------------------------- */
+
+.standard-shader {
+  --shader-ink: var(--ink);
+  position: relative;
+  display: block;
+  overflow: hidden;
+  min-height: 320px;
+  border-radius: var(--radius-2xl);
+  background: var(--white);
+  /* Standard shares RoleModel's typography — the Framer original set its own
+     Proxima Nova stack; here the lockup inherits the active brand face. */
+  font-family: var(--font-active);
+  /* The lockup scales off the component's own width, not the viewport's, so
+     the same element reads correctly as a full-bleed banner or a card. */
+  container-type: inline-size;
+
+  &.standard-shader--reversed {
+    --shader-ink: var(--white);
+    background: #27444d;
+  }
+
+  .standard-shader__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .standard-shader__lockup {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    padding: 8%;
+    color: var(--shader-ink);
+    text-align: center;
+  }
+
+  .standard-shader__mark-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .standard-shader__mark {
+    flex: 0 0 auto;
+    width: clamp(56px, 9cqw, 104px);
+    height: clamp(56px, 9cqw, 104px);
+    object-fit: contain;
+    display: block;
+  }
+
+  .standard-shader__wordmark {
+    font-size: clamp(40px, 8cqw, 92px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
+  }
+
+  .standard-shader__description {
+    font-size: var(--text-md);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  /* Mark alone — the wordmark and its caption come out and the mark takes
+     the space they leave. */
+  &.standard-shader--icon-only {
+    .standard-shader__lockup {
+      gap: 0;
+    }
+
+    .standard-shader__wordmark,
+    .standard-shader__description {
+      display: none;
+    }
+
+    .standard-shader__mark {
+      width: clamp(96px, 16cqw, 180px);
+      height: clamp(96px, 16cqw, 180px);
+    }
+  }
+}

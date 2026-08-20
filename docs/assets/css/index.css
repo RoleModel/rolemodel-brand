@@ -4,26 +4,30 @@
    ----------------------------------------------------------------------- */
 
 /* Tokens + document defaults */
-@import url("../tokens.css?v=1a5d6e6f");
+@import url("../tokens.css?v=4c5b4191");
 @import url("./base.css?v=0e245a34");
 
 /* Shared blocks */
 @import url("./page-nav.css?v=123ce805");
 @import url("./page-header.css?v=8a95defd");
-@import url("./page-shell.css?v=6b6f3d12");
+@import url("./page-shell.css?v=36a2b004");
 @import url("./download-button.css?v=01c9cf9b");
+@import url("./standard-shader.css?v=51b85baf");
 
 /* Homepage portal */
-@import url("./portal-grid.css?v=9e1830f1");
+@import url("./portal-grid.css?v=141a019e");
 @import url("./brand-card.css?v=fb6902a8");
 @import url("./intro.css?v=85c21bda");
 
 /* Guideline pages */
-@import url("./pages/color.css?v=7906aefa");
+@import url("./pages/color.css?v=fae4cb70");
 @import url("./pages/voice.css?v=1c5376f4");
 @import url("./pages/typography.css?v=9c9bdba4");
-@import url("./pages/logo.css?v=e28fcefd");
-@import url("./pages/imagery.css?v=db3b3f5a");
+@import url("./pages/logo.css?v=b4e2a4c5");
+@import url("./pages/imagery.css?v=1bffdc36");
 @import url("./pages/icons.css?v=d683bdcd");
 @import url("./pages/motion.css?v=c949dca1");
 @import url("./pages/visual-style.css?v=b9896e6e");
+
+/* Standalone tools */
+@import url("./pages/halftone-tool.css?v=bfd80dcd");

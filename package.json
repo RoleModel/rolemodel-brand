@@ -25,6 +25,8 @@
     "content:watch": "node docs/scripts/build-content.mjs --watch",
     "content:test": "node --test docs/scripts/*.test.mjs",
     "cache:bust": "node docs/scripts/bust-cache.mjs",
+    "logos:export": "node scripts/export-logos.mjs",
+    "logos:check": "node scripts/export-logos.mjs --check",
     "build": "npm run content:build && npm run cache:bust"
   },
   "devDependencies": {

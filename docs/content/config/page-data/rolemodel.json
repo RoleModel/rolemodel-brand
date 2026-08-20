@@ -53,97 +53,145 @@
       "working-genius.jpeg"
     ]
   },
+  "subBrandImagery": [
+    {
+      "slug": "standard",
+      "name": "Standard",
+      "source": "repo",
+      "dir": "standard",
+      "files": ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
+    }
+  ],
   "colors": [
     {
       "hex": "#3A70B3",
       "cmyk": "C81 M54 Y3 K0",
       "name": "RM Blue",
       "group": "core",
-      "span": { "c": 2, "r": 2 }
+      "span": {
+        "c": 2,
+        "r": 2
+      }
     },
     {
       "hex": "#2A84F8",
       "cmyk": "C81 M54 Y3 K0",
       "name": "RM Bright Blue",
       "group": "core",
-      "span": { "c": 1, "r": 3 }
+      "span": {
+        "c": 1,
+        "r": 3
+      }
     },
     {
       "hex": "#193C64",
       "cmyk": "C75 M53 Y0 K0",
       "name": "RM Dark Blue",
       "group": "core",
-      "span": { "c": 2, "r": 2 }
+      "span": {
+        "c": 2,
+        "r": 2
+      }
     },
     {
       "hex": "#A998C9",
       "cmyk": "C33 M40 Y0 K0",
       "name": "Light Purple",
       "group": "accent",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#3C194A",
       "cmyk": "C81 M98 Y37 K39",
       "name": "Dark Purple",
       "group": "dark",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#87D4E9",
       "cmyk": "C42 M9 Y0 K9",
       "name": "Light Blue",
       "group": "accent",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#B3D99A",
       "cmyk": "C18 M0 Y29 K15",
       "name": "Light Green",
       "group": "accent",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#538C5E",
       "cmyk": "C71 M25 Y76 K8",
       "name": "Dark Green",
       "group": "dark",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#86C774",
       "cmyk": "C51 M0 Y72 K0",
       "name": "Medium Green",
       "group": "accent",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#FFCD74",
       "cmyk": "C0 M20 Y63 K0",
       "name": "Orange",
       "group": "accent",
-      "span": { "c": 1, "r": 1 }
+      "span": {
+        "c": 1,
+        "r": 1
+      }
     },
     {
       "hex": "#FCF496",
       "cmyk": "C2 M0 Y51 K0",
       "name": "Bright Yellow",
       "group": "accent",
-      "span": { "c": 2, "r": 2 }
+      "span": {
+        "c": 2,
+        "r": 2
+      }
     },
     {
       "hex": "#04242B",
       "cmyk": "C89 M66 Y59 K68",
       "name": "Dark Blue Green",
       "group": "dark",
-      "span": { "c": 2, "r": 2 }
+      "span": {
+        "c": 2,
+        "r": 2
+      }
     },
     {
       "hex": "#27434D",
       "cmyk": "C84 M61 Y52 K40",
       "name": "Blue Green",
       "group": "dark",
-      "span": { "c": 2, "r": 2 }
+      "span": {
+        "c": 2,
+        "r": 2
+      }
     }
   ],
   "fonts": [
@@ -164,30 +212,42 @@
   ],
   "logos": [
     {
-      "label": "Color logo — light backgrounds",
+      "label": "Color logo \u2014 light backgrounds",
       "bg": "#FAFAF7",
-      "src": "logos/rolemodel/logo.svg",
-      "svgHref": "logos/rolemodel/logo.svg",
-      "pngHref": "logos/rolemodel/RMS-logo-Color@2x.png"
+      "src": "logos/rolemodel/rolemodel-logo.svg",
+      "svgHref": "logos/rolemodel/rolemodel-logo.svg",
+      "pngHref": "logos/rolemodel/rolemodel-logo@2x.png"
     },
     {
-      "label": "White logo — dark backgrounds",
+      "label": "White logo \u2014 dark backgrounds",
       "bg": "#04242B",
-      "src": "logos/rolemodel/RMS-logo-White.svg",
-      "svgHref": "logos/rolemodel/RMS-logo-White.svg",
-      "pngHref": "logos/rolemodel/RMS-logo-White@2x.png"
+      "src": "logos/rolemodel/rolemodel-logo-white.svg",
+      "svgHref": "logos/rolemodel/rolemodel-logo-white.svg",
+      "pngHref": "logos/rolemodel/rolemodel-logo-white@2x.png"
     },
     {
-      "label": "Brand icon — color",
+      "label": "Brand icon \u2014 color",
       "bg": "#FAFAF7",
-      "src": "logos/rolemodel/icon.svg",
-      "svgHref": "logos/rolemodel/icon.svg",
-      "pngHref": "logos/rolemodel/icon.png"
+      "src": "logos/rolemodel/rolemodel-icon.svg",
+      "svgHref": "logos/rolemodel/rolemodel-icon.svg",
+      "pngHref": "logos/rolemodel/rolemodel-icon.png"
     }
   ],
   "logoRules": [
-    { "slug": "min-size", "label": "Min size", "value": "50 px" },
-    { "slug": "clear-space", "label": "Clear space", "value": "40%" },
-    { "slug": "backgrounds", "label": "Backgrounds", "value": "Light · Dark" }
+    {
+      "slug": "min-size",
+      "label": "Min size",
+      "value": "50 px"
+    },
+    {
+      "slug": "clear-space",
+      "label": "Clear space",
+      "value": "40%"
+    },
+    {
+      "slug": "backgrounds",
+      "label": "Backgrounds",
+      "value": "Light \u00b7 Dark"
+    }
   ]
 }

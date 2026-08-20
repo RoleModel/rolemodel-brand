@@ -185,11 +185,24 @@
 }
 
 /* ---- Product family (sub-brand) cards ---- */
+/* auto-fit, not auto-fill: a three-product family would otherwise leave the
+   empty tracks of a five-wide row standing and squeeze its cards into the
+   left third. auto-fit collapses them so three cards share the full row,
+   while a family that already fills the row is laid out identically. */
 .subbrand-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--space-4);
   margin-top: var(--space-5);
+}
+
+/* ---- Family banner — the Standard mark rendered as a live shader field ---- */
+.family-banner {
+  margin-top: var(--space-5);
+
+  .standard-shader {
+    min-height: clamp(280px, 34vw, 420px);
+  }
 }
 
 .subbrand-card {

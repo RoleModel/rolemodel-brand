@@ -125,13 +125,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: start;
   gap: var(--space-2);
   min-height: 180px;
   padding: var(--space-6);
   border: none;
   border-radius: var(--radius-xl);
-  corner-shape: superellipse(50%);
+  corner-shape: superellipse(2);
   cursor: pointer;
   text-align: left;
   font-family: inherit;
@@ -145,16 +145,11 @@
 }
 
 .subpalette__chip {
-  position: absolute;
-  top: var(--space-5);
-  left: var(--space-6);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   height: var(--space-9);
-  padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-md);
-  background: var(--white);
 
   img {
     max-height: var(--space-6);

@@ -2,3 +2,4 @@ dist/
 .DS_Store
 src/
 node_modules
+.codex/

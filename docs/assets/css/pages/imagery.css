@@ -321,3 +321,114 @@ body.lightbox-open {
     animation: none;
   }
 }
+
+/* ---- Product family imagery — sub-brand photography below the main set ---- */
+.subimagery {
+  position: relative;
+
+  .subimagery__name {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tighter);
+    margin-bottom: var(--space-4);
+  }
+
+  /* Fixed column counts, not auto-fill. auto-fill adds a track whenever one
+     more will fit, so a wide viewport produced 4 columns for 6 images and
+     left two empty cells showing as a block of bare ground. (auto-fit is no
+     help — it only collapses tracks empty in every row.) 6 images divide
+     evenly by 3, 2 and 1, so every row stays full at every width. */
+  .subimagery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    background-color: #26454d;
+    padding: var(--space-3);
+  }
+
+  /* Landscape, not square. At 3 columns a square tile is as tall as it is
+     wide, so two rows filled the viewport on their own. The sources are
+     square, so the shader's cover-fit crops top and bottom to suit. */
+  .subimagery__grid .halftone-image {
+    aspect-ratio: 3 / 2;
+  }
+
+  @media (max-width: 1100px) {
+    .subimagery__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .subimagery__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .subimagery__name {
+    font-size: var(--text-3xl);
+  }
+
+  .subimagery__intro {
+    position: absolute;
+    z-index: 20;
+    margin-bottom: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    inset-inline: 30%;
+    background-color: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .subimagery__tool {
+    display: inline-block;
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--page-accent);
+  }
+
+  /* Sits on the light intro card, not the dark grid, so it keeps page ink. */
+  .subimagery__text {
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-tight);
+    opacity: var(--emphasis-muted);
+    margin-block-end: var(--space-3);
+  }
+}
+
+/* The source photo sits underneath and shows through when WebGL is
+   unavailable or the image can't be used as a texture; the canvas covers it
+   only once it has actually painted. */
+.halftone-image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  background: var(--white);
+
+  .halftone-image__source,
+  .halftone-image__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .halftone-image__source {
+    object-fit: cover;
+  }
+
+  .halftone-image__canvas {
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  &.halftone-image--painted .halftone-image__canvas {
+    opacity: 1;
+  }
+}

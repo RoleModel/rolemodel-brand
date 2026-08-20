@@ -69,7 +69,17 @@ test("INTRO_HEADING content round-trips through the real generator", async () =>
 test("BRANDS content round-trips through the real generator", async () => {
   const { BRANDS, BRAND_ORDER, CATEGORIES } =
     await import("../assets/js/modules/brand-data.js");
-  assert.deepEqual(BRAND_ORDER, ["rolemodel", "academy", "lightningcad"]);
+  assert.deepEqual(BRAND_ORDER, [
+    "rolemodel",
+    "academy",
+    "lightningcad",
+    "optics",
+  ]);
+  // Optics has no reversed wordmark, so logoWhite must be absent rather than
+  // emitted as a broken path.
+  assert.equal(BRANDS.optics.logoWhite, undefined);
+  assert.equal(BRANDS.optics.docsUrl, "https://docs.optics.rolemodel.design/");
+  assert.deepEqual(BRANDS.optics.sections, ["logo", "color"]);
   assert.equal(BRANDS.rolemodel.primary, "#3A70B3");
   assert.deepEqual(BRANDS.academy.sections, [
     "logo",

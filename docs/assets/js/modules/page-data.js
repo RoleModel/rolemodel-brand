@@ -89,6 +89,15 @@ const ROLEMODEL_VISUAL_STYLE_IMAGERY_FILES = [
   "working-genius.jpeg",
 ];
 
+const STANDARD_IMAGERY_FILES = [
+  "01.jpg",
+  "02.jpg",
+  "03.jpg",
+  "04.jpg",
+  "05.jpg",
+  "06.jpg",
+];
+
 export const PAGE_DATA = {
   academy: {
     aseUrl: "../downloads/academy-colors.ase",
@@ -150,20 +159,29 @@ export const PAGE_DATA = {
         name: "Space Grotesk",
         note: "Used for all text in Academy brand contexts.",
         role: "Display & UI",
-        weights: [300, 400, 500, 600, 700],
+        weights: [
+          300,
+          400,
+          500,
+          600,
+          700,
+        ],
       },
       {
         googleUrl: "https://fonts.google.com/specimen/Geist+Mono",
         name: "Geist Mono",
         note: "Always uppercase in UI. Used for labels, metadata, and code.",
         role: "Mono Caps / Code",
-        weights: [400, 600, 700],
+        weights: [
+          400,
+          600,
+          700,
+        ],
       },
     ],
     gridCols: 6,
     imagery: _repoImageEntries(ACADEMY_IMAGERY_FILES, "academy"),
-    imageryIntro:
-      "Academy imagery is built on handcrafted 3D clay-style renders—tactile, playful, and unmistakably made by hand. Every icon and scene reinforces the craftsmanship metaphor at the heart of the Academy.",
+    imageryIntro: "Academy imagery is built on handcrafted 3D clay-style renders—tactile, playful, and unmistakably made by hand. Every icon and scene reinforces the craftsmanship metaphor at the heart of the Academy.",
     logoRules: [
       {
         desc: "Never display the icon smaller than 50 px.",
@@ -185,27 +203,26 @@ export const PAGE_DATA = {
       {
         bg: "#F2F2F2",
         label: "Academy logo — light backgrounds",
-        pngHref: `${BRAND_ASSET_BASE}/logos/academy/Academy@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/academy/Academy.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/academy/Academy.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/academy/academy-logo@2x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/academy/academy-logo.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/academy/academy-logo.svg`,
       },
       {
         bg: "#293747",
         label: "Academy logo — dark backgrounds",
-        pngHref: `${BRAND_ASSET_BASE}/logos/academy/AcademyLogoWhite@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/academy/AcademyLogoWhite.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/academy/AcademyLogoWhite.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/academy/academy-logo-white@2x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/academy/academy-logo-white.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/academy/academy-logo-white.svg`,
       },
       {
         bg: "#F2F2F2",
         label: "Academy icon",
-        pngHref: `${BRAND_ASSET_BASE}/logos/academy/AcademyIcon@4x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/academy/AcademyIcon.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/academy/AcademyIcon.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/academy/academy-icon@4x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/academy/academy-icon.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/academy/academy-icon.svg`,
       },
     ],
-    zipUrl:
-      "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
+    zipUrl: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/academy-logos.zip",
   },
   lightningcad: {
     aseUrl: "../downloads/lightningcad-colors.ase",
@@ -247,20 +264,28 @@ export const PAGE_DATA = {
         name: "DM Sans",
         note: "Same font family as RoleModel Software.",
         role: "Display & UI",
-        weights: [400, 500, 600, 700],
+        weights: [
+          400,
+          500,
+          600,
+          700,
+        ],
       },
       {
         googleUrl: "https://fonts.google.com/specimen/Geist+Mono",
         name: "Geist Mono",
         note: "Always uppercase in UI. Used for labels, metadata, and code.",
         role: "Mono Caps / Code",
-        weights: [400, 600, 700],
+        weights: [
+          400,
+          600,
+          700,
+        ],
       },
     ],
     gridCols: 6,
     imagery: _imageEntries(ROLEMODEL_IMAGERY),
-    imageryIntro:
-      "LightningCAD imagery leans on the RoleModel photography library—real projects, real people—paired with clean product UI captures of the design tools themselves.",
+    imageryIntro: "LightningCAD imagery leans on the RoleModel photography library—real projects, real people—paired with clean product UI captures of the design tools themselves.",
     logoRules: [
       {
         desc: "Never display the icon smaller than 50 px.",
@@ -282,20 +307,126 @@ export const PAGE_DATA = {
       {
         bg: "#FAFAF7",
         label: "CAD logo — light backgrounds",
-        pngHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCad@2x.png`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadBlack.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo@2x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo@2x.png`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo-black.svg`,
       },
       {
         bg: "#032A5E",
         label: "CAD logo — dark backgrounds",
-        pngHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/lightningcad/LightningCadWhite.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo-white@2x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo-white.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/lightningcad/lightningcad-logo-white.svg`,
       },
     ],
-    zipUrl:
-      "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip",
+    zipUrl: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/lightningcad-logos.zip",
+  },
+  optics: {
+    aseUrl: "",
+    colors: [
+      {
+        cmyk: "",
+        group: "core",
+        hex: "#0868F7",
+        name: "Optics Blue",
+        span: {
+          c: 2,
+          r: 2,
+        },
+      },
+      {
+        cmyk: "",
+        group: "core",
+        hex: "#336CC1",
+        name: "Primary",
+        span: {
+          c: 2,
+          r: 2,
+        },
+      },
+      {
+        cmyk: "",
+        group: "accent",
+        hex: "#FF7700",
+        name: "Optics Orange",
+        span: {
+          c: 1,
+          r: 1,
+        },
+      },
+      {
+        cmyk: "",
+        group: "accent",
+        hex: "#FACE0A",
+        name: "Optics Yellow",
+        span: {
+          c: 1,
+          r: 1,
+        },
+      },
+      {
+        cmyk: "",
+        group: "accent",
+        hex: "#FFD438",
+        name: "Warning",
+        span: {
+          c: 1,
+          r: 1,
+        },
+      },
+      {
+        cmyk: "",
+        group: "accent",
+        hex: "#6BDB7E",
+        name: "Notice",
+        span: {
+          c: 1,
+          r: 1,
+        },
+      },
+      {
+        cmyk: "",
+        group: "accent",
+        hex: "#FE8585",
+        name: "Danger",
+        span: {
+          c: 1,
+          r: 1,
+        },
+      },
+      {
+        cmyk: "",
+        group: "dark",
+        hex: "#76797F",
+        name: "Neutral",
+        span: {
+          c: 1,
+          r: 1,
+        },
+      },
+    ],
+    fonts: [],
+    gridCols: 6,
+    imagery: undefined,
+    imageryIntro: "Optics is a code and design system, not a campaign — it has no photography library of its own. Use RoleModel's imagery when a piece needs a photograph.",
+    logoRules: [],
+    logos: [
+      {
+        bg: "#FAFAF7",
+        label: "Optics logo — light backgrounds",
+        pngHref: `${BRAND_ASSET_BASE}/logos/optics/optics-logo.svg`,
+        src: `${BRAND_ASSET_BASE}/logos/optics/optics-logo.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/optics/optics-logo.svg`,
+      },
+      {
+        bg: "#FAFAF7",
+        label: "Brand icon — color",
+        pngHref: `${BRAND_ASSET_BASE}/logos/optics/optics-icon.svg`,
+        src: `${BRAND_ASSET_BASE}/logos/optics/optics-icon.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/optics/optics-icon.svg`,
+      },
+    ],
+    zipUrl: "",
   },
   rolemodel: {
     aseUrl: "../downloads/rolemodel-colors.ase",
@@ -437,20 +568,28 @@ export const PAGE_DATA = {
         name: "DM Sans",
         note: "Variable weight 100–1000. Used at all hierarchy levels.",
         role: "Display & UI",
-        weights: [400, 500, 600, 700],
+        weights: [
+          400,
+          500,
+          600,
+          700,
+        ],
       },
       {
         googleUrl: "https://fonts.google.com/specimen/Geist+Mono",
         name: "Geist Mono",
         note: "Always uppercase in UI. Used for labels, metadata, and code.",
         role: "Mono Caps / Code",
-        weights: [400, 600, 700],
+        weights: [
+          400,
+          600,
+          700,
+        ],
       },
     ],
     gridCols: 6,
     imagery: _imageEntries(ROLEMODEL_IMAGERY),
-    imageryIntro:
-      'Imagery should feel real, grounded, and people-centered—showing the work, the process, and the partnership. Favor authentic moments over stocky "tech" clichés. Choose photos and illustrations that reinforce trust, competence, and momentum.',
+    imageryIntro: "Imagery should feel real, grounded, and people-centered—showing the work, the process, and the partnership. Favor authentic moments over stocky \"tech\" clichés. Choose photos and illustrations that reinforce trust, competence, and momentum.",
     logoRules: [
       {
         desc: "Never display the icon smaller than 50 px.",
@@ -472,31 +611,35 @@ export const PAGE_DATA = {
       {
         bg: "#FAFAF7",
         label: "Color logo — light backgrounds",
-        pngHref: `${BRAND_ASSET_BASE}/logos/rolemodel/RMS-logo-Color@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/rolemodel/logo.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/logo.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo@2x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo.svg`,
       },
       {
         bg: "#04242B",
         label: "White logo — dark backgrounds",
-        pngHref: `${BRAND_ASSET_BASE}/logos/rolemodel/RMS-logo-White@2x.png`,
-        src: `${BRAND_ASSET_BASE}/logos/rolemodel/RMS-logo-White.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/RMS-logo-White.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo-white@2x.png`,
+        src: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo-white.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-logo-white.svg`,
       },
       {
         bg: "#FAFAF7",
         label: "Brand icon — color",
-        pngHref: `${BRAND_ASSET_BASE}/logos/rolemodel/icon.png`,
-        src: `${BRAND_ASSET_BASE}/logos/rolemodel/icon.svg`,
-        svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/icon.svg`,
+        pngHref: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-icon.png`,
+        src: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-icon.svg`,
+        svgHref: `${BRAND_ASSET_BASE}/logos/rolemodel/rolemodel-icon.svg`,
       },
     ],
-    visualStyleImagery: _repoImageEntries(
-      ROLEMODEL_VISUAL_STYLE_IMAGERY_FILES,
-      "rolemodel"
-    ),
-    zipUrl:
-      "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip",
+    subBrandImagery: [
+      {
+        images: _repoImageEntries(STANDARD_IMAGERY_FILES, "standard"),
+        name: "Standard",
+        slug: "standard",
+        text: "Standard's photography is the work itself — desks mid-project, hands on keyboards, notes and screens in progress. Shot candidly and rendered as a halftone in brand ink so the images read as one set rather than a gallery of stock.",
+      },
+    ],
+    visualStyleImagery: _repoImageEntries(ROLEMODEL_VISUAL_STYLE_IMAGERY_FILES, "rolemodel"),
+    zipUrl: "https://github.com/RoleModel/rolemodel-brand/releases/latest/download/rolemodel-brand-all.zip",
   },
 };
 
@@ -551,8 +694,7 @@ export const TYPE_SCALE = [
     lh: "1.6em",
     ls: "-0.02em",
     name: "Body",
-    sample:
-      "Great software starts with deep understanding. We embed with your team.",
+    sample: "Great software starts with deep understanding. We embed with your team.",
     size: "1.6rem",
     usage: "Main readable text",
     weight: 400,
@@ -572,46 +714,40 @@ export const TYPE_SCALE = [
 // ---- Voice concepts — sourced from the RoleModel Way + core values + approach ----
 export const VOICE_CONCEPTS = [
   {
-    description:
-      "Strong positions, grounded in values and earned experience rather than authority. Name what we're not before what we are; name uncertainty plainly, then assert the method.",
+    description: "Strong positions, grounded in values and earned experience rather than authority. Name what we're not before what we are; name uncertainty plainly, then assert the method.",
     name: "Humble Confidence",
     practice: [
-      '"The best software projects don\'t start with code"',
-      '"relationship, not recipe"',
-      '"Hope is not a strategy"',
+      "\"The best software projects don't start with code\"",
+      "\"relationship, not recipe\"",
+      "\"Hope is not a strategy\"",
     ],
-    quote:
-      "It's impossible to know exactly how a custom software project will go — but by choosing a shared point on the horizon, we can navigate together.",
+    quote: "It's impossible to know exactly how a custom software project will go — but by choosing a shared point on the horizon, we can navigate together.",
   },
   {
-    description:
-      "Shared ownership of outcomes, not a service transaction. Partners are integral members of the team, and trust is a moral commitment.",
+    description: "Shared ownership of outcomes, not a service transaction. Partners are integral members of the team, and trust is a moral commitment.",
     name: "Trusted Partnership",
     practice: [
-      '"integral members of our development team"',
-      '"navigate together"',
+      "\"integral members of our development team\"",
+      "\"navigate together\"",
     ],
     quote: "Together we build the tailored solution your company needs.",
   },
   {
-    description:
-      "Teach before prescribing. Why comes before how, and complex ideas are made durable through concrete metaphors and named constructs.",
+    description: "Teach before prescribing. Why comes before how, and complex ideas are made durable through concrete metaphors and named constructs.",
     name: "Instructive Clarity",
     practice: [
-      '"Why do we write tests?"',
-      '"Expertise Amplification"',
-      '"Iterative Value"',
+      "\"Why do we write tests?\"",
+      "\"Expertise Amplification\"",
+      "\"Iterative Value\"",
     ],
-    quote:
-      "The best software projects don't start with code — they start with understanding your business.",
+    quote: "The best software projects don't start with code — they start with understanding your business.",
   },
   {
-    description:
-      "No concept left floating. Theory, references, and values resolve into a concrete behavior or a business outcome.",
+    description: "No concept left floating. Theory, references, and values resolve into a concrete behavior or a business outcome.",
     name: "Practical Value",
     practice: [
-      '"Theory can be helpful, but what counts is delivering value for customers."',
-      '"start small, deliver early, build on wins"',
+      "\"Theory can be helpful, but what counts is delivering value for customers.\"",
+      "\"start small, deliver early, build on wins\"",
     ],
     quote: "Real value, not assumptions.",
   },

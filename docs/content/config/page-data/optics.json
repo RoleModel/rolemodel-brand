@@ -1,0 +1,105 @@
+{
+  "aseUrl": "",
+  "gridCols": 6,
+  "zipUrl": "",
+  "colors": [
+    {
+      "hex": "#0868F7",
+      "cmyk": "",
+      "name": "Optics Blue",
+      "group": "core",
+      "span": {
+        "c": 2,
+        "r": 2
+      }
+    },
+    {
+      "hex": "#336CC1",
+      "cmyk": "",
+      "name": "Primary",
+      "group": "core",
+      "span": {
+        "c": 2,
+        "r": 2
+      }
+    },
+    {
+      "hex": "#FF7700",
+      "cmyk": "",
+      "name": "Optics Orange",
+      "group": "accent",
+      "span": {
+        "c": 1,
+        "r": 1
+      }
+    },
+    {
+      "hex": "#FACE0A",
+      "cmyk": "",
+      "name": "Optics Yellow",
+      "group": "accent",
+      "span": {
+        "c": 1,
+        "r": 1
+      }
+    },
+    {
+      "hex": "#FFD438",
+      "cmyk": "",
+      "name": "Warning",
+      "group": "accent",
+      "span": {
+        "c": 1,
+        "r": 1
+      }
+    },
+    {
+      "hex": "#6BDB7E",
+      "cmyk": "",
+      "name": "Notice",
+      "group": "accent",
+      "span": {
+        "c": 1,
+        "r": 1
+      }
+    },
+    {
+      "hex": "#FE8585",
+      "cmyk": "",
+      "name": "Danger",
+      "group": "accent",
+      "span": {
+        "c": 1,
+        "r": 1
+      }
+    },
+    {
+      "hex": "#76797F",
+      "cmyk": "",
+      "name": "Neutral",
+      "group": "dark",
+      "span": {
+        "c": 1,
+        "r": 1
+      }
+    }
+  ],
+  "fonts": [],
+  "logoRules": [],
+  "logos": [
+    {
+      "label": "Optics logo \u2014 light backgrounds",
+      "bg": "#FAFAF7",
+      "src": "logos/optics/optics-logo.svg",
+      "svgHref": "logos/optics/optics-logo.svg",
+      "pngHref": "logos/optics/optics-logo.svg"
+    },
+    {
+      "label": "Brand icon \u2014 color",
+      "bg": "#FAFAF7",
+      "src": "logos/optics/optics-icon.svg",
+      "svgHref": "logos/optics/optics-icon.svg",
+      "pngHref": "logos/optics/optics-icon.svg"
+    }
+  ]
+}

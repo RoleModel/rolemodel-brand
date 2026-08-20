@@ -1,9 +1,9 @@
 {
   "font": "'DM Sans', sans-serif",
   "heroColor": "#2a83f7",
-  "icon": "logos/lightningcad/LightningCAD-Icon.svg",
-  "logo": "logos/lightningcad/LightningCad@2x.png",
-  "logoWhite": "logos/lightningcad/LightningCadWhite.svg",
+  "icon": "logos/lightningcad/lightningcad-icon.svg",
+  "logo": "logos/lightningcad/lightningcad-logo@2x.png",
+  "logoWhite": "logos/lightningcad/lightningcad-logo-white.svg",
   "name": "LightningCAD",
   "palette": [
     "#2a83f7",
@@ -26,31 +26,36 @@
     {
       "slug": "airfield-designer",
       "color": "#07BBC2",
-      "logo": "logos/designers/AirfieldDesigner.svg",
+      "logo": "logos/designers/airfield-designer-logo.svg",
+      "logoWhite": "logos/designers/airfield-designer-logo-white.svg",
       "name": "Airfield Designer"
     },
     {
       "slug": "deck-designer",
       "color": "#FFAC08",
-      "logo": "logos/designers/DeckDesigner.svg",
+      "logo": "logos/designers/deck-designer-logo.svg",
+      "logoWhite": "logos/designers/deck-designer-logo-white.svg",
       "name": "Deck Designer"
     },
     {
       "slug": "dock-designer",
       "color": "#0E8A6B",
-      "logo": "logos/designers/DockDesigner.svg",
+      "logo": "logos/designers/dock-designer-logo.svg",
+      "logoWhite": "logos/designers/dock-designer-logo-white.svg",
       "name": "Dock Designer"
     },
     {
       "slug": "dpq",
       "color": "#2A83F7",
-      "logo": "logos/designers/DPQ.svg",
+      "logo": "logos/designers/dpq-logo.svg",
+      "logoWhite": "logos/designers/dpq-logo-white.svg",
       "name": "DPQ"
     },
     {
       "slug": "railing-designer",
       "color": "#8D3DE3",
-      "logo": "logos/designers/RailingDesigner@2x.png",
+      "logo": "logos/designers/railing-designer-logo@2x.png",
+      "logoWhite": "logos/designers/railing-designer-logo-white.svg",
       "name": "Railing Designer"
     }
   ],

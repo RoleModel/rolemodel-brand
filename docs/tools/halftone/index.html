@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Halftone Export — RoleModel Brand</title>
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="../../assets/favicon.png" sizes="any" />
+    <link rel="apple-touch-icon" href="../../assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Geist+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/index.css" />
+  </head>
+
+  <body class="ht-body">
+    <nav class="page-nav">
+      <a
+        href="../../index.html"
+        class="page-nav__back"
+        aria-label="Back to Brand Guidelines"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M9 2L4 7L9 12"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Brand Guidelines
+      </a>
+      <div class="page-nav__divider" aria-hidden="true"></div>
+      <span class="page-nav__brand">Halftone Export</span>
+    </nav>
+
+    <header class="ht-header">
+      <div>
+        <span class="section-label">Brand Tool</span>
+        <h1 class="ht-header__title">Halftone Export</h1>
+        <p class="ht-header__intro">
+          Applies the brand halftone treatment to your images and hands back
+          files you can download. Everything runs in this browser tab — nothing
+          is uploaded, and the originals are never modified.
+        </p>
+      </div>
+    </header>
+
+    <p class="ht-warning" id="nowebgl" hidden>
+      This browser can't run WebGL, so images can't be processed here.
+    </p>
+
+    <main class="ht-main">
+      <aside class="ht-panel" aria-label="Treatment settings">
+        <div class="ht-drop" id="drop">
+          <label class="ht-drop__label" for="file">
+            <strong>Drop images here</strong>
+            <span>or choose files</span>
+          </label>
+          <input
+            class="ht-drop__input"
+            type="file"
+            id="file"
+            accept="image/*"
+            multiple
+          />
+        </div>
+
+        <div class="ht-controls" id="controls"></div>
+
+        <label class="ht-control ht-control--inline">
+          <span class="ht-control__label">Ink</span>
+          <input type="color" id="ctl-ink" />
+        </label>
+        <label class="ht-control ht-control--inline">
+          <span class="ht-control__label">Paper</span>
+          <input type="color" id="ctl-paper" />
+        </label>
+
+        <label class="ht-control ht-control--inline">
+          <span class="ht-control__label">Longest edge</span>
+          <select id="ctl-size">
+            <option value="1024">1024 px</option>
+            <option value="2048" selected>2048 px</option>
+            <option value="4096">4096 px</option>
+          </select>
+        </label>
+        <label class="ht-control ht-control--inline">
+          <span class="ht-control__label">Format</span>
+          <select id="ctl-format">
+            <option value="png" selected>PNG</option>
+            <option value="jpg">JPG</option>
+          </select>
+        </label>
+
+        <button type="button" class="ht-reset" id="reset">
+          Reset to brand defaults
+        </button>
+      </aside>
+
+      <section class="ht-output" aria-label="Processed images">
+        <div class="ht-bulk" id="bulk" hidden>
+          <button
+            type="button"
+            class="download-button download-button--accent"
+            id="download-all"
+          >
+            Download all
+          </button>
+          <span class="ht-bulk__note">
+            Downloads save one at a time — your browser may ask permission for
+            multiple files.
+          </span>
+        </div>
+
+        <p class="ht-empty" id="empty">
+          No images yet. Drop a few in to see them treated.
+        </p>
+
+        <div class="ht-gallery" id="gallery"></div>
+      </section>
+    </main>
+
+    <script type="module" src="../../assets/js/tools/halftone-tool.js"></script>
+  </body>
+</html>

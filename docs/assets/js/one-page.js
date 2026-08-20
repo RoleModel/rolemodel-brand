@@ -20,12 +20,12 @@ import {
   BRAND_ORDER,
   BRANDS,
   CATEGORIES,
-} from "./modules/brand-data.js?v=1454729e";
-import { initIconAnimations } from "./modules/icon-animations.js?v=1454729e";
-import { renderIcon } from "./modules/icons.js?v=1454729e";
-import { setupIntro } from "./modules/intro.js?v=1454729e";
-import { readableTextColor } from "./modules/page-utils.js?v=1454729e";
-import "./components/brand-card.js?v=1454729e";
+} from "./modules/brand-data.js?v=b8a53096";
+import { initIconAnimations } from "./modules/icon-animations.js?v=b8a53096";
+import { renderIcon } from "./modules/icons.js?v=b8a53096";
+import { setupIntro } from "./modules/intro.js?v=b8a53096";
+import { readableTextColor } from "./modules/page-utils.js?v=b8a53096";
+import "./components/brand-card.js?v=b8a53096";
 
 const STORAGE_KEY = "brandGuide.activeBrand";
 const DEFAULT_BRAND = "rolemodel";
@@ -52,6 +52,22 @@ const pageUrlFor = (categorySlug, brandSlug) =>
 
 const hasSection = (brand, categorySlug) =>
   !brand.sections || brand.sections.includes(categorySlug);
+
+// Brand cards have to tile the 12-column row exactly, or every card after
+// them wraps ragged. The span attribute is not a column count: brand-card.css
+// special-cases a brand card at span 2 to four columns, while any other span
+// maps to that many columns. So three brands fit a row at span 2 (3 x 4) and
+// four fit at span 3 (4 x 3).
+const BRAND_SPAN_COLUMNS = { 2: 4 };
+const brandColumns = (span) => BRAND_SPAN_COLUMNS[span] ?? span;
+const brandSpan = (count) => {
+  for (const span of [2, 3, 4, 6, 1]) {
+    if ((count * brandColumns(span)) % 12 === 0) {
+      return span;
+    }
+  }
+  return 2;
+};
 
 const sectionSpan = (brand, category) =>
   brand.sectionSpans?.[category.slug] ?? category.span;
@@ -189,7 +205,7 @@ class OnePage {
       card.setAttribute("label", brand.name);
       card.setAttribute("bg", brand.heroColor);
       card.setAttribute("icon-src", brand.icon);
-      card.setAttribute("span", "2");
+      card.setAttribute("span", String(brandSpan(BRAND_ORDER.length)));
       card.classList.toggle("brand-card--active", slug === this.activeBrand);
       this.cards.set(`brand:${slug}`, card);
       grid.append(card);
