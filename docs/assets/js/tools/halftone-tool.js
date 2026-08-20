@@ -22,7 +22,7 @@ import {
   HalftoneRenderer,
 } from "../modules/halftone.js?v=b8a53096";
 
-const MAX_EDGE_LIMIT = 4096;
+const MAX_EDGE_LIMIT = 8192;
 const JPEG_QUALITY = 0.92;
 const DOWNLOAD_GAP_MS = 350;
 
@@ -61,12 +61,15 @@ const ensureRenderer = () => {
   return renderer?.ok ? renderer : null;
 };
 
-// Fit the source into the chosen longest edge without enlarging it — an
-// 800px photo exported at "2048" should stay 800 rather than be upscaled
-// into a blurry, over-dithered mess.
+// Render at the requested longest edge regardless of the source size,
+// upscaling when asked. That is normally wrong for photographs, but the
+// output here is a dot field evaluated per output pixel: a large render from
+// a small source still produces a crisp dither, because the photo's detail
+// is being discarded and replaced by dots either way. Print wants the big
+// one. Aspect ratio is preserved.
 const outputSize = (image, maxEdge) => {
   const { naturalWidth: w, naturalHeight: h } = image;
-  const scale = Math.min(1, maxEdge / Math.max(w, h));
+  const scale = maxEdge / Math.max(w, h);
   return {
     height: Math.max(1, Math.round(h * scale)),
     width: Math.max(1, Math.round(w * scale)),
@@ -124,6 +127,8 @@ const toBlob = (canvas) =>
 const download = async (item) => {
   const blob = await toBlob(item.canvas);
   if (!blob) {
+    item.card.querySelector(".ht-card__meta").textContent =
+      `${item.name} — export failed at ${item.canvas.width}x${item.canvas.height}. Try a smaller size.`;
     return;
   }
   const url = URL.createObjectURL(blob);
